@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portafolio académico · Flores Canto, David Piero</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f3ee;--card:#fff;--ink:#2b2a28;--mut:#7a766d;--line:#dcd8cf;--pri:#0a5fb4;--navy:#0b3a5e;--soft:#e8eef6;--btn:#0b3a5e;--btnt:#fff;--ok:#1a7f4b}
+@media(prefers-color-scheme:dark){:root{--bg:#14171b;--card:#1d2127;--ink:#e8e6e1;--mut:#9a968c;--line:#333840;--pri:#5aa7ec;--navy:#9bcaf6;--soft:#222c38;--btn:#5aa7ec;--btnt:#0b1620;--ok:#4cc38a}}
+*{box-sizing:border-box}
+html{scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 'IBM Plex Sans',system-ui,sans-serif}
+h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;margin:0;line-height:1.15}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+header{display:flex;align-items:center;gap:14px;padding:16px max(20px,4vw);border-bottom:1px solid var(--line);background:var(--card)}
+header .t{flex:1;min-width:0}
+header .t b{font:600 19px 'Source Serif 4',Georgia,serif;display:block}
+header .t span{color:var(--mut);font-size:14px}
+button,.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:2px}
+button.p,.btn.p{background:var(--btn);color:var(--btnt);border-color:var(--btn)}
+button:focus-visible,input:focus-visible,label:focus-within{outline:2px solid var(--pri);outline-offset:2px}
+main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
+.hero{background:var(--card);border:1px solid var(--line);display:grid;grid-template-columns:auto 1fr auto;gap:32px;padding:36px}
+.hero h1{font-size:clamp(28px,5vw,46px);margin:6px 0 14px}
+.hero p{color:var(--mut);margin:0 0 22px;max-width:60ch}
+.hero p b{color:var(--ink)}
+.eyebrow{color:var(--pri);font-size:13px}
+.stats{display:flex;gap:30px;flex-wrap:wrap}
+.stats b{display:block;font:500 28px 'IBM Plex Mono',monospace;color:var(--navy)}
+.stats span{color:var(--mut);font-size:14px}
+.badge{display:grid;gap:6px;justify-items:center;align-content:start;width:110px;color:var(--mut);font-size:12px;border-right:1px solid var(--line);padding-right:32px}
+.ph{width:140px;text-align:center;font-size:12px;color:var(--mut)}
+.ph .box{width:140px;height:175px;background:var(--soft);border:1px solid var(--line);display:grid;place-items:center;font:600 40px 'Source Serif 4',serif;color:var(--navy);overflow:hidden;margin-bottom:8px}
+.ph .box img{width:100%;height:100%;object-fit:cover}
+.ph label{cursor:pointer;color:var(--pri);text-decoration:underline}
+.tabs{display:flex;gap:0;margin:34px 0 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tabs button{border:0;border-bottom:3px solid transparent;background:none;padding:12px 18px;color:var(--mut);border-radius:0}
+.tabs button[aria-selected=true]{color:var(--ink);border-color:var(--pri);font-weight:600}
+.units{display:flex;gap:8px;margin:20px 0;flex-wrap:wrap}
+.units button[aria-selected=true]{background:var(--btn);color:var(--btnt);border-color:var(--btn)}
+.weeks{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.wk{background:var(--card);border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:12px}
+.wk.has{border-left:4px solid var(--ok)}
+.wk h3{font-size:19px;display:flex;justify-content:space-between;align-items:baseline}
+.wk h3 small{font:400 12px 'IBM Plex Mono',monospace;color:var(--mut)}
+.drop{display:block;border:1.5px dashed var(--line);padding:18px 10px;text-align:center;color:var(--mut);font-size:14px;cursor:pointer}
+.drop.over{border-color:var(--pri);background:var(--soft);color:var(--ink)}
+.drop input{position:absolute;opacity:0;width:1px;height:1px}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.th{position:relative;aspect-ratio:1;background:var(--soft)}
+.th img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;display:block}
+.th i{position:absolute;left:3px;top:3px;background:rgba(0,0,0,.65);color:#fff;font:11px 'IBM Plex Mono',monospace;padding:0 5px}
+.th button{position:absolute;right:3px;top:3px;padding:0 7px;line-height:20px;background:rgba(0,0,0,.65);color:#fff;border:0}
+.nx{align-self:flex-end;font-size:14px}
+.skills{margin-top:44px}
+.skills h2{font-size:26px;margin-bottom:14px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:var(--soft);color:var(--navy);padding:5px 12px;font:500 14px 'IBM Plex Mono',monospace;border:1px solid var(--line)}
+.chip button{border:0;background:none;padding:0 0 0 8px;color:var(--mut)}
+.add{display:flex;gap:8px;margin-top:14px}
+input[type=text],input[type=password]{font:inherit;padding:9px 12px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:2px;width:100%}
+.note{color:var(--mut);font-size:13px;margin-top:40px;max-width:70ch}
+.auth{max-width:400px;margin:9vh auto;background:var(--card);border:1px solid var(--line);padding:32px;display:grid;gap:14px}
+.auth h1{font-size:28px}.err{color:#c0392b;font-size:14px;min-height:20px}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;place-items:center;z-index:9;cursor:zoom-out}
+#lb.on{display:grid}#lb img{max-width:94vw;max-height:92vh}
+#msg{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--btn);color:var(--btnt);padding:10px 18px;display:none;z-index:10}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding:22px}.badge{display:none}.ph{order:-1}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="lb"><img alt="Vista ampliada"></div>
+<div id="msg" role="status"></div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const COURSES=['Taller de Aplicaciones 1','Algoritmo y Estructura de Datos'];
+const S={c:0,u:0,imgs:[],photo:null,user:null};
+const lsGet=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
+const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
+
+/* ---------- Base de datos local (IndexedDB) ---------- */
+const dbp=new Promise((res,rej)=>{const r=indexedDB.open('portafolio-upla',1);
+ r.onupgradeneeded=()=>{r.result.createObjectStore('imgs',{keyPath:'id',autoIncrement:true});r.result.createObjectStore('kv')};
+ r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
+const tx=async(st,mode,fn)=>{const d=await dbp;return new Promise((res,rej)=>{const t=d.transaction(st,mode);const q=fn(t.objectStore(st));t.oncomplete=()=>res(q&&q.result);t.onerror=()=>rej(t.error)})};
+
+async function load(){
+ const all=await tx('imgs','readonly',s=>s.getAll());
+ all.sort((a,b)=>a.id-b.id);
+ S.imgs=all.map(r=>({...r,url:URL.createObjectURL(r.blob)}));
+ const p=await tx('kv','readonly',s=>s.get('photo'));
+ S.photo=p?URL.createObjectURL(p):null;
+}
+
+/* ---------- Utilidades ---------- */
+const hash=async p=>{if(!crypto.subtle)return btoa(p);
+ const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('upla:'+p));
+ return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')};
+async function shrink(f,max=1600){
+ const bm=await createImageBitmap(f);const k=Math.min(1,max/Math.max(bm.width,bm.height));
+ const c=document.createElement('canvas');c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);
+ c.getContext('2d').drawImage(bm,0,0,c.width,c.height);
+ return new Promise(r=>c.toBlob(r,'image/jpeg',.82))}
+const toast=t=>{const m=$('#msg');m.textContent=t;m.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>m.style.display='none',2600)};
+const slotImgs=s=>S.imgs.filter(i=>i.slot===s);
+const doneWeeks=c=>{let n=0;for(let u=0;u<4;u++)for(let w=0;w<4;w++)if(slotImgs(`${c}-${u}-${w}`).length)n++;return n};
+const initials=n=>n.split(/[ ,]+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
+
+/* ---------- Subida múltiple ---------- */
+async function addImages(slot,files){
+ const fs=[...files].filter(f=>f.type.startsWith('image/')).sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));
+ if(!fs.length)return toast('Selecciona archivos de imagen');
+ let n=0;
+ for(const f of fs){
+  toast(`Subiendo ${++n} de ${fs.length}…`);
+  const blob=await shrink(f);const rec={slot,name:f.name,blob};
+  rec.id=await tx('imgs','readwrite',s=>s.add(rec));
+  S.imgs.push({...rec,url:URL.createObjectURL(blob)});
+ }
+ toast(`${fs.length} imagen(es) guardadas`);view();
+}
+async function delImage(id){
+ await tx('imgs','readwrite',s=>s.delete(id));
+ const i=S.imgs.findIndex(x=>x.id===id);if(i>=0){URL.revokeObjectURL(S.imgs[i].url);S.imgs.splice(i,1)}
+ view();
+}
+
+/* ---------- Vistas ---------- */
+function authView(){
+ const u=lsGet('user',null);
+ $('#app').innerHTML=`<form class="auth" id="af">
+  <p class="eyebrow mono">${u?'Iniciar sesión':'Crear cuenta'}</p>
+  <h1>Portafolio académico</h1>
+  ${u?`<p style="margin:0;color:var(--mut)">Hola, ${esc(u.name)}.</p>`:`<input type="text" id="nm" value="Flores Canto, David Piero" aria-label="Nombre completo" required>`}
+  <input type="password" id="pw" placeholder="Contraseña" aria-label="Contraseña" required minlength="4">
+  <div class="err" id="er"></div>
+  <button class="p" type="submit">${u?'Entrar':'Crear cuenta y entrar'}</button>
+ </form>`;
+ $('#af').onsubmit=async e=>{e.preventDefault();const pw=$('#pw').value;const h=await hash(pw);
+  if(u){if(h!==u.h)return $('#er').textContent='Contraseña incorrecta. Inténtalo de nuevo.'}
+  else lsSet('user',{name:$('#nm').value.trim(),h});
+  sessionStorage.setItem('ok','1');start()};
+}
+function view(){
+ const u=lsGet('user',{name:'Estudiante'});const c=S.c;
+ const done=doneWeeks(c);
+ const weeks=[0,1,2,3].map(w=>{const slot=`${c}-${S.u}-${w}`;const im=slotImgs(slot);
+  return `<section class="wk ${im.length?'has':''}" id="w${w}">
+   <h3>Semana ${w+1}<small>${im.length} img</small></h3>
+   <label class="drop" data-slot="${slot}"><input type="file" accept="image/*" multiple data-slot="${slot}">Arrastra varias imágenes aquí o toca para elegirlas<br>(se suben todas juntas)</label>
+   <div class="thumbs">${im.map((x,i)=>`<div class="th"><img src="${x.url}" alt="${esc(x.name)}" data-big="${x.url}"><i>${i+1}</i><button data-del="${x.id}" aria-label="Eliminar ${esc(x.name)}">×</button></div>`).join('')}</div>
+   ${w<3?`<button class="nx" data-next="${w+1}">Siguiente semana →</button>`:''}
+  </section>`}).join('');
+ const skills=lsGet('skills',['Python','Java','JavaScript','HTML y CSS','Git y GitHub','SQL','Lógica de programación','Estructuras de datos','Algoritmos','Trabajo en equipo']);
+ $('#app').innerHTML=`
+ <header>
+  <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 2l14 8v16l-14 8L4 26V10z" fill="var(--pri)"/><text x="18" y="23" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="sans-serif">UP</text></svg>
+  <div class="t"><b>${esc(u.name)}</b><span>Universidad Peruana Los Andes</span></div>
+  <button id="out">Cerrar sesión</button>
+ </header>
+ <main>
+  <div class="hero">
+   <div class="badge mono"><span>Universidad</span><span>Peruana</span><span>Los Andes</span></div>
+   <div>
+    <p class="eyebrow mono" style="margin:0">Expediente de curso</p>
+    <h1>${esc(u.name)}</h1>
+    <p>Registro de las tareas entregadas en <b>${COURSES[0]}</b> y <b>${COURSES[1]}</b>, organizadas por unidad y semana en el mismo orden en que se dictaron en clase.</p>
+    <div class="stats"><div><b>02</b><span>Cursos</span></div><div><b>04</b><span>Unidades por curso</span></div><div><b>${done}/16</b><span>Semanas con tareas</span></div></div>
+   </div>
+   <div class="ph"><div class="box">${S.photo?`<img src="${S.photo}" alt="Foto del estudiante">`:esc(initials(u.name))}</div><label>Cambiar foto<input type="file" accept="image/*" id="pf" hidden></label></div>
+  </div>
+  <div class="tabs" role="tablist">${COURSES.map((n,i)=>`<button role="tab" aria-selected="${i===c}" data-c="${i}">${n}</button>`).join('')}</div>
+  <div class="units">${[0,1,2,3].map(i=>`<button aria-selected="${i===S.u}" data-u="${i}">Unidad ${i+1}</button>`).join('')}</div>
+  <div class="weeks">${weeks}</div>
+  <div class="skills">
+   <h2>Habilidades</h2>
+   <div class="chips">${skills.map((s,i)=>`<span class="chip">${esc(s)}<button data-rs="${i}" aria-label="Quitar ${esc(s)}">×</button></span>`).join('')}</div>
+   <form class="add" id="sf"><input type="text" id="sk" placeholder="Agregar habilidad" aria-label="Nueva habilidad"><button class="p">Agregar</button></form>
+  </div>
+  <p class="note">Tus imágenes se guardan en este navegador (IndexedDB), ordenadas por curso, unidad y semana. Si borras los datos del navegador o cambias de dispositivo, no las verás: conserva una copia de tus archivos originales.</p>
+ </main>`;
+}
+
+/* ---------- Eventos ---------- */
+const app=$('#app');
+app.addEventListener('click',e=>{const t=e.target;
+ if(t.dataset.c){S.c=+t.dataset.c;S.u=0;view()}
+ else if(t.dataset.u){S.u=+t.dataset.u;view()}
+ else if(t.dataset.del){if(confirm('¿Eliminar esta imagen?'))delImage(+t.dataset.del)}
+ else if(t.dataset.big){$('#lb img').src=t.dataset.big;$('#lb').classList.add('on')}
+ else if(t.dataset.next){$('#w'+t.dataset.next).scrollIntoView({behavior:'smooth'})}
+ else if(t.dataset.rs!==undefined){const s=lsGet('skills',[]);s.splice(+t.dataset.rs,1);lsSet('skills',s);view()}
+ else if(t.id==='out'){sessionStorage.clear();authView()}});
+app.addEventListener('change',async e=>{const t=e.target;
+ if(t.dataset.slot){await addImages(t.dataset.slot,t.files)}
+ else if(t.id==='pf'&&t.files[0]){const b=await shrink(t.files[0],600);await tx('kv','readwrite',s=>s.put(b,'photo'));S.photo=URL.createObjectURL(b);view()}});
+app.addEventListener('submit',e=>{if(e.target.id==='sf'){e.preventDefault();const v=$('#sk').value.trim();if(v){const s=lsGet('skills',[]);s.push(v);lsSet('skills',s);view()}}});
+['dragover','dragleave','drop'].forEach(ev=>app.addEventListener(ev,e=>{const d=e.target.closest('.drop');if(!d)return;e.preventDefault();
+ d.classList.toggle('over',ev==='dragover');if(ev==='drop')addImages(d.dataset.slot,e.dataTransfer.files)}));
+$('#lb').onclick=()=>$('#lb').classList.remove('on');
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#lb').classList.remove('on')});
+
+async function start(){await load();view()}
+sessionStorage.getItem('ok')?start():authView();
+</script>
+</body>
+</html>
