@@ -6,26 +6,27 @@
 <title>Portafolio académico · Flores Canto, David Piero</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f5f3ee;--card:#fff;--ink:#2b2a28;--mut:#7a766d;--line:#dcd8cf;--pri:#0a5fb4;--navy:#0b3a5e;--soft:#e8eef6;--btn:#0b3a5e;--btnt:#fff;--ok:#1a7f4b}
-@media(prefers-color-scheme:dark){:root{--bg:#14171b;--card:#1d2127;--ink:#e8e6e1;--mut:#9a968c;--line:#333840;--pri:#5aa7ec;--navy:#9bcaf6;--soft:#222c38;--btn:#5aa7ec;--btnt:#0b1620;--ok:#4cc38a}}
+:root{--bg:#f2f4ef;--card:#fff;--ink:#202522;--mut:#69736d;--line:#d8dfd8;--pri:#087f73;--navy:#244b47;--soft:#e4efeb;--btn:#173e3a;--btnt:#fff;--ok:#23835e;--accent:#c45b38}
+@media(prefers-color-scheme:dark){:root{--bg:#171d1b;--card:#202925;--ink:#edf1ed;--mut:#a4b0a8;--line:#3a4740;--pri:#59c2ad;--navy:#a9d8ce;--soft:#293932;--btn:#9bdbc9;--btnt:#14201c;--ok:#64c99d;--accent:#f08b67}}
 *{box-sizing:border-box}
-html{scroll-padding-top:16px}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 'IBM Plex Sans',system-ui,sans-serif}
+html{scroll-padding-top:84px;scroll-behavior:smooth}
+body{margin:0;background-color:var(--bg);background-image:radial-gradient(var(--line) .65px,transparent .65px);background-size:18px 18px;color:var(--ink);font:16px/1.55 'IBM Plex Sans',system-ui,sans-serif}
 h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;margin:0;line-height:1.15}
 .mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
-header{display:flex;align-items:center;gap:14px;padding:16px max(20px,4vw);border-bottom:1px solid var(--line);background:var(--card)}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;padding:12px max(20px,4vw);border-bottom:1px solid var(--line);background:var(--card)}
 header .t{flex:1;min-width:0}
 header .t b{font:600 19px 'Source Serif 4',Georgia,serif;display:block}
 header .t span{color:var(--mut);font-size:14px}
-button,.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:2px}
+button,.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:2px;transition:background-color .16s ease,border-color .16s ease,color .16s ease}
+button:hover,.btn:hover{border-color:var(--pri)}
 button.p,.btn.p{background:var(--btn);color:var(--btnt);border-color:var(--btn)}
 button:focus-visible,input:focus-visible,label:focus-within{outline:2px solid var(--pri);outline-offset:2px}
 main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
-.hero{background:var(--card);border:1px solid var(--line);display:grid;grid-template-columns:auto 1fr auto;gap:32px;padding:36px}
+.hero{background:linear-gradient(112deg,var(--card) 72%,var(--soft));border:1px solid var(--line);border-left:4px solid var(--pri);display:grid;grid-template-columns:auto 1fr auto;gap:32px;padding:36px;box-shadow:0 12px 34px rgba(24,50,42,.06)}
 .hero h1{font-size:clamp(28px,5vw,46px);margin:6px 0 14px}
 .hero p{color:var(--mut);margin:0 0 22px;max-width:60ch}
 .hero p b{color:var(--ink)}
-.eyebrow{color:var(--pri);font-size:13px}
+.eyebrow{color:var(--pri);font-size:13px;text-transform:uppercase}
 .stats{display:flex;gap:30px;flex-wrap:wrap}
 .stats b{display:block;font:500 28px 'IBM Plex Mono',monospace;color:var(--navy)}
 .stats span{color:var(--mut);font-size:14px}
@@ -34,13 +35,14 @@ main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
 .ph .box{width:140px;height:175px;background:var(--soft);border:1px solid var(--line);display:grid;place-items:center;font:600 40px 'Source Serif 4',serif;color:var(--navy);overflow:hidden;margin-bottom:8px}
 .ph .box img{width:100%;height:100%;object-fit:cover}
 .ph label{cursor:pointer;color:var(--pri);text-decoration:underline}
-.tabs{display:flex;gap:0;margin:34px 0 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tabs{display:flex;gap:0;margin:34px 0 0;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:thin}
 .tabs button{border:0;border-bottom:3px solid transparent;background:none;padding:12px 18px;color:var(--mut);border-radius:0}
+.tabs button{flex:0 0 auto}
 .tabs button[aria-selected=true]{color:var(--ink);border-color:var(--pri);font-weight:600}
 .units{display:flex;gap:8px;margin:20px 0;flex-wrap:wrap}
 .units button[aria-selected=true]{background:var(--btn);color:var(--btnt);border-color:var(--btn)}
 .weeks{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-.wk{background:var(--card);border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:12px}
+.wk{background:var(--card);border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 3px 12px rgba(24,50,42,.035)}
 .wk.has{border-left:4px solid var(--ok)}
 .wk h3{font-size:19px;display:flex;justify-content:space-between;align-items:baseline}
 .wk h3 small{font:400 12px 'IBM Plex Mono',monospace;color:var(--mut)}
@@ -53,11 +55,12 @@ main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
 .th i{position:absolute;left:3px;top:3px;background:rgba(0,0,0,.65);color:#fff;font:11px 'IBM Plex Mono',monospace;padding:0 5px}
 .th button{position:absolute;right:3px;top:3px;padding:0 7px;line-height:20px;background:rgba(0,0,0,.65);color:#fff;border:0}
 .nx{align-self:flex-end;font-size:14px}
-.skills{margin-top:44px}
+.skills{margin-top:44px;padding-top:28px;border-top:1px solid var(--line)}
 .skills h2{font-size:26px;margin-bottom:14px}
 .chips{display:flex;gap:8px;flex-wrap:wrap}
-.chip{background:var(--soft);color:var(--navy);padding:5px 12px;font:500 14px 'IBM Plex Mono',monospace;border:1px solid var(--line)}
-.chip button{border:0;background:none;padding:0 0 0 8px;color:var(--mut)}
+.chip{background:var(--card);color:var(--navy);padding:5px 8px 5px 12px;font:500 14px 'IBM Plex Mono',monospace;border:1px solid var(--line);display:inline-flex;align-items:center;gap:6px}
+.chip button{border:0;background:none;padding:0 3px;color:var(--mut);font-size:18px;line-height:1}
+.chip button:hover{color:var(--accent)}
 .add{display:flex;gap:8px;margin-top:14px}
 input[type=text],input[type=password]{font:inherit;padding:9px 12px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:2px;width:100%}
 .note{color:var(--mut);font-size:13px;margin-top:40px;max-width:70ch}
@@ -66,7 +69,8 @@ input[type=text],input[type=password]{font:inherit;padding:9px 12px;border:1px s
 #lb{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;place-items:center;z-index:9;cursor:zoom-out}
 #lb.on{display:grid}#lb img{max-width:94vw;max-height:92vh}
 #msg{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--btn);color:var(--btnt);padding:10px 18px;display:none;z-index:10}
-@media(max-width:760px){.hero{grid-template-columns:1fr;padding:22px}.badge{display:none}.ph{order:-1}}
+@media(max-width:760px){main{padding:22px 14px 44px}.hero{grid-template-columns:1fr;gap:20px;padding:22px}.badge{display:none}.ph{order:-1}.ph .box{margin:0 auto 8px}.stats{gap:16px}.units{overflow-x:auto;flex-wrap:nowrap;padding:2px}.units button{flex:0 0 auto}.weeks{grid-template-columns:1fr}.add{align-items:stretch}.add input{min-width:0}}
+@media(max-width:420px){header{gap:10px;padding:10px 12px}header svg{width:30px;height:30px}header .t b{font-size:16px}header .t span{font-size:12px}header button{padding:7px 9px;font-size:14px}.hero h1{overflow-wrap:anywhere}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.stats b{font-size:23px}.stats span{font-size:12px}.tabs button{padding:11px 12px;font-size:14px}.add{gap:6px}.add button{padding:8px 10px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
 </head>
@@ -78,6 +82,7 @@ input[type=text],input[type=password]{font:inherit;padding:9px 12px;border:1px s
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const COURSES=['Taller de Aplicaciones 1','Algoritmo y Estructura de Datos'];
+const DEFAULT_SKILLS=['Python','Java','JavaScript','HTML y CSS','Git y GitHub','SQL','Lógica de programación','Estructuras de datos','Algoritmos','Trabajo en equipo'];
 const S={c:0,u:0,imgs:[],photo:null,user:null};
 const lsGet=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
 const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
@@ -155,7 +160,7 @@ function view(){
    <div class="thumbs">${im.map((x,i)=>`<div class="th"><img src="${x.url}" alt="${esc(x.name)}" data-big="${x.url}"><i>${i+1}</i><button data-del="${x.id}" aria-label="Eliminar ${esc(x.name)}">×</button></div>`).join('')}</div>
    ${w<3?`<button class="nx" data-next="${w+1}">Siguiente semana →</button>`:''}
   </section>`}).join('');
- const skills=lsGet('skills',['Python','Java','JavaScript','HTML y CSS','Git y GitHub','SQL','Lógica de programación','Estructuras de datos','Algoritmos','Trabajo en equipo']);
+ const skills=lsGet('skills',DEFAULT_SKILLS);
  $('#app').innerHTML=`
  <header>
   <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 2l14 8v16l-14 8L4 26V10z" fill="var(--pri)"/><text x="18" y="23" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="sans-serif">UP</text></svg>
@@ -193,12 +198,12 @@ app.addEventListener('click',e=>{const t=e.target;
  else if(t.dataset.del){if(confirm('¿Eliminar esta imagen?'))delImage(+t.dataset.del)}
  else if(t.dataset.big){$('#lb img').src=t.dataset.big;$('#lb').classList.add('on')}
  else if(t.dataset.next){$('#w'+t.dataset.next).scrollIntoView({behavior:'smooth'})}
- else if(t.dataset.rs!==undefined){const s=lsGet('skills',[]);s.splice(+t.dataset.rs,1);lsSet('skills',s);view()}
+ else if(t.dataset.rs!==undefined){const s=lsGet('skills',DEFAULT_SKILLS);s.splice(+t.dataset.rs,1);lsSet('skills',s);view()}
  else if(t.id==='out'){sessionStorage.clear();authView()}});
 app.addEventListener('change',async e=>{const t=e.target;
  if(t.dataset.slot){await addImages(t.dataset.slot,t.files)}
  else if(t.id==='pf'&&t.files[0]){const b=await shrink(t.files[0],600);await tx('kv','readwrite',s=>s.put(b,'photo'));S.photo=URL.createObjectURL(b);view()}});
-app.addEventListener('submit',e=>{if(e.target.id==='sf'){e.preventDefault();const v=$('#sk').value.trim();if(v){const s=lsGet('skills',[]);s.push(v);lsSet('skills',s);view()}}});
+app.addEventListener('submit',e=>{if(e.target.id==='sf'){e.preventDefault();const v=$('#sk').value.trim();if(v){const s=lsGet('skills',DEFAULT_SKILLS);if(s.some(x=>x.toLocaleLowerCase()===v.toLocaleLowerCase()))return toast('Esa habilidad ya está en la lista');s.push(v);lsSet('skills',s);view()}}});
 ['dragover','dragleave','drop'].forEach(ev=>app.addEventListener(ev,e=>{const d=e.target.closest('.drop');if(!d)return;e.preventDefault();
  d.classList.toggle('over',ev==='dragover');if(ev==='drop')addImages(d.dataset.slot,e.dataTransfer.files)}));
 $('#lb').onclick=()=>$('#lb').classList.remove('on');
