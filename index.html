@@ -3,107 +3,159 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Portafolio académico de David Piero Flores Canto, estudiante de Ingeniería de Sistemas y Computación en la Universidad Peruana Los Andes.">
+<meta name="theme-color" content="#273c75">
 <title>Portafolio académico · Flores Canto, David Piero</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f2f4ef;--card:#fff;--ink:#202522;--mut:#69736d;--line:#d8dfd8;--pri:#087f73;--navy:#244b47;--soft:#e4efeb;--btn:#173e3a;--btnt:#fff;--ok:#23835e;--accent:#c45b38}
-@media(prefers-color-scheme:dark){:root{--bg:#171d1b;--card:#202925;--ink:#edf1ed;--mut:#a4b0a8;--line:#3a4740;--pri:#59c2ad;--navy:#a9d8ce;--soft:#293932;--btn:#9bdbc9;--btnt:#14201c;--ok:#64c99d;--accent:#f08b67}}
+:root{--bg:#eef1f6;--card:#fff;--ink:#172033;--mut:#5d677a;--line:#dce2ec;--pri:#273c75;--pri-ink:#fff;--soft:#e8edf6;--gold:#a8823a;--ok:#2f7d5b;--danger:#b4372f;--shadow:0 1px 2px rgba(23,32,51,.05),0 12px 32px rgba(23,32,51,.08)}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1320;--card:#161d2e;--ink:#e7ebf3;--mut:#9aa4b8;--line:#28324a;--pri:#9fb3f0;--pri-ink:#0e1320;--soft:#1d2740;--gold:#d6b56d;--ok:#6cc79c;--danger:#f08a80;--shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.35)}}
 *{box-sizing:border-box}
-html{scroll-padding-top:84px;scroll-behavior:smooth}
-body{margin:0;background-color:var(--bg);background-image:radial-gradient(var(--line) .65px,transparent .65px);background-size:18px 18px;color:var(--ink);font:16px/1.55 'IBM Plex Sans',system-ui,sans-serif}
-h1,h2,h3{font-family:'Source Serif 4',Georgia,serif;font-weight:600;margin:0;line-height:1.15}
-.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
-header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;padding:12px max(20px,4vw);border-bottom:1px solid var(--line);background:var(--card)}
-header .t{flex:1;min-width:0}
-header .t b{font:600 19px 'Source Serif 4',Georgia,serif;display:block}
-header .t span{color:var(--mut);font-size:14px}
-button,.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:2px;transition:background-color .16s ease,border-color .16s ease,color .16s ease}
+html{scroll-padding-top:88px;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:600;margin:0;line-height:1.15;letter-spacing:-.01em}
+a{color:var(--pri)}
+button,.btn{font:600 15px 'Manrope',system-ui,sans-serif;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:background-color .16s ease,border-color .16s ease,color .16s ease,transform .1s ease}
 button:hover,.btn:hover{border-color:var(--pri)}
-button.p,.btn.p{background:var(--btn);color:var(--btnt);border-color:var(--btn)}
-button:focus-visible,input:focus-visible,label:focus-within{outline:2px solid var(--pri);outline-offset:2px}
-main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
-.hero{background:linear-gradient(112deg,var(--card) 72%,var(--soft));border:1px solid var(--line);border-left:4px solid var(--pri);display:grid;grid-template-columns:auto 1fr auto;gap:32px;padding:36px;box-shadow:0 12px 34px rgba(24,50,42,.06)}
-.hero.public-hero{grid-template-columns:minmax(0,1fr) 180px;align-items:center;min-height:290px}
-.public-hero .ph{width:180px}
-.public-hero .ph .box{width:160px;height:200px;margin:0 auto}
-.public-hero .eyebrow{letter-spacing:.08em}
-.public-section{margin-top:42px}
-.public-section h2{font-size:30px;margin-bottom:8px}
-.public-lead{color:var(--mut);margin:0 0 20px}
-.public-empty{padding:22px;background:var(--card);border:1px dashed var(--line);color:var(--mut)}
-.public-footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mut);font-size:13px}
-.hero h1{font-size:clamp(28px,5vw,46px);margin:6px 0 14px}
-.hero p{color:var(--mut);margin:0 0 22px;max-width:60ch}
-.hero p b{color:var(--ink)}
-.eyebrow{color:var(--pri);font-size:13px;text-transform:uppercase}
-.stats{display:flex;gap:30px;flex-wrap:wrap}
-.stats b{display:block;font:500 28px 'IBM Plex Mono',monospace;color:var(--navy)}
-.stats span{color:var(--mut);font-size:14px}
-.badge{display:grid;gap:6px;justify-items:center;align-content:start;width:110px;color:var(--mut);font-size:12px;border-right:1px solid var(--line);padding-right:32px}
-.ph{width:140px;text-align:center;font-size:12px;color:var(--mut)}
-.ph .box{width:140px;height:175px;background:var(--soft);border:1px solid var(--line);display:grid;place-items:center;font:600 40px 'Source Serif 4',serif;color:var(--navy);overflow:hidden;margin-bottom:8px}
-.ph .box img{width:100%;height:100%;object-fit:cover}
-.ph label{cursor:pointer;color:var(--pri);text-decoration:underline}
-.tabs{display:flex;gap:0;margin:34px 0 0;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:thin}
-.tabs button{border:0;border-bottom:3px solid transparent;background:none;padding:12px 18px;color:var(--mut);border-radius:0}
-.tabs button{flex:0 0 auto}
-.tabs button[aria-selected=true]{color:var(--ink);border-color:var(--pri);font-weight:600}
-.units{display:flex;gap:8px;margin:20px 0;flex-wrap:wrap}
-.units button[aria-selected=true]{background:var(--btn);color:var(--btnt);border-color:var(--btn)}
-.weeks{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
-.wk{background:var(--card);border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;gap:12px;box-shadow:0 3px 12px rgba(24,50,42,.035)}
-.wk.has{border-left:4px solid var(--ok)}
-.wk h3{font-size:19px;display:flex;justify-content:space-between;align-items:baseline}
-.wk h3 small{font:400 12px 'IBM Plex Mono',monospace;color:var(--mut)}
+button:active,.btn:active{transform:scale(.97)}
+button.p,.btn.p{background:var(--pri);color:var(--pri-ink);border-color:var(--pri)}
+button.p:hover,.btn.p:hover{filter:brightness(1.1)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* ---------- Cabecera ---------- */
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;padding:12px max(20px,calc((100vw - 1100px)/2));border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--card) 86%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px)}
+header .t{flex:1;min-width:0}
+header .t b{font:600 18px 'Fraunces',Georgia,serif;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header .t span{color:var(--mut);font-size:13px}
+header nav{display:flex;gap:4px}
+header nav a{color:var(--mut);text-decoration:none;font-weight:600;font-size:15px;padding:8px 12px;border-radius:8px}
+header nav a:hover{color:var(--ink);background:var(--soft)}
+
+main{max-width:1100px;margin:0 auto;padding:36px 20px 64px}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:48px;align-items:center;padding:52px 52px 48px}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:linear-gradient(to left,#000 0%,transparent 55%);mask-image:linear-gradient(to left,#000 0%,transparent 55%);opacity:.7}
+.hero>*{position:relative}
+.kicker{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;color:var(--mut);font-weight:600;font-size:14px}
+.kicker::before{content:"";width:22px;height:2px;background:var(--gold);border-radius:2px}
+.hero h1{font-size:clamp(34px,5.4vw,60px);line-height:1.04;letter-spacing:-.025em;margin:0 0 18px;max-width:14ch}
+.hero .lead{color:var(--mut);margin:0 0 30px;max-width:58ch;font-size:17px}
+.hero .lead b{color:var(--ink);font-weight:600}
+.prog{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px 28px;max-width:620px}
+.prog div{display:grid;gap:7px}
+.prog p{margin:0;display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--mut)}
+.prog p b{color:var(--ink);font-weight:600}
+.prog p span{font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar{height:6px;border-radius:99px;background:var(--soft);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--pri),var(--gold));transform-origin:left;animation:grow .9s cubic-bezier(.2,.8,.2,1) .25s both}
+.ph{text-align:center;font-size:13px;color:var(--mut)}
+.ph .box{position:relative;isolation:isolate;width:190px;aspect-ratio:4/5;margin:0 auto 12px}
+.ph .box::after{content:"";position:absolute;inset:0;transform:translate(12px,12px);border:1.5px solid var(--gold);border-radius:18px;z-index:-1}
+.ph .face{width:100%;height:100%;border-radius:18px;overflow:hidden;background:var(--soft);display:grid;place-items:center;font:600 52px 'Fraunces',serif;color:var(--pri);box-shadow:var(--shadow)}
+.ph .face img{width:100%;height:100%;object-fit:cover}
+.ph label{cursor:pointer;color:var(--pri);font-weight:600}
+.ph label:hover{text-decoration:underline}
+@media(prefers-reduced-motion:no-preference){.hero .kicker,.hero h1,.hero .lead,.prog,.ph{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}.hero h1{animation-delay:.06s}.hero .lead{animation-delay:.12s}.prog{animation-delay:.18s}.ph{animation-delay:.1s}}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}}
+@keyframes grow{from{transform:scaleX(0)}}
+
+/* ---------- Secciones ---------- */
+.section{margin-top:64px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.section-head h2{font-size:clamp(28px,3.4vw,36px)}
+.section-head p{color:var(--mut);margin:6px 0 0;max-width:60ch}
+
+/* ---------- Trabajos ---------- */
+.tabs{display:inline-flex;gap:4px;padding:4px;background:var(--soft);border-radius:14px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.tabs button{flex:0 0 auto;border:0;background:none;color:var(--mut);border-radius:10px;padding:10px 18px}
+.tabs button[aria-selected=true]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(23,32,51,.12)}
+.units{display:flex;gap:8px;margin:18px 0 24px;flex-wrap:wrap}
+.units button{border-radius:99px;padding:7px 16px;font-size:14px}
+.units button[aria-selected=true]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.weeks{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.wk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.wk.has{box-shadow:var(--shadow)}
+.wk h3{font-size:21px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.wk h3 small{font:600 12px 'Manrope',sans-serif;color:var(--mut);background:var(--soft);padding:3px 10px;border-radius:99px;white-space:nowrap}
+.wk.has h3 small{color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
 .week-details{display:grid;gap:6px}
-.week-title{font-size:16px}
-.week-link{color:var(--pri);font-size:14px;overflow-wrap:anywhere}
-.week-meta{display:grid;gap:8px}
-.week-meta label{display:grid;gap:4px;color:var(--mut);font-size:13px}
+.week-title{font:600 16px 'Manrope',sans-serif;letter-spacing:0}
+.week-link{font-weight:600;font-size:14px;overflow-wrap:anywhere;text-underline-offset:3px}
+.week-meta{display:grid;gap:10px}
+.week-meta label{display:grid;gap:5px;color:var(--mut);font-size:13px;font-weight:600}
 .week-meta button{justify-self:start}
-.drop{display:block;border:1.5px dashed var(--line);padding:18px 10px;text-align:center;color:var(--mut);font-size:14px;cursor:pointer}
-.drop.over{border-color:var(--pri);background:var(--soft);color:var(--ink)}
+.drop{display:block;border:1.5px dashed var(--line);border-radius:12px;padding:18px 12px;text-align:center;color:var(--mut);font-size:14px;cursor:pointer;transition:border-color .16s ease,background-color .16s ease}
+.drop:hover,.drop.over{border-color:var(--pri);background:var(--soft);color:var(--ink)}
 .drop input{position:absolute;opacity:0;width:1px;height:1px}
-.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.th{position:relative;aspect-ratio:1;background:var(--soft)}
-.th img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;display:block}
-.th.document{aspect-ratio:auto;min-height:110px;display:flex;align-items:center;padding:12px;overflow-wrap:anywhere}
-.th.document a{color:var(--pri);font-size:14px}
-.th.document small{display:block;color:var(--mut)}
-.th i{position:absolute;left:3px;top:3px;background:rgba(0,0,0,.65);color:#fff;font:11px 'IBM Plex Mono',monospace;padding:0 5px}
-.th button{position:absolute;right:3px;top:3px;padding:0 7px;line-height:20px;background:rgba(0,0,0,.65);color:#fff;border:0}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.thumbs:empty{display:none}
+.th{position:relative;aspect-ratio:1;background:var(--soft);border-radius:10px;overflow:hidden}
+.th img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;display:block;transition:transform .3s ease}
+.th img:hover{transform:scale(1.04)}
+.th.document{grid-column:1/-1;aspect-ratio:auto;display:flex;align-items:center;padding:12px 12px 12px 40px;overflow-wrap:anywhere}
+.th.document a{font-size:14px;font-weight:600;text-decoration:none}
+.th.document small{display:block;color:var(--mut);font-weight:500}
+.th i{position:absolute;left:6px;top:6px;background:rgba(14,19,32,.7);color:#fff;font:600 11px 'Manrope',sans-serif;font-style:normal;padding:1px 7px;border-radius:99px}
+.th.document i{top:50%;transform:translateY(-50%)}
+.th button{position:absolute;right:6px;top:6px;padding:0 8px;line-height:22px;background:rgba(14,19,32,.7);color:#fff;border:0;border-radius:99px}
+.th button:hover{background:var(--danger)}
 .nx{align-self:flex-end;font-size:14px}
-.skills{margin-top:44px;padding-top:28px;border-top:1px solid var(--line)}
-.skills h2{font-size:26px;margin-bottom:14px}
-.chips{display:flex;gap:8px;flex-wrap:wrap}
-.chip{background:var(--card);color:var(--navy);padding:5px 8px 5px 12px;font:500 14px 'IBM Plex Mono',monospace;border:1px solid var(--line);display:inline-flex;align-items:center;gap:6px}
-.chip button{border:0;background:none;padding:0 3px;color:var(--mut);font-size:18px;line-height:1}
-.chip button:hover{color:var(--accent)}
-.add{display:flex;gap:8px;margin-top:14px}
-input[type=text],input[type=password],input[type=url]{font:inherit;padding:9px 12px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:2px;width:100%}
-.note{color:var(--mut);font-size:13px;margin-top:40px;max-width:70ch}
-.auth{max-width:400px;margin:9vh auto;background:var(--card);border:1px solid var(--line);padding:32px;display:grid;gap:14px}
-.auth h1{font-size:28px}.err{color:#c0392b;font-size:14px;min-height:20px}
-.auth a{color:var(--pri);font-size:14px}
-#lb{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;place-items:center;z-index:9;cursor:zoom-out}
-#lb.on{display:grid}#lb img{max-width:94vw;max-height:92vh}
-#msg{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--btn);color:var(--btnt);padding:10px 18px;display:none;z-index:10}
-.chat-toggle{position:fixed;right:20px;bottom:20px;z-index:11;border:0;border-radius:999px;background:var(--btn);color:var(--btnt);box-shadow:0 4px 18px #0003}
-.chat-panel{position:fixed;right:20px;bottom:82px;z-index:11;width:min(360px,calc(100vw - 28px));height:min(460px,calc(100dvh - 110px));background:var(--card);border:1px solid var(--line);box-shadow:0 8px 30px #0003;display:flex;flex-direction:column}
+.public-empty{grid-column:1/-1;margin:0;padding:28px;background:var(--card);border:1.5px dashed var(--line);border-radius:16px;color:var(--mut);text-align:center}
+
+/* ---------- Habilidades ---------- */
+.skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.skill-group{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.skill-group h3{font-size:19px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.skill-group h3 svg{flex:0 0 auto;color:var(--gold)}
+.skill-group ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.skill{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:12px;font-weight:600;font-size:15px}
+.meter{display:flex;gap:4px}
+.meter span,.meter button{width:18px;height:7px;border-radius:99px;background:var(--soft);padding:0;border:0}
+.meter .on{background:var(--pri)}
+.meter button:hover{background:var(--gold)}
+.skill-x{border:0;background:none;padding:0 4px;color:var(--mut);font-size:20px;line-height:1}
+.skill-x:hover{color:var(--danger)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;color:var(--mut);font-size:13px;margin-top:16px}
+.add{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:8px;margin-top:18px;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:16px}
+input[type=text],input[type=password],input[type=url],select{font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;width:100%}
+input:focus,select:focus{border-color:var(--pri);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--pri) 20%,transparent)}
+.note{color:var(--mut);font-size:14px;margin-top:48px;max-width:70ch;padding:14px 16px;border-left:3px solid var(--gold);background:var(--card);border-radius:0 12px 12px 0}
+.public-footer{border-top:1px solid var(--line);margin-top:64px;padding-top:20px;color:var(--mut);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* ---------- Acceso ---------- */
+.auth{max-width:420px;margin:10vh auto;background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:36px;display:grid;gap:14px}
+.auth h1{font-size:30px}
+.auth button{justify-content:center}
+.err{color:var(--danger);font-size:14px;min-height:20px}
+.auth a{font-size:14px;font-weight:600}
+
+/* ---------- Superposiciones ---------- */
+#lb{position:fixed;inset:0;background:rgba(9,12,20,.9);display:none;place-items:center;z-index:9;cursor:zoom-out}
+#lb.on{display:grid}#lb img{max-width:94vw;max-height:92vh;border-radius:8px}
+#msg{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--card);padding:11px 20px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:12;font-weight:600;font-size:14px;max-width:calc(100vw - 32px)}
+.chat-toggle{position:fixed;right:20px;bottom:20px;z-index:11;border:0;border-radius:99px;padding:12px 18px;background:var(--pri);color:var(--pri-ink);box-shadow:0 8px 24px rgba(23,32,51,.25)}
+.chat-panel{position:fixed;right:20px;bottom:82px;z-index:11;width:min(370px,calc(100vw - 28px));height:min(480px,calc(100dvh - 110px));background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 50px rgba(23,32,51,.25);display:flex;flex-direction:column;overflow:hidden;transform-origin:bottom right}
 .chat-panel[hidden]{display:none}
-.chat-head{display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid var(--line)}
+@media(prefers-reduced-motion:no-preference){.chat-panel:not([hidden]){animation:pop .18s cubic-bezier(.2,.8,.2,1)}}
+@keyframes pop{from{opacity:0;transform:scale(.96) translateY(6px)}}
+.chat-head{display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--pri);color:var(--pri-ink)}
 .chat-head strong{flex:1}
-.chat-head small{display:block;color:var(--mut);font-size:12px}
-.chat-close{padding:2px 9px;font-size:20px}
-.chat-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:12px}
-.chat-message{max-width:90%;padding:9px 11px;background:var(--soft);overflow-wrap:anywhere}
-.chat-message.user{align-self:flex-end;background:var(--btn);color:var(--btnt)}
+.chat-head small{display:block;opacity:.8;font-size:12px;font-weight:500}
+.chat-close{padding:0 10px;font-size:22px;background:none;border:0;color:inherit}
+.chat-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:14px}
+.chat-message{max-width:88%;padding:10px 13px;background:var(--soft);border-radius:14px 14px 14px 4px;overflow-wrap:anywhere;font-size:14px}
+.chat-message.user{align-self:flex-end;background:var(--pri);color:var(--pri-ink);border-radius:14px 14px 4px 14px}
 .chat-form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
 .chat-form input{min-width:0}
 .chat-form button{flex:0 0 auto}
-@media(max-width:760px){main{padding:22px 14px 44px}.hero,.hero.public-hero{grid-template-columns:1fr;gap:20px;padding:22px}.badge{display:none}.ph{order:-1}.ph .box{margin:0 auto 8px}.public-hero .ph{order:-1;width:100%}.stats{gap:16px}.units{overflow-x:auto;flex-wrap:nowrap;padding:2px}.units button{flex:0 0 auto}.weeks{grid-template-columns:1fr}.add{align-items:stretch}.add input{min-width:0}}
-@media(max-width:420px){header{gap:10px;padding:10px 12px}header svg{width:30px;height:30px}header .t b{font-size:16px}header .t span{font-size:12px}header button{padding:7px 9px;font-size:14px}.hero h1{overflow-wrap:anywhere}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.stats b{font-size:23px}.stats span{font-size:12px}.tabs button{padding:11px 12px;font-size:14px}.add{gap:6px}.add button{padding:8px 10px}.chat-toggle{right:12px;bottom:12px}.chat-panel{right:12px;bottom:70px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+@media(max-width:860px){header nav{display:none}}
+@media(max-width:760px){main{padding:22px 14px 48px}.hero{grid-template-columns:1fr;gap:28px;padding:28px 22px}.hero::before{-webkit-mask-image:linear-gradient(to bottom,#000,transparent 40%);mask-image:linear-gradient(to bottom,#000,transparent 40%)}.ph{order:-1}.ph .box{width:150px}.section{margin-top:48px}.units{overflow-x:auto;flex-wrap:nowrap;padding:2px}.units button{flex:0 0 auto}.weeks{grid-template-columns:1fr}.add{grid-template-columns:1fr 1fr}.add input{grid-column:1/-1}.add button{grid-column:1/-1;justify-content:center}}
+@media(max-width:420px){header{gap:10px;padding:10px 12px}header svg{width:30px;height:30px}header .t b{font-size:16px}header .t span{font-size:12px}header .btn,header button{padding:7px 10px;font-size:14px}.hero h1{overflow-wrap:anywhere}.tabs{display:flex}.tabs button{padding:9px 12px;font-size:14px}.chat-toggle{right:12px;bottom:12px}.chat-panel{right:12px;bottom:70px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -112,7 +164,7 @@ input[type=text],input[type=password],input[type=url]{font:inherit;padding:9px 1
 <div id="msg" role="status"></div>
 <section class="chat-panel" id="chat-panel" aria-label="Ayuda del portafolio" hidden>
  <div class="chat-head"><div><strong>Ayuda del portafolio</strong><small>Respuestas sobre este sistema</small></div><button class="chat-close" id="chat-close" type="button" aria-label="Cerrar chat">×</button></div>
- <div class="chat-messages" id="chat-messages" aria-live="polite"><div class="chat-message">¡Hola! Puedo ayudarte con cursos, semanas, imágenes, títulos, enlaces y otras funciones del portafolio.</div></div>
+ <div class="chat-messages" id="chat-messages" aria-live="polite"><div class="chat-message">¡Hola! Puedo ayudarte con cursos, semanas, imágenes, títulos, enlaces, habilidades y otras funciones del portafolio.</div></div>
  <form class="chat-form" id="chat-form"><input type="text" id="chat-input" placeholder="Pregunta sobre el portafolio..." aria-label="Escribe tu pregunta" autocomplete="off" required><button class="p" type="submit">Enviar</button></form>
 </section>
 <button class="chat-toggle" id="chat-toggle" type="button" aria-expanded="false" aria-controls="chat-panel">💬 Ayuda</button>
@@ -120,10 +172,27 @@ input[type=text],input[type=password],input[type=url]{font:inherit;padding:9px 1
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const COURSES=['Taller de Aplicaciones 1','Algoritmo y Estructura de Datos'];
-const DEFAULT_SKILLS=['Python','Java','JavaScript','HTML y CSS','Git y GitHub','SQL','Lógica de programación','Estructuras de datos','Algoritmos','Trabajo en equipo'];
+const CAREER='Ingeniería de Sistemas y Computación';
+const SKILL_CATS=['Lenguajes','Desarrollo web','Datos y herramientas','Fundamentos','Habilidades blandas'];
+const LEVELS=['','Básico','En progreso','Intermedio','Avanzado','Experto'];
+const DEFAULT_SKILLS=[
+ {name:'Python',cat:'Lenguajes',level:4},{name:'Java',cat:'Lenguajes',level:3},{name:'JavaScript',cat:'Lenguajes',level:3},{name:'C++',cat:'Lenguajes',level:3},
+ {name:'HTML y CSS',cat:'Desarrollo web',level:4},{name:'Diseño responsive',cat:'Desarrollo web',level:3},{name:'APIs del navegador',cat:'Desarrollo web',level:2},
+ {name:'SQL',cat:'Datos y herramientas',level:3},{name:'Git y GitHub',cat:'Datos y herramientas',level:4},{name:'VS Code',cat:'Datos y herramientas',level:4},{name:'Linux (terminal)',cat:'Datos y herramientas',level:2},
+ {name:'Lógica de programación',cat:'Fundamentos',level:4},{name:'Estructuras de datos',cat:'Fundamentos',level:3},{name:'Algoritmos',cat:'Fundamentos',level:3},{name:'Programación orientada a objetos',cat:'Fundamentos',level:3},
+ {name:'Trabajo en equipo',cat:'Habilidades blandas',level:4},{name:'Resolución de problemas',cat:'Habilidades blandas',level:4},{name:'Comunicación',cat:'Habilidades blandas',level:3}];
+const CAT_ICONS={
+ 'Lenguajes':'<path d="M8 6l-6 6 6 6M16 6l6 6-6 6"/>',
+ 'Desarrollo web':'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/>',
+ 'Datos y herramientas':'<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
+ 'Fundamentos':'<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 8l3.5 8M16.5 8L13 16"/>',
+ 'Habilidades blandas':'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5M16 4.8a3.5 3.5 0 010 6.4M18.5 14.8c1.7.8 2.7 2.5 3 5.2"/>'};
 const S={c:0,u:0,imgs:[],photo:null,user:null,weekDetails:{}};
 const lsGet=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
 const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
+/* Las versiones anteriores guardaban las habilidades como texto; se convierten al formato con categoría y nivel */
+const normSkill=s=>{if(typeof s!=='string')return s;const d=DEFAULT_SKILLS.find(x=>x.name.toLocaleLowerCase()===s.toLocaleLowerCase());return d?{...d,name:s}:{name:s,cat:'Fundamentos',level:3}};
+const getSkills=()=>lsGet('skills',DEFAULT_SKILLS).map(normSkill);
 
 /* ---------- Base de datos local (IndexedDB) ---------- */
 const dbp=new Promise((res,rej)=>{const r=indexedDB.open('portafolio-upla',1);
@@ -160,12 +229,12 @@ const fileKind=f=>{
 };
 const safeLink=value=>{try{const url=new URL(value);return ['http:','https:'].includes(url.protocol)?url.href:null}catch{return null}};
 function chatReply(question){
- const q=question.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+ const q=question.toLocaleLowerCase('es').normalize('NFD').replace(/[̀-ͯ]/g,'');
  if(/\b(hola|buenas|buenos dias|buenas tardes)\b/.test(q))return '¡Hola! Puedo responder preguntas sobre cómo usar este portafolio académico.';
+ if(/habilidad|skill|nivel|categoria/.test(q))return 'En administración, agrega una habilidad con su nombre, categoría y nivel. Para cambiar el nivel de una existente, toca uno de sus segmentos; para quitarla, usa el botón × junto a ella.';
  if(/titulo|nombre|enlace|link/.test(q))return 'En administración, cada semana tiene campos opcionales para título y enlace. Escribe lo que quieras y pulsa “Guardar”; el enlace debe empezar con http:// o https://.';
  if(/imagen|foto|subir|cargar|archivo|pdf|word/.test(q))return 'En administración, abre el curso y la unidad; en la semana elegida puedes arrastrar o seleccionar imágenes, PDF y archivos Word (.doc o .docx). La foto del perfil se cambia desde “Cambiar foto”.';
- if(/semana|unidad|curso|tarea|trabajo/.test(q))return 'El portafolio organiza los trabajos por curso, unidad y semana. Usa las pestañas de cursos y los botones de unidad para navegar. Las semanas con trabajos, título o enlace aparecen en la vista pública.';
- if(/habilidad/.test(q))return 'En administración, puedes agregar habilidades desde el campo “Agregar habilidad” y quitarlas con el botón × junto a cada una.';
+ if(/semana|unidad|curso|tarea|trabajo|progreso/.test(q))return 'El portafolio organiza los trabajos por curso, unidad y semana. Usa las pestañas de cursos y los botones de unidad para navegar. Las barras del inicio muestran cuántas de las 16 semanas de cada curso ya tienen trabajos.';
  if(/guardar|datos|privacidad|navegador|dispositivo/.test(q))return 'Las imágenes, los PDF, los archivos Word y la foto se guardan en IndexedDB de este navegador; los títulos, enlaces y habilidades se guardan en el almacenamiento local. No se sincronizan con otros dispositivos.';
  if(/admin|administrar|contrasena|sesion|entrar/.test(q))return 'Para administrar, pulsa “Administrar” en el portafolio público e inicia sesión. Desde esa vista puedes editar el contenido y cerrar sesión.';
  if(/portafolio|sistema|funciona|funcion/.test(q))return 'Este sistema muestra un portafolio académico con cursos, unidades, semanas, trabajos, habilidades y foto de perfil. Pregúntame por cualquiera de esas funciones.';
@@ -204,12 +273,13 @@ async function delImage(id){
 }
 
 /* ---------- Vistas ---------- */
+const logo=`<svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 2l14 8v16l-14 8L4 26V10z" fill="var(--pri)"/><path d="M18 2l14 8v16l-14 8" fill="none" stroke="var(--gold)" stroke-width="1.5"/><text x="18" y="23" text-anchor="middle" fill="var(--pri-ink)" font-size="12" font-weight="700" font-family="Manrope,sans-serif">UP</text></svg>`;
 function authView(){
  const u=lsGet('user',null);
  $('#app').innerHTML=`<form class="auth" id="af">
-  <p class="eyebrow mono">${u?'Iniciar sesión':'Crear cuenta'}</p>
-  <h1>Portafolio académico</h1>
-  ${u?`<p style="margin:0;color:var(--mut)">Hola, ${esc(u.name)}.</p>`:`<input type="text" id="nm" value="Flores Canto, David Piero" aria-label="Nombre completo" required>`}
+  ${logo}
+  <h1>${u?'Iniciar sesión':'Crear cuenta'}</h1>
+  ${u?`<p style="margin:0;color:var(--mut)">Hola, ${esc(u.name)}. Ingresa tu contraseña para editar el portafolio.</p>`:`<input type="text" id="nm" value="Flores Canto, David Piero" aria-label="Nombre completo" required>`}
   <input type="password" id="pw" placeholder="Contraseña" aria-label="Contraseña" required minlength="4">
   <div class="err" id="er"></div>
   <button class="p" type="submit">${u?'Entrar':'Crear cuenta y entrar'}</button>
@@ -220,9 +290,24 @@ function authView(){
   else lsSet('user',{name:$('#nm').value.trim(),h});
   sessionStorage.setItem('ok','1');history.replaceState(null,'',`${location.pathname}?admin=1`);start(false)};
 }
+function skillsView(publicMode){
+ const skills=getSkills();
+ const groups=SKILL_CATS.map(cat=>{
+  const items=skills.map((s,i)=>({...s,i})).filter(s=>s.cat===cat||(cat==='Fundamentos'&&!SKILL_CATS.includes(s.cat)));
+  if(!items.length)return '';
+  return `<section class="skill-group"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${CAT_ICONS[cat]}</svg>${cat}</h3><ul>${items.map(s=>{
+   const lv=Math.min(5,Math.max(1,+s.level||3));
+   const segs=[1,2,3,4,5].map(n=>publicMode?`<span class="${n<=lv?'on':''}"></span>`:`<button type="button" class="${n<=lv?'on':''}" data-sk="${s.i}" data-lv="${n}" aria-label="Nivel ${LEVELS[n]} para ${esc(s.name)}"></button>`).join('');
+   return `<li class="skill"><span>${esc(s.name)}</span><span class="meter" role="img" aria-label="Nivel: ${LEVELS[lv]}" title="${LEVELS[lv]}">${segs}</span>${publicMode?'':`<button class="skill-x" data-rs="${s.i}" aria-label="Quitar ${esc(s.name)}">×</button>`}</li>`}).join('')}</ul></section>`}).join('');
+ return `<div class="skill-grid">${groups||'<p class="public-empty">Agrega tu primera habilidad para mostrarla aquí.</p>'}</div>
+  <p class="legend"><span>1 · Básico</span><span>3 · Intermedio</span><span>5 · Experto</span></p>
+  ${publicMode?'':`<form class="add" id="sf"><input type="text" id="sk" placeholder="Nombre de la habilidad" aria-label="Nueva habilidad" required>
+   <select id="skc" aria-label="Categoría">${SKILL_CATS.map(c=>`<option>${c}</option>`).join('')}</select>
+   <select id="skl" aria-label="Nivel">${[1,2,3,4,5].map(n=>`<option value="${n}" ${n===3?'selected':''}>${LEVELS[n]}</option>`).join('')}</select>
+   <button class="p">Agregar habilidad</button></form>`}`;
+}
 function view(publicMode=false){
  const u=lsGet('user',{name:'Estudiante'});const c=S.c;
- const done=doneWeeks(c);
  const weekIndexes=[0,1,2,3].filter(w=>{
   const slot=`${c}-${S.u}-${w}`;const detail=S.weekDetails[slot];
   return !publicMode||slotImgs(slot).length||detail?.title||detail?.link;
@@ -230,8 +315,8 @@ function view(publicMode=false){
  const weeks=weekIndexes.map(w=>{const slot=`${c}-${S.u}-${w}`;const im=slotImgs(slot);
   const detail=S.weekDetails[slot]||{title:'',link:''};const link=safeLink(detail.link||'');
   return `<section class="wk ${im.length?'has':''}" id="w${w}">
-   <h3>Semana ${w+1}<small>${im.length} ${im.length===1?'archivo':'archivos'}</small></h3>
-   ${detail.title||link?`<div class="week-details">${detail.title?`<h4 class="week-title">${esc(detail.title)}</h4>`:''}${link?`<a class="week-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">Ver enlace ↗</a>`:''}</div>`:''}
+   <h3>Semana ${w+1}<small>${im.length?`${im.length} ${im.length===1?'archivo':'archivos'}`:'Sin archivos'}</small></h3>
+   ${detail.title||link?`<div class="week-details">${detail.title?`<h4 class="week-title">${esc(detail.title)}</h4>`:''}${link?`<a class="week-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">Abrir enlace ↗</a>`:''}</div>`:''}
    ${publicMode?'':`<form class="week-meta" data-slot="${slot}">
     <label>Título (opcional)<input type="text" name="title" value="${esc(detail.title||'')}" placeholder="Título de la semana"></label>
     <label>Enlace (opcional)<input type="url" name="link" value="${esc(detail.link||'')}" placeholder="https://..."></label>
@@ -239,39 +324,38 @@ function view(publicMode=false){
    </form>`}
    ${publicMode?'':`<label class="drop" data-slot="${slot}"><input type="file" accept="image/*,.pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple data-slot="${slot}">Arrastra imágenes, PDF o Word aquí, o toca para elegirlos<br>(puedes seleccionar varios archivos)</label>`}
    <div class="thumbs">${im.map((x,i)=>`<div class="th ${x.kind==='image'?'':'document'}">${x.kind==='image'?`<img src="${x.url}" alt="${esc(x.name)}" data-big="${x.url}">`:`<a href="${x.url}" download="${esc(x.name)}">${esc(x.name)}<small>Descargar ${x.kind==='pdf'?'PDF':'Word'}</small></a>`}<i>${i+1}</i>${publicMode?'':`<button data-del="${x.id}" aria-label="Eliminar ${esc(x.name)}">×</button>`}</div>`).join('')}</div>
-   ${!publicMode&&w<3?`<button class="nx" data-next="${w+1}">Siguiente semana →</button>`:''}
+   ${!publicMode&&w<3?`<button class="nx" data-next="${w+1}">Siguiente semana</button>`:''}
   </section>`}).join('');
- const skills=lsGet('skills',DEFAULT_SKILLS);
+ const progress=COURSES.map((n,i)=>{const d=doneWeeks(i);return `<div><p><b>${n}</b><span>${d} de 16 semanas</span></p><div class="bar" role="progressbar" aria-label="Avance en ${n}" aria-valuemin="0" aria-valuemax="16" aria-valuenow="${d}"><i style="width:${d/16*100}%"></i></div></div>`}).join('');
  $('#app').innerHTML=`
  <header>
-  <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 2l14 8v16l-14 8L4 26V10z" fill="var(--pri)"/><text x="18" y="23" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="sans-serif">UP</text></svg>
+  ${logo}
   <div class="t"><b>${esc(u.name)}</b><span>Universidad Peruana Los Andes</span></div>
+  <nav aria-label="Secciones"><a href="#trabajos">Trabajos</a><a href="#habilidades">Habilidades</a></nav>
   <a class="btn ${publicMode?'p':''}" href="${publicMode?'?admin=1':'./'}">${publicMode?'Administrar':'Ver portafolio'}</a>
   ${publicMode?'':'<button id="out">Cerrar sesión</button>'}
  </header>
  <main>
-  <div class="hero ${publicMode?'public-hero':''}">
-   ${publicMode?'':'<div class="badge mono"><span>Universidad</span><span>Peruana</span><span>Los Andes</span></div>'}
+  <div class="hero">
    <div>
-    <p class="eyebrow mono" style="margin:0">${publicMode?'Portafolio académico':'Expediente de curso'}</p>
-    <h1>${publicMode?'Hola, soy ':''}${esc(u.name)}</h1>
-    <p>${publicMode?'Aquí comparto mis trabajos, habilidades y proyectos de la Universidad Peruana Los Andes.':`Registro de las tareas entregadas en <b>${COURSES[0]}</b> y <b>${COURSES[1]}</b>, organizadas por unidad y semana en el mismo orden en que se dictaron en clase.`}</p>
-    <div class="stats"><div><b>02</b><span>Cursos</span></div><div><b>04</b><span>Unidades por curso</span></div><div><b>${done}/16</b><span>Semanas con tareas</span></div></div>
+    <p class="kicker">${publicMode?`Estudiante de ${CAREER}`:'Modo edición'}</p>
+    <h1>${esc(u.name)}</h1>
+    <p class="lead">${publicMode?`Aquí reúno los trabajos que desarrollo en la <b>Universidad Peruana Los Andes</b>, ordenados por curso, unidad y semana, junto con las herramientas que uso para construir software.`:`Registra las tareas de <b>${COURSES[0]}</b> y <b>${COURSES[1]}</b> en el mismo orden en que se dictaron en clase. Los cambios se ven al instante en la vista pública.`}</p>
+    <div class="prog">${progress}</div>
    </div>
-   <div class="ph"><div class="box">${S.photo?`<img src="${S.photo}" alt="Foto de ${esc(u.name)}">`:esc(initials(u.name))}</div>${publicMode?'':'<label>Cambiar foto<input type="file" accept="image/*" id="pf" hidden></label>'}</div>
+   <div class="ph"><div class="box"><div class="face">${S.photo?`<img src="${S.photo}" alt="Foto de ${esc(u.name)}">`:esc(initials(u.name))}</div></div>${publicMode?'':'<label>Cambiar foto<input type="file" accept="image/*" id="pf" hidden></label>'}</div>
   </div>
-  <section class="public-section" id="trabajos">
-  ${publicMode?'<h2>Trabajos seleccionados</h2><p class="public-lead">Explora las entregas por curso y unidad.</p>':''}
-  <div class="tabs" role="tablist">${COURSES.map((n,i)=>`<button role="tab" aria-selected="${i===c}" data-c="${i}">${n}</button>`).join('')}</div>
-  <div class="units">${[0,1,2,3].map(i=>`<button aria-selected="${i===S.u}" data-u="${i}">Unidad ${i+1}</button>`).join('')}</div>
-  <div class="weeks">${weeks|| (publicMode?'<p class="public-empty">Aún no hay trabajos en esta unidad.</p>':'')}</div>
+  <section class="section" id="trabajos">
+   <div class="section-head"><div><h2>Trabajos</h2><p>${publicMode?'Elige un curso y una unidad para ver las entregas de cada semana.':'Sube archivos, títulos y enlaces para cada semana.'}</p></div>
+   <div class="tabs" role="tablist">${COURSES.map((n,i)=>`<button role="tab" aria-selected="${i===c}" data-c="${i}">${n}</button>`).join('')}</div></div>
+   <div class="units">${[0,1,2,3].map(i=>`<button aria-selected="${i===S.u}" data-u="${i}">Unidad ${i+1}</button>`).join('')}</div>
+   <div class="weeks">${weeks||(publicMode?'<p class="public-empty">Esta unidad todavía no tiene entregas publicadas.</p>':'')}</div>
   </section>
-  <div class="skills">
-   <h2>Habilidades</h2>
-   <div class="chips">${skills.map((s,i)=>`<span class="chip">${esc(s)}${publicMode?'':`<button data-rs="${i}" aria-label="Quitar ${esc(s)}">×</button>`}</span>`).join('')}</div>
-   ${publicMode?'':'<form class="add" id="sf"><input type="text" id="sk" placeholder="Agregar habilidad" aria-label="Nueva habilidad"><button class="p">Agregar</button></form>'}
-  </div>
-  ${publicMode?'<p class="public-footer">Portafolio académico · Universidad Peruana Los Andes</p>':'<p class="note">Tus imágenes, documentos y los títulos y enlaces de cada semana se guardan en este navegador. Si borras los datos del navegador o cambias de dispositivo, no los verás: conserva una copia de tus archivos originales.</p>'}
+  <section class="section" id="habilidades">
+   <div class="section-head"><div><h2>Habilidades</h2><p>Lenguajes, herramientas y fundamentos que aplico en mis proyectos, con mi nivel actual en cada uno.</p></div></div>
+   ${skillsView(publicMode)}
+  </section>
+  ${publicMode?`<footer class="public-footer"><span>${esc(u.name)}</span><span>${CAREER} · Universidad Peruana Los Andes</span></footer>`:'<p class="note">Tus imágenes, documentos, títulos, enlaces y habilidades se guardan en este navegador. Si borras los datos del navegador o cambias de dispositivo, no los verás: conserva una copia de tus archivos originales.</p>'}
  </main>`;
 }
 
@@ -288,13 +372,14 @@ $('#chat-form').addEventListener('submit',e=>{
  e.preventDefault();const input=$('#chat-input');const question=input.value.trim();if(!question)return;
  addChatMessage(question,'user');addChatMessage(chatReply(question),'');input.value='';input.focus();
 });
-app.addEventListener('click',e=>{const t=e.target;
+app.addEventListener('click',e=>{const t=e.target.closest('button,img')||e.target;
  if(t.dataset.c){S.c=+t.dataset.c;S.u=0;view()}
  else if(t.dataset.u){S.u=+t.dataset.u;view()}
- else if(t.dataset.del){if(confirm('¿Eliminar esta imagen?'))delImage(+t.dataset.del)}
+ else if(t.dataset.del){if(confirm('¿Eliminar este archivo?'))delImage(+t.dataset.del)}
  else if(t.dataset.big){$('#lb img').src=t.dataset.big;$('#lb').classList.add('on')}
  else if(t.dataset.next){$('#w'+t.dataset.next).scrollIntoView({behavior:'smooth'})}
- else if(t.dataset.rs!==undefined){const s=lsGet('skills',DEFAULT_SKILLS);s.splice(+t.dataset.rs,1);lsSet('skills',s);view()}
+ else if(t.dataset.lv){const s=getSkills();s[+t.dataset.sk].level=+t.dataset.lv;lsSet('skills',s);view()}
+ else if(t.dataset.rs!==undefined){const s=getSkills();s.splice(+t.dataset.rs,1);lsSet('skills',s);view()}
  else if(t.id==='out'){sessionStorage.clear();history.replaceState(null,'',location.pathname);start(true)}});
 app.addEventListener('change',async e=>{const t=e.target;
  if(t.dataset.slot){await addFiles(t.dataset.slot,t.files);t.value=''}
@@ -312,15 +397,17 @@ app.addEventListener('submit',e=>{
   else delete details[form.dataset.slot];
   try{localStorage.setItem('weekDetails',JSON.stringify(details))}
   catch(error){console.error('No se pudieron guardar los datos de la semana',error);return toast('No se pudieron guardar los datos de la semana')}
-  S.weekDetails=details;view();
+  S.weekDetails=details;view();toast('Semana guardada');
  }else if(e.target.id==='sf'){
-  e.preventDefault();const v=$('#sk').value.trim();if(v){const s=lsGet('skills',DEFAULT_SKILLS);if(s.some(x=>x.toLocaleLowerCase()===v.toLocaleLowerCase()))return toast('Esa habilidad ya está en la lista');s.push(v);lsSet('skills',s);view()}
+  e.preventDefault();const v=$('#sk').value.trim();if(!v)return;
+  const s=getSkills();if(s.some(x=>x.name.toLocaleLowerCase()===v.toLocaleLowerCase()))return toast('Esa habilidad ya está en la lista');
+  s.push({name:v,cat:$('#skc').value,level:+$('#skl').value});lsSet('skills',s);view();toast('Habilidad agregada');
  }
 });
 ['dragover','dragleave','drop'].forEach(ev=>app.addEventListener(ev,e=>{const d=e.target.closest('.drop');if(!d)return;e.preventDefault();
  d.classList.toggle('over',ev==='dragover');if(ev==='drop')addFiles(d.dataset.slot,e.dataTransfer.files)}));
 $('#lb').onclick=()=>$('#lb').classList.remove('on');
-document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#lb').classList.remove('on')});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#lb').classList.remove('on');if(!chatPanel.hidden)setChatOpen(false)}});
 
 async function start(publicMode=false){await load();view(publicMode)}
 const adminRequested=new URLSearchParams(location.search).has('admin');
