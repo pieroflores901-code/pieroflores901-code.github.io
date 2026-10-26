@@ -6,6 +6,7 @@
 <meta name="description" content="Portafolio académico de David Piero Flores Canto, estudiante de Ingeniería de Sistemas y Computación en la Universidad Peruana Los Andes.">
 <meta name="theme-color" content="#070b18">
 <title>Portafolio académico · Flores Canto, David Piero</title>
+<link rel="icon" type="image/png" href="upla-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -27,6 +28,10 @@ button.p:hover,.btn.p:hover{box-shadow:var(--glow)}
 
 /* ---------- Cabecera ---------- */
 header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;padding:12px max(20px,calc((100vw - 1100px)/2));border-bottom:1px solid var(--line);background:rgba(7,11,24,.72);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px)}
+.logo{display:block;flex:0 0 auto;filter:drop-shadow(0 0 10px rgba(30,136,214,.45))}
+.auth .logo{width:48px;height:55px}
+.foot-brand{display:inline-flex;align-items:center;gap:10px}
+.foot-brand .logo{width:22px;height:25px;filter:none}
 header .t{flex:1;min-width:0}
 header .t b{font:500 15px 'Unbounded',sans-serif;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 header .t span{color:var(--mut);font-size:13px}
@@ -175,7 +180,7 @@ input:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 
 
 @media(max-width:860px){header nav{display:none}}
 @media(max-width:760px){main{padding:22px 14px 48px}.hero{grid-template-columns:1fr;gap:30px;padding:30px 22px 40px}.ph{order:-1}.ph .box{width:160px}.ph::before{width:220px;height:220px}.section{margin-top:52px}.units{overflow-x:auto;flex-wrap:nowrap;padding:2px}.units button{flex:0 0 auto}.weeks{grid-template-columns:1fr}.add{grid-template-columns:1fr 1fr}.add input{grid-column:1/-1}.add button{grid-column:1/-1;justify-content:center}}
-@media(max-width:420px){header{gap:10px;padding:10px 12px}header svg{width:30px;height:30px}header .t b{font-size:13px}header .t span{font-size:12px}header .btn,header button{padding:7px 10px;font-size:14px}.hero h1{overflow-wrap:anywhere}.tabs{display:flex}.tabs button{padding:9px 12px;font-size:14px}.chat-toggle{right:12px;bottom:12px}.chat-panel{right:12px;bottom:70px}}
+@media(max-width:420px){header{gap:10px;padding:10px 12px}header .logo{width:27px;height:31px}header .t b{font-size:13px}header .t span{font-size:12px}header .btn,header button{padding:7px 10px;font-size:14px}.hero h1{overflow-wrap:anywhere}.tabs{display:flex}.tabs button{padding:9px 12px;font-size:14px}.chat-toggle{right:12px;bottom:12px}.chat-panel{right:12px;bottom:70px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.floor::before{animation:none}}
 </style>
 </head>
@@ -334,7 +339,7 @@ async function delImage(id){
 }
 
 /* ---------- Vistas ---------- */
-const logo=`<svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 2l14 8v16l-14 8L4 26V10z" fill="var(--pri)"/><path d="M18 2l14 8v16l-14 8" fill="none" stroke="var(--accent)" stroke-width="1.5"/><text x="18" y="23" text-anchor="middle" fill="var(--pri-ink)" font-size="12" font-weight="700" font-family="Unbounded,sans-serif">UP</text></svg>`;
+const logo=`<img class="logo" src="upla-logo.png" width="32" height="37" alt="Logo de la Universidad Peruana Los Andes">`;
 function authView(){
  const u=lsGet('user',null);
  $('#app').innerHTML=`<form class="auth" id="af">
@@ -417,7 +422,7 @@ function view(publicMode=false){
    <div class="section-head"><div><h2>Habilidades</h2><p>Lenguajes, herramientas y fundamentos que aplico en mis proyectos, con mi nivel actual en cada uno.</p></div></div>
    ${skillsView(publicMode)}
   </section>
-  ${publicMode?`<footer class="public-footer"><span>${esc(u.name)}</span><span>${CAREER} · Universidad Peruana Los Andes</span></footer>`:'<p class="note">Tus imágenes, documentos, títulos, enlaces y habilidades se guardan en este navegador. Si borras los datos del navegador o cambias de dispositivo, no los verás: conserva una copia de tus archivos originales.</p>'}
+  ${publicMode?`<footer class="public-footer"><span class="foot-brand">${logo}${esc(u.name)}</span><span>${CAREER} · Universidad Peruana Los Andes</span></footer>`:'<p class="note">Tus imágenes, documentos, títulos, enlaces y habilidades se guardan en este navegador. Si borras los datos del navegador o cambias de dispositivo, no los verás: conserva una copia de tus archivos originales.</p>'}
  </main>`;
 }
 
