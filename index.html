@@ -10,8 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#eef1f6;--card:#fff;--ink:#172033;--mut:#5d677a;--line:#dce2ec;--pri:#273c75;--pri-ink:#fff;--soft:#e8edf6;--gold:#a8823a;--ok:#2f7d5b;--danger:#b4372f;--shadow:0 1px 2px rgba(23,32,51,.05),0 12px 32px rgba(23,32,51,.08)}
-@media(prefers-color-scheme:dark){:root{--bg:#0e1320;--card:#161d2e;--ink:#e7ebf3;--mut:#9aa4b8;--line:#28324a;--pri:#9fb3f0;--pri-ink:#0e1320;--soft:#1d2740;--gold:#d6b56d;--ok:#6cc79c;--danger:#f08a80;--shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.35)}}
+:root{--bg:#eef1f6;--card:#fff;--ink:#172033;--mut:#5d677a;--line:#dce2ec;--pri:#273c75;--pri-ink:#fff;--soft:#e8edf6;--gold:#a8823a;--ok:#2f7d5b;--danger:#b4372f;--shadow:0 1px 2px rgba(23,32,51,.05),0 12px 32px rgba(23,32,51,.08);--shadow-lift:0 2px 4px rgba(23,32,51,.06),0 24px 48px rgba(23,32,51,.16);--sheen:rgba(255,255,255,.55);--ease-out:cubic-bezier(.23,1,.32,1)}
+@media(prefers-color-scheme:dark){:root{--bg:#0e1320;--card:#161d2e;--ink:#e7ebf3;--mut:#9aa4b8;--line:#28324a;--pri:#9fb3f0;--pri-ink:#0e1320;--soft:#1d2740;--gold:#d6b56d;--ok:#6cc79c;--danger:#f08a80;--shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.35);--shadow-lift:0 2px 4px rgba(0,0,0,.35),0 28px 56px rgba(0,0,0,.5);--sheen:rgba(159,179,240,.12)}}
 *{box-sizing:border-box}
 html{scroll-padding-top:88px;scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
@@ -51,10 +51,11 @@ main{max-width:1100px;margin:0 auto;padding:36px 20px 64px}
 .prog p span{font-variant-numeric:tabular-nums;white-space:nowrap}
 .bar{height:6px;border-radius:99px;background:var(--soft);overflow:hidden}
 .bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--pri),var(--gold));transform-origin:left;animation:grow .9s cubic-bezier(.2,.8,.2,1) .25s both}
-.ph{text-align:center;font-size:13px;color:var(--mut)}
-.ph .box{position:relative;isolation:isolate;width:190px;aspect-ratio:4/5;margin:0 auto 12px}
-.ph .box::after{content:"";position:absolute;inset:0;transform:translate(12px,12px);border:1.5px solid var(--gold);border-radius:18px;z-index:-1}
-.ph .face{width:100%;height:100%;border-radius:18px;overflow:hidden;background:var(--soft);display:grid;place-items:center;font:600 52px 'Fraunces',serif;color:var(--pri);box-shadow:var(--shadow)}
+.ph{text-align:center;font-size:13px;color:var(--mut);perspective:800px}
+/* Foto en capas: marco dorado al fondo, foto al frente; el giro con el puntero revela la profundidad */
+.ph .box{position:relative;width:190px;aspect-ratio:4/5;margin:0 auto 12px;transform-style:preserve-3d;transition:transform .5s var(--ease-out)}
+.ph .box::after{content:"";position:absolute;inset:0;transform:translate3d(12px,12px,-24px);border:1.5px solid var(--gold);border-radius:18px}
+.ph .face{position:relative;width:100%;height:100%;border-radius:18px;overflow:hidden;background:var(--soft);display:grid;place-items:center;font:600 52px 'Fraunces',serif;color:var(--pri);box-shadow:var(--shadow-lift);transform:translateZ(28px)}
 .ph .face img{width:100%;height:100%;object-fit:cover}
 .ph label{cursor:pointer;color:var(--pri);font-weight:600}
 .ph label:hover{text-decoration:underline}
@@ -86,6 +87,7 @@ main{max-width:1100px;margin:0 auto;padding:36px 20px 64px}
 .week-link{font-weight:600;font-size:14px;overflow-wrap:anywhere;text-underline-offset:3px}
 .week-meta{display:grid;gap:10px}
 .week-meta label{display:grid;gap:5px;color:var(--mut);font-size:13px;font-weight:600}
+.week-meta small{font-weight:500;font-size:12px}
 .week-meta button{justify-self:start}
 .drop{display:block;border:1.5px dashed var(--line);border-radius:12px;padding:18px 12px;text-align:center;color:var(--mut);font-size:14px;cursor:pointer;transition:border-color .16s ease,background-color .16s ease}
 .drop:hover,.drop.over{border-color:var(--pri);background:var(--soft);color:var(--ink)}
@@ -103,6 +105,11 @@ main{max-width:1100px;margin:0 auto;padding:36px 20px 64px}
 .th button{position:absolute;right:6px;top:6px;padding:0 8px;line-height:22px;background:rgba(14,19,32,.7);color:#fff;border:0;border-radius:99px}
 .th button:hover{background:var(--danger)}
 .nx{align-self:flex-end;font-size:14px}
+/* Tarjetas en 3D: inclinación según el puntero con un brillo que lo sigue (solo en la vista pública y con mouse) */
+.tilt{position:relative;transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out)}
+.tilt::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),var(--sheen),transparent 45%);opacity:0;transition:opacity .3s ease}
+.tilt.tilting{box-shadow:var(--shadow-lift);transition:transform .12s linear,box-shadow .3s var(--ease-out)}
+.tilt.tilting::before{opacity:1}
 .public-empty{grid-column:1/-1;margin:0;padding:28px;background:var(--card);border:1.5px dashed var(--line);border-radius:16px;color:var(--mut);text-align:center}
 
 /* ---------- Habilidades ---------- */
@@ -295,7 +302,7 @@ function skillsView(publicMode){
  const groups=SKILL_CATS.map(cat=>{
   const items=skills.map((s,i)=>({...s,i})).filter(s=>s.cat===cat||(cat==='Fundamentos'&&!SKILL_CATS.includes(s.cat)));
   if(!items.length)return '';
-  return `<section class="skill-group"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${CAT_ICONS[cat]}</svg>${cat}</h3><ul>${items.map(s=>{
+  return `<section class="skill-group ${publicMode?'tilt':''}"><h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${CAT_ICONS[cat]}</svg>${cat}</h3><ul>${items.map(s=>{
    const lv=Math.min(5,Math.max(1,+s.level||3));
    const segs=[1,2,3,4,5].map(n=>publicMode?`<span class="${n<=lv?'on':''}"></span>`:`<button type="button" class="${n<=lv?'on':''}" data-sk="${s.i}" data-lv="${n}" aria-label="Nivel ${LEVELS[n]} para ${esc(s.name)}"></button>`).join('');
    return `<li class="skill"><span>${esc(s.name)}</span><span class="meter" role="img" aria-label="Nivel: ${LEVELS[lv]}" title="${LEVELS[lv]}">${segs}</span>${publicMode?'':`<button class="skill-x" data-rs="${s.i}" aria-label="Quitar ${esc(s.name)}">×</button>`}</li>`}).join('')}</ul></section>`}).join('');
@@ -314,12 +321,12 @@ function view(publicMode=false){
  });
  const weeks=weekIndexes.map(w=>{const slot=`${c}-${S.u}-${w}`;const im=slotImgs(slot);
   const detail=S.weekDetails[slot]||{title:'',link:''};const link=safeLink(detail.link||'');
-  return `<section class="wk ${im.length?'has':''}" id="w${w}">
+  return `<section class="wk ${im.length?'has':''} ${publicMode?'tilt':''}" id="w${w}">
    <h3>Semana ${w+1}<small>${im.length?`${im.length} ${im.length===1?'archivo':'archivos'}`:'Sin archivos'}</small></h3>
-   ${detail.title||link?`<div class="week-details">${detail.title?`<h4 class="week-title">${esc(detail.title)}</h4>`:''}${link?`<a class="week-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">Abrir enlace ↗</a>`:''}</div>`:''}
+   ${detail.title||link?`<div class="week-details">${detail.title?`<h4 class="week-title">${esc(detail.title)}</h4>`:''}${link?`<a class="week-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">Abrir en ${esc(new URL(link).hostname.replace(/^www\./,''))} ↗</a>`:''}</div>`:''}
    ${publicMode?'':`<form class="week-meta" data-slot="${slot}">
     <label>Título (opcional)<input type="text" name="title" value="${esc(detail.title||'')}" placeholder="Título de la semana"></label>
-    <label>Enlace (opcional)<input type="url" name="link" value="${esc(detail.link||'')}" placeholder="https://..."></label>
+    <label>Enlace (opcional)<input type="url" name="link" value="${esc(detail.link||'')}" placeholder="https://..."><small>Si es de OneDrive o Google Drive, usa “Compartir” con acceso para cualquier persona con el vínculo.</small></label>
     <button class="p">Guardar</button>
    </form>`}
    ${publicMode?'':`<label class="drop" data-slot="${slot}"><input type="file" accept="image/*,.pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple data-slot="${slot}">Arrastra imágenes, PDF o Word aquí, o toca para elegirlos<br>(puedes seleccionar varios archivos)</label>`}
@@ -406,6 +413,26 @@ app.addEventListener('submit',e=>{
 });
 ['dragover','dragleave','drop'].forEach(ev=>app.addEventListener(ev,e=>{const d=e.target.closest('.drop');if(!d)return;e.preventDefault();
  d.classList.toggle('over',ev==='dragover');if(ev==='drop')addFiles(d.dataset.slot,e.dataTransfer.files)}));
+/* ---------- Efecto 3D ---------- */
+const canTilt=matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+let tiltCard=null;
+const pointerIn=(e,el)=>{const r=el.getBoundingClientRect();return [(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height]};
+function resetTilt(){
+ if(tiltCard){tiltCard.style.transform='';tiltCard.classList.remove('tilting');tiltCard=null}
+}
+app.addEventListener('pointermove',e=>{
+ if(!canTilt.matches)return;
+ const box=$('.ph .box'),hero=e.target.closest('.hero');
+ if(box)box.style.transform=hero?(([x,y])=>`rotateX(${(.5-y)*16}deg) rotateY(${(x-.5)*20}deg)`)(pointerIn(e,hero)):'';
+ const card=e.target.closest('.tilt');
+ if(card!==tiltCard)resetTilt();
+ if(!card)return;
+ const [x,y]=pointerIn(e,card);
+ tiltCard=card;card.classList.add('tilting');
+ card.style.setProperty('--mx',`${x*100}%`);card.style.setProperty('--my',`${y*100}%`);
+ card.style.transform=`perspective(1000px) rotateX(${(.5-y)*6}deg) rotateY(${(x-.5)*8}deg) translateY(-4px)`;
+});
+app.addEventListener('pointerleave',()=>{resetTilt();const box=$('.ph .box');if(box)box.style.transform=''});
 $('#lb').onclick=()=>$('#lb').classList.remove('on');
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#lb').classList.remove('on');if(!chatPanel.hidden)setChatOpen(false)}});
 
