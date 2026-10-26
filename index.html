@@ -85,8 +85,21 @@ input[type=text],input[type=password],input[type=url]{font:inherit;padding:9px 1
 #lb{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;place-items:center;z-index:9;cursor:zoom-out}
 #lb.on{display:grid}#lb img{max-width:94vw;max-height:92vh}
 #msg{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--btn);color:var(--btnt);padding:10px 18px;display:none;z-index:10}
+.chat-toggle{position:fixed;right:20px;bottom:20px;z-index:11;border:0;border-radius:999px;background:var(--btn);color:var(--btnt);box-shadow:0 4px 18px #0003}
+.chat-panel{position:fixed;right:20px;bottom:82px;z-index:11;width:min(360px,calc(100vw - 28px));height:min(460px,calc(100dvh - 110px));background:var(--card);border:1px solid var(--line);box-shadow:0 8px 30px #0003;display:flex;flex-direction:column}
+.chat-panel[hidden]{display:none}
+.chat-head{display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid var(--line)}
+.chat-head strong{flex:1}
+.chat-head small{display:block;color:var(--mut);font-size:12px}
+.chat-close{padding:2px 9px;font-size:20px}
+.chat-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:12px}
+.chat-message{max-width:90%;padding:9px 11px;background:var(--soft);overflow-wrap:anywhere}
+.chat-message.user{align-self:flex-end;background:var(--btn);color:var(--btnt)}
+.chat-form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
+.chat-form input{min-width:0}
+.chat-form button{flex:0 0 auto}
 @media(max-width:760px){main{padding:22px 14px 44px}.hero,.hero.public-hero{grid-template-columns:1fr;gap:20px;padding:22px}.badge{display:none}.ph{order:-1}.ph .box{margin:0 auto 8px}.public-hero .ph{order:-1;width:100%}.stats{gap:16px}.units{overflow-x:auto;flex-wrap:nowrap;padding:2px}.units button{flex:0 0 auto}.weeks{grid-template-columns:1fr}.add{align-items:stretch}.add input{min-width:0}}
-@media(max-width:420px){header{gap:10px;padding:10px 12px}header svg{width:30px;height:30px}header .t b{font-size:16px}header .t span{font-size:12px}header button{padding:7px 9px;font-size:14px}.hero h1{overflow-wrap:anywhere}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.stats b{font-size:23px}.stats span{font-size:12px}.tabs button{padding:11px 12px;font-size:14px}.add{gap:6px}.add button{padding:8px 10px}}
+@media(max-width:420px){header{gap:10px;padding:10px 12px}header svg{width:30px;height:30px}header .t b{font-size:16px}header .t span{font-size:12px}header button{padding:7px 9px;font-size:14px}.hero h1{overflow-wrap:anywhere}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.stats b{font-size:23px}.stats span{font-size:12px}.tabs button{padding:11px 12px;font-size:14px}.add{gap:6px}.add button{padding:8px 10px}.chat-toggle{right:12px;bottom:12px}.chat-panel{right:12px;bottom:70px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
 </head>
@@ -94,6 +107,12 @@ input[type=text],input[type=password],input[type=url]{font:inherit;padding:9px 1
 <div id="app"></div>
 <div id="lb"><img alt="Vista ampliada"></div>
 <div id="msg" role="status"></div>
+<section class="chat-panel" id="chat-panel" aria-label="Ayuda del portafolio" hidden>
+ <div class="chat-head"><div><strong>Ayuda del portafolio</strong><small>Respuestas sobre este sistema</small></div><button class="chat-close" id="chat-close" type="button" aria-label="Cerrar chat">×</button></div>
+ <div class="chat-messages" id="chat-messages" aria-live="polite"><div class="chat-message">¡Hola! Puedo ayudarte con cursos, semanas, imágenes, títulos, enlaces y otras funciones del portafolio.</div></div>
+ <form class="chat-form" id="chat-form"><input type="text" id="chat-input" placeholder="Pregunta sobre el portafolio..." aria-label="Escribe tu pregunta" autocomplete="off" required><button class="p" type="submit">Enviar</button></form>
+</section>
+<button class="chat-toggle" id="chat-toggle" type="button" aria-expanded="false" aria-controls="chat-panel">💬 Ayuda</button>
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -130,6 +149,18 @@ async function shrink(f,max=1600){
 const toast=t=>{const m=$('#msg');m.textContent=t;m.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>m.style.display='none',2600)};
 const slotImgs=s=>S.imgs.filter(i=>i.slot===s);
 const safeLink=value=>{try{const url=new URL(value);return ['http:','https:'].includes(url.protocol)?url.href:null}catch{return null}};
+function chatReply(question){
+ const q=question.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+ if(/\b(hola|buenas|buenos dias|buenas tardes)\b/.test(q))return '¡Hola! Puedo responder preguntas sobre cómo usar este portafolio académico.';
+ if(/titulo|nombre|enlace|link/.test(q))return 'En administración, cada semana tiene campos opcionales para título y enlace. Escribe lo que quieras y pulsa “Guardar”; el enlace debe empezar con http:// o https://.';
+ if(/imagen|foto|subir|cargar|archivo/.test(q))return 'En administración, abre el curso y la unidad; en la semana elegida puedes arrastrar imágenes o tocar el recuadro para seleccionarlas. La foto del perfil se cambia desde “Cambiar foto”.';
+ if(/semana|unidad|curso|tarea|trabajo/.test(q))return 'El portafolio organiza los trabajos por curso, unidad y semana. Usa las pestañas de cursos y los botones de unidad para navegar. Las semanas con trabajos, título o enlace aparecen en la vista pública.';
+ if(/habilidad/.test(q))return 'En administración, puedes agregar habilidades desde el campo “Agregar habilidad” y quitarlas con el botón × junto a cada una.';
+ if(/guardar|datos|privacidad|navegador|dispositivo/.test(q))return 'Las imágenes y la foto se guardan en IndexedDB de este navegador; los títulos, enlaces y habilidades se guardan en el almacenamiento local. No se sincronizan con otros dispositivos.';
+ if(/admin|administrar|contrasena|sesion|entrar/.test(q))return 'Para administrar, pulsa “Administrar” en el portafolio público e inicia sesión. Desde esa vista puedes editar el contenido y cerrar sesión.';
+ if(/portafolio|sistema|funciona|funcion/.test(q))return 'Este sistema muestra un portafolio académico con cursos, unidades, semanas, trabajos, habilidades y foto de perfil. Pregúntame por cualquiera de esas funciones.';
+ return 'Solo puedo ayudar con el uso de este portafolio académico. Pregúntame sobre cursos, semanas, imágenes, títulos, enlaces, habilidades o administración.';
+}
 const doneWeeks=c=>{let n=0;for(let u=0;u<4;u++)for(let w=0;w<4;w++){const slot=`${c}-${u}-${w}`;if(slotImgs(slot).length||S.weekDetails[slot]?.title||S.weekDetails[slot]?.link)n++}return n};
 const initials=n=>n.split(/[ ,]+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
 
@@ -226,6 +257,17 @@ function view(publicMode=false){
 
 /* ---------- Eventos ---------- */
 const app=$('#app');
+const chatPanel=$('#chat-panel'),chatToggle=$('#chat-toggle'),chatMessages=$('#chat-messages');
+function setChatOpen(open){chatPanel.hidden=!open;chatToggle.setAttribute('aria-expanded',String(open));if(open)$('#chat-input').focus()}
+function addChatMessage(text,kind){
+ const message=document.createElement('div');message.className=`chat-message ${kind}`.trim();message.textContent=text;chatMessages.append(message);chatMessages.scrollTop=chatMessages.scrollHeight;
+}
+chatToggle.addEventListener('click',()=>setChatOpen(chatPanel.hidden));
+$('#chat-close').addEventListener('click',()=>setChatOpen(false));
+$('#chat-form').addEventListener('submit',e=>{
+ e.preventDefault();const input=$('#chat-input');const question=input.value.trim();if(!question)return;
+ addChatMessage(question,'user');addChatMessage(chatReply(question),'');input.value='';input.focus();
+});
 app.addEventListener('click',e=>{const t=e.target;
  if(t.dataset.c){S.c=+t.dataset.c;S.u=0;view()}
  else if(t.dataset.u){S.u=+t.dataset.u;view()}
