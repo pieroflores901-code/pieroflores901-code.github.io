@@ -4,30 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Portafolio académico de David Piero Flores Canto, estudiante de Ingeniería de Sistemas y Computación en la Universidad Peruana Los Andes.">
-<meta name="theme-color" content="#273c75">
+<meta name="theme-color" content="#070b18">
 <title>Portafolio académico · Flores Canto, David Piero</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#eef1f6;--card:#fff;--ink:#172033;--mut:#5d677a;--line:#dce2ec;--pri:#273c75;--pri-ink:#fff;--soft:#e8edf6;--gold:#a8823a;--ok:#2f7d5b;--danger:#b4372f;--shadow:0 1px 2px rgba(23,32,51,.05),0 12px 32px rgba(23,32,51,.08);--shadow-lift:0 2px 4px rgba(23,32,51,.06),0 24px 48px rgba(23,32,51,.16);--sheen:rgba(255,255,255,.55);--ease-out:cubic-bezier(.23,1,.32,1)}
-@media(prefers-color-scheme:dark){:root{--bg:#0e1320;--card:#161d2e;--ink:#e7ebf3;--mut:#9aa4b8;--line:#28324a;--pri:#9fb3f0;--pri-ink:#0e1320;--soft:#1d2740;--gold:#d6b56d;--ok:#6cc79c;--danger:#f08a80;--shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px rgba(0,0,0,.35);--shadow-lift:0 2px 4px rgba(0,0,0,.35),0 28px 56px rgba(0,0,0,.5);--sheen:rgba(159,179,240,.12)}}
+:root{color-scheme:dark;--bg:#070b18;--card:rgba(15,22,42,.72);--solid:#0e1528;--ink:#e8edff;--mut:#8f9bbd;--line:rgba(140,160,255,.16);--line-strong:rgba(140,160,255,.32);--pri:#7c8cff;--pri-ink:#070b18;--accent:#5ee6f0;--soft:rgba(124,140,255,.1);--ok:#5ee6a8;--danger:#ff7a8a;--grad:linear-gradient(120deg,#7c8cff,#5ee6f0);--glow:0 0 24px rgba(94,230,240,.35);--shadow:inset 0 1px 0 rgba(255,255,255,.05),0 18px 40px rgba(0,0,0,.45);--shadow-lift:inset 0 1px 0 rgba(255,255,255,.07),0 30px 60px rgba(0,0,0,.6),0 0 0 1px rgba(94,230,240,.28);--sheen:rgba(94,230,240,.13);--ease-out:cubic-bezier(.23,1,.32,1)}
 *{box-sizing:border-box}
-html{scroll-padding-top:88px;scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;font-weight:600;margin:0;line-height:1.15;letter-spacing:-.01em}
-a{color:var(--pri)}
-button,.btn{font:600 15px 'Manrope',system-ui,sans-serif;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:background-color .16s ease,border-color .16s ease,color .16s ease,transform .1s ease}
-button:hover,.btn:hover{border-color:var(--pri)}
+html{scroll-padding-top:88px;scroll-behavior:smooth;background:var(--bg)}
+body{margin:0;min-height:100vh;background:radial-gradient(1100px 600px at 85% -10%,rgba(124,140,255,.2),transparent 60%),radial-gradient(900px 520px at -10% 30%,rgba(94,230,240,.08),transparent 60%),var(--bg);background-attachment:fixed;color:var(--ink);font:16px/1.6 'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Unbounded','Manrope',sans-serif;font-weight:500;margin:0;line-height:1.15;letter-spacing:-.02em}
+h4{margin:0}
+a{color:var(--accent)}
+::selection{background:rgba(94,230,240,.3)}
+button,.btn{font:600 15px 'Manrope',system-ui,sans-serif;cursor:pointer;border:1px solid var(--line-strong);background:var(--soft);color:var(--ink);padding:9px 16px;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:background-color .16s ease,border-color .16s ease,color .16s ease,box-shadow .2s ease,transform .12s var(--ease-out)}
+button:hover,.btn:hover{border-color:var(--accent)}
 button:active,.btn:active{transform:scale(.97)}
-button.p,.btn.p{background:var(--pri);color:var(--pri-ink);border-color:var(--pri)}
-button.p:hover,.btn.p:hover{filter:brightness(1.1)}
-:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+button.p,.btn.p{background:var(--grad);color:var(--pri-ink);border-color:transparent}
+button.p:hover,.btn.p:hover{box-shadow:var(--glow)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 /* ---------- Cabecera ---------- */
-header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;padding:12px max(20px,calc((100vw - 1100px)/2));border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--card) 86%,transparent);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px)}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;padding:12px max(20px,calc((100vw - 1100px)/2));border-bottom:1px solid var(--line);background:rgba(7,11,24,.72);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px)}
 header .t{flex:1;min-width:0}
-header .t b{font:600 18px 'Fraunces',Georgia,serif;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+header .t b{font:500 15px 'Unbounded',sans-serif;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 header .t span{color:var(--mut);font-size:13px}
 header nav{display:flex;gap:4px}
 header nav a{color:var(--mut);text-decoration:none;font-weight:600;font-size:15px;padding:8px 12px;border-radius:8px}
@@ -36,133 +37,146 @@ header nav a:hover{color:var(--ink);background:var(--soft)}
 main{max-width:1100px;margin:0 auto;padding:36px 20px 64px}
 
 /* ---------- Hero ---------- */
-.hero{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:48px;align-items:center;padding:52px 52px 48px}
-.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:linear-gradient(to left,#000 0%,transparent 55%);mask-image:linear-gradient(to left,#000 0%,transparent 55%);opacity:.7}
+.hero{position:relative;overflow:hidden;isolation:isolate;background:linear-gradient(180deg,rgba(17,25,48,.9),rgba(9,14,30,.9));border:1px solid var(--line-strong);border-radius:24px;box-shadow:var(--shadow);display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:48px;align-items:center;padding:56px 52px 60px}
 .hero>*{position:relative}
-.kicker{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;color:var(--mut);font-weight:600;font-size:14px}
-.kicker::before{content:"";width:22px;height:2px;background:var(--gold);border-radius:2px}
-.hero h1{font-size:clamp(34px,5.4vw,60px);line-height:1.04;letter-spacing:-.025em;margin:0 0 18px;max-width:14ch}
-.hero .lead{color:var(--mut);margin:0 0 30px;max-width:58ch;font-size:17px}
+/* Piso holográfico: una cuadrícula en perspectiva que avanza lentamente hacia el visitante */
+.hero>.floor{position:absolute;z-index:-1;left:-40%;right:-40%;bottom:0;height:60%;overflow:hidden;transform:perspective(380px) rotateX(55deg);transform-origin:50% 100%;-webkit-mask-image:linear-gradient(to top,#000 15%,transparent 95%);mask-image:linear-gradient(to top,#000 15%,transparent 95%);pointer-events:none}
+.floor::before{content:"";position:absolute;inset:-56px 0 0;background-image:linear-gradient(rgba(124,140,255,.5) 1.5px,transparent 1.5px),linear-gradient(90deg,rgba(94,230,240,.4) 1.5px,transparent 1.5px);background-size:56px 56px;animation:drift 4s linear infinite}
+@keyframes drift{to{transform:translateY(56px)}}
+.kicker{display:inline-flex;align-items:center;gap:10px;margin:0 0 18px;padding:6px 14px 6px 10px;border:1px solid var(--line-strong);border-radius:99px;background:var(--soft);color:var(--ink);font-weight:600;font-size:13px}
+.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px rgba(94,230,240,.18),0 0 12px var(--accent)}
+.hero h1{font-size:clamp(30px,4.6vw,52px);line-height:1.08;letter-spacing:-.035em;margin:0 0 18px;max-width:16ch;background:linear-gradient(180deg,#fff 30%,#b8c4ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .lead{color:var(--mut);margin:0 0 32px;max-width:58ch;font-size:17px}
 .hero .lead b{color:var(--ink);font-weight:600}
 .prog{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px 28px;max-width:620px}
-.prog div{display:grid;gap:7px}
+.prog div{display:grid;gap:8px}
 .prog p{margin:0;display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--mut)}
 .prog p b{color:var(--ink);font-weight:600}
 .prog p span{font-variant-numeric:tabular-nums;white-space:nowrap}
-.bar{height:6px;border-radius:99px;background:var(--soft);overflow:hidden}
-.bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--pri),var(--gold));transform-origin:left;animation:grow .9s cubic-bezier(.2,.8,.2,1) .25s both}
-.ph{text-align:center;font-size:13px;color:var(--mut);perspective:800px}
-/* Foto en capas: marco dorado al fondo, foto al frente; el giro con el puntero revela la profundidad */
-.ph .box{position:relative;width:190px;aspect-ratio:4/5;margin:0 auto 12px;transform-style:preserve-3d;transition:transform .5s var(--ease-out)}
-.ph .box::after{content:"";position:absolute;inset:0;transform:translate3d(12px,12px,-24px);border:1.5px solid var(--gold);border-radius:18px}
-.ph .face{position:relative;width:100%;height:100%;border-radius:18px;overflow:hidden;background:var(--soft);display:grid;place-items:center;font:600 52px 'Fraunces',serif;color:var(--pri);box-shadow:var(--shadow-lift);transform:translateZ(28px)}
+.bar{height:6px;border-radius:99px;background:rgba(124,140,255,.14);overflow:hidden}
+.bar i{display:block;height:100%;border-radius:inherit;background:var(--grad);box-shadow:0 0 12px rgba(94,230,240,.6);transform-origin:left;animation:grow .9s var(--ease-out) .25s both}
+.ph{position:relative;text-align:center;font-size:13px;color:var(--mut);perspective:800px}
+.ph::before{content:"";position:absolute;left:50%;top:42%;width:260px;height:260px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(94,230,240,.28),rgba(124,140,255,.12) 45%,transparent 70%);filter:blur(10px);pointer-events:none}
+/* Foto holográfica en capas: esquinas de visor al fondo, foto al frente; el giro con el puntero revela la profundidad */
+.ph .box{position:relative;width:200px;aspect-ratio:4/5;margin:0 auto 14px;transform-style:preserve-3d;transition:transform .5s var(--ease-out)}
+.ph .box::after{content:"";position:absolute;inset:-12px;transform:translateZ(-24px);--c:var(--accent);background:linear-gradient(var(--c),var(--c)) 0 0/26px 2px,linear-gradient(var(--c),var(--c)) 0 0/2px 26px,linear-gradient(var(--c),var(--c)) 100% 0/26px 2px,linear-gradient(var(--c),var(--c)) 100% 0/2px 26px,linear-gradient(var(--c),var(--c)) 0 100%/26px 2px,linear-gradient(var(--c),var(--c)) 0 100%/2px 26px,linear-gradient(var(--c),var(--c)) 100% 100%/26px 2px,linear-gradient(var(--c),var(--c)) 100% 100%/2px 26px;background-repeat:no-repeat;filter:drop-shadow(0 0 6px rgba(94,230,240,.7))}
+.ph .face{position:relative;width:100%;height:100%;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,#1a2550,#0d1430);border:1px solid var(--line-strong);display:grid;place-items:center;font:500 54px 'Unbounded',sans-serif;color:var(--accent);box-shadow:var(--shadow-lift);transform:translateZ(28px)}
+.ph .face::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px),linear-gradient(160deg,rgba(94,230,240,.14),transparent 45%)}
 .ph .face img{width:100%;height:100%;object-fit:cover}
-.ph label{cursor:pointer;color:var(--pri);font-weight:600}
+.ph label{cursor:pointer;color:var(--accent);font-weight:600}
 .ph label:hover{text-decoration:underline}
-@media(prefers-reduced-motion:no-preference){.hero .kicker,.hero h1,.hero .lead,.prog,.ph{animation:rise .7s cubic-bezier(.2,.8,.2,1) both}.hero h1{animation-delay:.06s}.hero .lead{animation-delay:.12s}.prog{animation-delay:.18s}.ph{animation-delay:.1s}}
+@media(prefers-reduced-motion:no-preference){.hero .kicker,.hero h1,.hero .lead,.prog,.ph{animation:rise .7s var(--ease-out) both}.hero h1{animation-delay:.06s}.hero .lead{animation-delay:.12s}.prog{animation-delay:.18s}.ph{animation-delay:.1s}}
 @keyframes rise{from{opacity:0;transform:translateY(12px)}}
 @keyframes grow{from{transform:scaleX(0)}}
 
 /* ---------- Secciones ---------- */
-.section{margin-top:64px}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
-.section-head h2{font-size:clamp(28px,3.4vw,36px)}
-.section-head p{color:var(--mut);margin:6px 0 0;max-width:60ch}
+.section{margin-top:72px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.section-head h2{font-size:clamp(24px,3vw,32px)}
+.section-head p{color:var(--mut);margin:8px 0 0;max-width:60ch}
 
 /* ---------- Trabajos ---------- */
-.tabs{display:inline-flex;gap:4px;padding:4px;background:var(--soft);border-radius:14px;max-width:100%;overflow-x:auto;scrollbar-width:none}
-.tabs button{flex:0 0 auto;border:0;background:none;color:var(--mut);border-radius:10px;padding:10px 18px}
-.tabs button[aria-selected=true]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(23,32,51,.12)}
+.tabs{display:inline-flex;gap:4px;padding:4px;background:var(--soft);border:1px solid var(--line);border-radius:14px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.tabs button{flex:0 0 auto;border:1px solid transparent;background:none;color:var(--mut);border-radius:10px;padding:10px 18px}
+.tabs button[aria-selected=true]{background:var(--solid);color:var(--ink);border-color:var(--line-strong);box-shadow:0 0 18px rgba(124,140,255,.18)}
 .units{display:flex;gap:8px;margin:18px 0 24px;flex-wrap:wrap}
-.units button{border-radius:99px;padding:7px 16px;font-size:14px}
-.units button[aria-selected=true]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.units button{border-radius:99px;padding:7px 16px;font-size:14px;background:transparent}
+.units button[aria-selected=true]{background:var(--grad);color:var(--pri-ink);border-color:transparent}
 .weeks{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-.wk{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:14px}
-.wk.has{box-shadow:var(--shadow)}
-.wk h3{font-size:21px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.wk h3 small{font:600 12px 'Manrope',sans-serif;color:var(--mut);background:var(--soft);padding:3px 10px;border-radius:99px;white-space:nowrap}
-.wk.has h3 small{color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,transparent)}
+.wk,.skill-group{background:linear-gradient(180deg,rgba(255,255,255,.035),transparent 40%),var(--card);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:18px}
+.wk{padding:20px;display:flex;flex-direction:column;gap:14px}
+.wk.has{border-color:rgba(94,230,240,.3);box-shadow:var(--shadow)}
+.wk h3{font-size:17px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.wk h3 small{font:600 12px 'Manrope',sans-serif;letter-spacing:0;color:var(--mut);background:var(--soft);padding:3px 10px;border-radius:99px;white-space:nowrap}
+.wk.has h3 small{color:var(--ok);background:rgba(94,230,168,.12)}
 .week-details{display:grid;gap:6px}
-.week-title{font:600 16px 'Manrope',sans-serif;letter-spacing:0}
+.week-title{font:600 16px 'Manrope',sans-serif}
 .week-link{font-weight:600;font-size:14px;overflow-wrap:anywhere;text-underline-offset:3px}
 .week-meta{display:grid;gap:10px}
 .week-meta label{display:grid;gap:5px;color:var(--mut);font-size:13px;font-weight:600}
 .week-meta small{font-weight:500;font-size:12px}
 .week-meta button{justify-self:start}
-.drop{display:block;border:1.5px dashed var(--line);border-radius:12px;padding:18px 12px;text-align:center;color:var(--mut);font-size:14px;cursor:pointer;transition:border-color .16s ease,background-color .16s ease}
-.drop:hover,.drop.over{border-color:var(--pri);background:var(--soft);color:var(--ink)}
+.drop{display:block;border:1.5px dashed var(--line-strong);border-radius:12px;padding:18px 12px;text-align:center;color:var(--mut);font-size:14px;cursor:pointer;transition:border-color .16s ease,background-color .16s ease,color .16s ease}
+.drop:hover,.drop.over{border-color:var(--accent);background:rgba(94,230,240,.06);color:var(--ink)}
 .drop input{position:absolute;opacity:0;width:1px;height:1px}
 .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .thumbs:empty{display:none}
-.th{position:relative;aspect-ratio:1;background:var(--soft);border-radius:10px;overflow:hidden}
-.th img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;display:block;transition:transform .3s ease}
-.th img:hover{transform:scale(1.04)}
+.th{position:relative;aspect-ratio:1;background:var(--soft);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.th img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;display:block;transition:transform .3s var(--ease-out)}
+@media(hover:hover) and (pointer:fine){.th img:hover{transform:scale(1.04)}}
 .th.document{grid-column:1/-1;aspect-ratio:auto;display:flex;align-items:center;padding:12px 12px 12px 40px;overflow-wrap:anywhere}
-.th.document a{font-size:14px;font-weight:600;text-decoration:none}
-.th.document small{display:block;color:var(--mut);font-weight:500}
-.th i{position:absolute;left:6px;top:6px;background:rgba(14,19,32,.7);color:#fff;font:600 11px 'Manrope',sans-serif;font-style:normal;padding:1px 7px;border-radius:99px}
+.th.document a{font-size:14px;font-weight:600;text-decoration:none;color:var(--ink)}
+.th.document small{display:block;color:var(--accent);font-weight:600}
+.th i{position:absolute;left:6px;top:6px;background:rgba(7,11,24,.8);color:#fff;font:600 11px 'Manrope',sans-serif;font-style:normal;padding:1px 7px;border-radius:99px}
 .th.document i{top:50%;transform:translateY(-50%)}
-.th button{position:absolute;right:6px;top:6px;padding:0 8px;line-height:22px;background:rgba(14,19,32,.7);color:#fff;border:0;border-radius:99px}
+.th button{position:absolute;right:6px;top:6px;padding:0 8px;line-height:22px;background:rgba(7,11,24,.8);color:#fff;border:0;border-radius:99px}
 .th button:hover{background:var(--danger)}
 .nx{align-self:flex-end;font-size:14px}
 /* Tarjetas en 3D: inclinación según el puntero con un brillo que lo sigue (solo en la vista pública y con mouse) */
-.tilt{position:relative;transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out)}
+.tilt{position:relative;transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out),border-color .3s ease}
 .tilt::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),var(--sheen),transparent 45%);opacity:0;transition:opacity .3s ease}
-.tilt.tilting{box-shadow:var(--shadow-lift);transition:transform .12s linear,box-shadow .3s var(--ease-out)}
+.tilt.tilting{box-shadow:var(--shadow-lift);border-color:rgba(94,230,240,.4);transition:transform .12s linear,box-shadow .3s var(--ease-out),border-color .3s ease}
 .tilt.tilting::before{opacity:1}
-.public-empty{grid-column:1/-1;margin:0;padding:28px;background:var(--card);border:1.5px dashed var(--line);border-radius:16px;color:var(--mut);text-align:center}
+.public-empty{grid-column:1/-1;margin:0;padding:28px;background:var(--card);border:1.5px dashed var(--line-strong);border-radius:18px;color:var(--mut);text-align:center}
 
 /* ---------- Habilidades ---------- */
 .skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
-.skill-group{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
-.skill-group h3{font-size:19px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.skill-group h3 svg{flex:0 0 auto;color:var(--gold)}
+.skill-group{padding:22px}
+.skill-group h3{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.skill-group h3 svg{flex:0 0 auto;color:var(--accent);padding:7px;width:34px;height:34px;border-radius:10px;background:rgba(94,230,240,.1);border:1px solid rgba(94,230,240,.25)}
 .skill-group ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 .skill{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:12px;font-weight:600;font-size:15px}
 .meter{display:flex;gap:4px}
-.meter span,.meter button{width:18px;height:7px;border-radius:99px;background:var(--soft);padding:0;border:0}
-.meter .on{background:var(--pri)}
-.meter button:hover{background:var(--gold)}
+.meter span,.meter button{width:18px;height:6px;border-radius:99px;background:rgba(124,140,255,.16);padding:0;border:0}
+.meter .on{background:var(--accent);box-shadow:0 0 8px rgba(94,230,240,.55)}
+.meter button:hover{background:var(--pri)}
 .skill-x{border:0;background:none;padding:0 4px;color:var(--mut);font-size:20px;line-height:1}
 .skill-x:hover{color:var(--danger)}
 .legend{display:flex;gap:18px;flex-wrap:wrap;color:var(--mut);font-size:13px;margin-top:16px}
-.add{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:8px;margin-top:18px;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:16px}
-input[type=text],input[type=password],input[type=url],select{font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;width:100%}
-input:focus,select:focus{border-color:var(--pri);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--pri) 20%,transparent)}
-.note{color:var(--mut);font-size:14px;margin-top:48px;max-width:70ch;padding:14px 16px;border-left:3px solid var(--gold);background:var(--card);border-radius:0 12px 12px 0}
-.public-footer{border-top:1px solid var(--line);margin-top:64px;padding-top:20px;color:var(--mut);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.add{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:8px;margin-top:18px;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:18px}
+input[type=text],input[type=password],input[type=url],select{font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line-strong);background:var(--solid);color:var(--ink);border-radius:10px;width:100%}
+input::placeholder{color:#64708f}
+input:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(94,230,240,.18)}
+.note{color:var(--mut);font-size:14px;margin-top:48px;max-width:70ch;padding:14px 16px;border-left:3px solid var(--accent);background:var(--card);border-radius:0 12px 12px 0}
+.public-footer{border-top:1px solid var(--line);margin-top:72px;padding-top:20px;color:var(--mut);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 /* ---------- Acceso ---------- */
-.auth{max-width:420px;margin:10vh auto;background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:36px;display:grid;gap:14px}
-.auth h1{font-size:30px}
+.auth{max-width:420px;margin:10vh auto;background:var(--card);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line-strong);border-radius:22px;box-shadow:var(--shadow);padding:36px;display:grid;gap:14px}
+.auth h1{font-size:26px}
 .auth button{justify-content:center}
 .err{color:var(--danger);font-size:14px;min-height:20px}
 .auth a{font-size:14px;font-weight:600}
 
 /* ---------- Superposiciones ---------- */
-#lb{position:fixed;inset:0;background:rgba(9,12,20,.9);display:none;place-items:center;z-index:9;cursor:zoom-out}
+#lb{position:fixed;inset:0;background:rgba(4,6,14,.92);display:none;place-items:center;z-index:9;cursor:zoom-out}
 #lb.on{display:grid}#lb img{max-width:94vw;max-height:92vh;border-radius:8px}
-#msg{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--card);padding:11px 20px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:12;font-weight:600;font-size:14px;max-width:calc(100vw - 32px)}
-.chat-toggle{position:fixed;right:20px;bottom:20px;z-index:11;border:0;border-radius:99px;padding:12px 18px;background:var(--pri);color:var(--pri-ink);box-shadow:0 8px 24px rgba(23,32,51,.25)}
-.chat-panel{position:fixed;right:20px;bottom:82px;z-index:11;width:min(370px,calc(100vw - 28px));height:min(480px,calc(100dvh - 110px));background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 50px rgba(23,32,51,.25);display:flex;flex-direction:column;overflow:hidden;transform-origin:bottom right}
+#msg{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--solid);color:var(--ink);border:1px solid var(--line-strong);padding:11px 20px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:12;font-weight:600;font-size:14px;max-width:calc(100vw - 32px)}
+.chat-toggle{position:fixed;right:20px;bottom:20px;z-index:11;border:0;border-radius:99px;padding:12px 18px;background:var(--grad);color:var(--pri-ink);box-shadow:0 8px 24px rgba(0,0,0,.45),var(--glow)}
+.chat-panel{position:fixed;right:20px;bottom:82px;z-index:11;width:min(370px,calc(100vw - 28px));height:min(480px,calc(100dvh - 110px));background:rgba(10,15,32,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line-strong);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.6);display:flex;flex-direction:column;overflow:hidden;transform-origin:bottom right}
 .chat-panel[hidden]{display:none}
-@media(prefers-reduced-motion:no-preference){.chat-panel:not([hidden]){animation:pop .18s cubic-bezier(.2,.8,.2,1)}}
+@media(prefers-reduced-motion:no-preference){.chat-panel:not([hidden]){animation:pop .18s var(--ease-out)}}
 @keyframes pop{from{opacity:0;transform:scale(.96) translateY(6px)}}
-.chat-head{display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--pri);color:var(--pri-ink)}
+.chat-head{display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--grad);color:var(--pri-ink)}
 .chat-head strong{flex:1}
-.chat-head small{display:block;opacity:.8;font-size:12px;font-weight:500}
+.chat-head small{display:block;opacity:.75;font-size:12px;font-weight:600}
 .chat-close{padding:0 10px;font-size:22px;background:none;border:0;color:inherit}
 .chat-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:14px}
-.chat-message{max-width:88%;padding:10px 13px;background:var(--soft);border-radius:14px 14px 14px 4px;overflow-wrap:anywhere;font-size:14px}
-.chat-message.user{align-self:flex-end;background:var(--pri);color:var(--pri-ink);border-radius:14px 14px 4px 14px}
+.chat-message{max-width:88%;padding:10px 13px;background:var(--soft);border:1px solid var(--line);border-radius:14px 14px 14px 4px;overflow-wrap:anywhere;font-size:14px}
+.chat-message.user{align-self:flex-end;background:var(--grad);color:var(--pri-ink);border:0;border-radius:14px 14px 4px 14px;font-weight:600}
+.chat-message.typing{display:flex;gap:4px;padding:14px 13px}
+.chat-message.typing span{width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.4}
+@media(prefers-reduced-motion:no-preference){.chat-message.typing span{animation:blink 1s ease-in-out infinite}.chat-message.typing span:nth-child(2){animation-delay:.15s}.chat-message.typing span:nth-child(3){animation-delay:.3s}}
+@keyframes blink{50%{opacity:1}}
+.chat-suggest{display:flex;flex-wrap:wrap;gap:6px}
+.chat-suggest button{font-size:13px;padding:6px 11px;border-radius:99px}
 .chat-form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
 .chat-form input{min-width:0}
 .chat-form button{flex:0 0 auto}
 
 @media(max-width:860px){header nav{display:none}}
-@media(max-width:760px){main{padding:22px 14px 48px}.hero{grid-template-columns:1fr;gap:28px;padding:28px 22px}.hero::before{-webkit-mask-image:linear-gradient(to bottom,#000,transparent 40%);mask-image:linear-gradient(to bottom,#000,transparent 40%)}.ph{order:-1}.ph .box{width:150px}.section{margin-top:48px}.units{overflow-x:auto;flex-wrap:nowrap;padding:2px}.units button{flex:0 0 auto}.weeks{grid-template-columns:1fr}.add{grid-template-columns:1fr 1fr}.add input{grid-column:1/-1}.add button{grid-column:1/-1;justify-content:center}}
-@media(max-width:420px){header{gap:10px;padding:10px 12px}header svg{width:30px;height:30px}header .t b{font-size:16px}header .t span{font-size:12px}header .btn,header button{padding:7px 10px;font-size:14px}.hero h1{overflow-wrap:anywhere}.tabs{display:flex}.tabs button{padding:9px 12px;font-size:14px}.chat-toggle{right:12px;bottom:12px}.chat-panel{right:12px;bottom:70px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+@media(max-width:760px){main{padding:22px 14px 48px}.hero{grid-template-columns:1fr;gap:30px;padding:30px 22px 40px}.ph{order:-1}.ph .box{width:160px}.ph::before{width:220px;height:220px}.section{margin-top:52px}.units{overflow-x:auto;flex-wrap:nowrap;padding:2px}.units button{flex:0 0 auto}.weeks{grid-template-columns:1fr}.add{grid-template-columns:1fr 1fr}.add input{grid-column:1/-1}.add button{grid-column:1/-1;justify-content:center}}
+@media(max-width:420px){header{gap:10px;padding:10px 12px}header svg{width:30px;height:30px}header .t b{font-size:13px}header .t span{font-size:12px}header .btn,header button{padding:7px 10px;font-size:14px}.hero h1{overflow-wrap:anywhere}.tabs{display:flex}.tabs button{padding:9px 12px;font-size:14px}.chat-toggle{right:12px;bottom:12px}.chat-panel{right:12px;bottom:70px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.floor::before{animation:none}}
 </style>
 </head>
 <body>
@@ -170,16 +184,17 @@ input:focus,select:focus{border-color:var(--pri);outline:none;box-shadow:0 0 0 3
 <div id="lb"><img alt="Vista ampliada"></div>
 <div id="msg" role="status"></div>
 <section class="chat-panel" id="chat-panel" aria-label="Ayuda del portafolio" hidden>
- <div class="chat-head"><div><strong>Ayuda del portafolio</strong><small>Respuestas sobre este sistema</small></div><button class="chat-close" id="chat-close" type="button" aria-label="Cerrar chat">×</button></div>
- <div class="chat-messages" id="chat-messages" aria-live="polite"><div class="chat-message">¡Hola! Puedo ayudarte con cursos, semanas, imágenes, títulos, enlaces, habilidades y otras funciones del portafolio.</div></div>
+ <div class="chat-head"><div><strong>Asistente del portafolio</strong><small>Responde con la información de esta página</small></div><button class="chat-close" id="chat-close" type="button" aria-label="Cerrar chat">×</button></div>
+ <div class="chat-messages" id="chat-messages" aria-live="polite"><div class="chat-message">¡Hola! Soy el asistente de este portafolio. Pregúntame por el perfil, las habilidades, el avance o los trabajos de cualquier semana.</div><div class="chat-suggest"><button type="button" data-q="¿Quién es?">¿Quién es?</button><button type="button" data-q="¿Qué habilidades tiene?">¿Qué habilidades tiene?</button><button type="button" data-q="¿Cómo va su avance?">¿Cómo va su avance?</button><button type="button" data-q="¿Qué hizo en la semana 1?">¿Qué hizo en la semana 1?</button></div></div>
  <form class="chat-form" id="chat-form"><input type="text" id="chat-input" placeholder="Pregunta sobre el portafolio..." aria-label="Escribe tu pregunta" autocomplete="off" required><button class="p" type="submit">Enviar</button></form>
 </section>
-<button class="chat-toggle" id="chat-toggle" type="button" aria-expanded="false" aria-controls="chat-panel">💬 Ayuda</button>
+<button class="chat-toggle" id="chat-toggle" type="button" aria-expanded="false" aria-controls="chat-panel">💬 Pregúntame</button>
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const COURSES=['Taller de Aplicaciones 1','Algoritmo y Estructura de Datos'];
 const CAREER='Ingeniería de Sistemas y Computación';
+const OWNER='Flores Canto, David Piero';
 const SKILL_CATS=['Lenguajes','Desarrollo web','Datos y herramientas','Fundamentos','Habilidades blandas'];
 const LEVELS=['','Básico','En progreso','Intermedio','Avanzado','Experto'];
 const DEFAULT_SKILLS=[
@@ -232,17 +247,61 @@ const fileKind=f=>/^image\/(avif|bmp|gif|jpeg|png|webp)$/.test(f.type)||(!f.type
 const DOC_TYPES={pdf:'PDF',doc:'Word',docx:'Word',odt:'documento',xls:'Excel',xlsx:'Excel',csv:'CSV',ods:'hoja de cálculo',ppt:'PowerPoint',pptx:'PowerPoint',odp:'presentación',txt:'texto',zip:'ZIP',rar:'RAR','7z':'7Z',svg:'SVG'};
 const docLabel=name=>{const ext=(name.match(/\.([^.]+)$/)?.[1]||'').toLocaleLowerCase();return DOC_TYPES[ext]||(ext?ext.toUpperCase():'archivo')};
 const safeLink=value=>{try{const url=new URL(value);return ['http:','https:'].includes(url.protocol)?url.href:null}catch{return null}};
+/* ---------- Asistente: responde con los datos reales del portafolio ---------- */
+const norm=s=>String(s).toLocaleLowerCase('es').normalize('NFD').replace(/[̀-ͯ]/g,'');
+const reEsc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const listEs=a=>a.length<2?a.join(''):`${a.slice(0,-1).join(', ')} y ${a.at(-1)}`;
+const skillLevel=s=>Math.min(5,Math.max(1,+s.level||3));
+const CAT_WORDS={'Lenguajes':/lenguaje/,'Desarrollo web':/\bweb\b|frontend|pagina/,'Datos y herramientas':/\bdatos\b|herramienta|base de datos/,'Fundamentos':/fundamento|teori/,'Habilidades blandas':/blanda|soft|equipo|personal/};
+const HOWTO=[
+ [/habilidad|skill|nivel|categoria/,'En “Administrar”, agrega una habilidad con su nombre, categoría y nivel. Para cambiar el nivel de una existente, toca uno de sus segmentos; para quitarla, usa el botón × junto a ella.'],
+ [/titulo|enlace|link/,'En “Administrar”, cada semana tiene campos opcionales para título y enlace. Escribe lo que quieras y pulsa “Guardar”; el enlace debe empezar con http:// o https://.'],
+ [/imagen|foto|subir|cargar|archivo|documento|pdf|word|excel|powerpoint|zip/,'En “Administrar”, abre el curso y la unidad; en la semana elegida puedes arrastrar o seleccionar cualquier archivo: imágenes, PDF, Word, Excel, PowerPoint, ZIP y más. La foto del perfil se cambia desde “Cambiar foto”.'],
+ [/guardar|datos|privacidad|navegador|dispositivo/,'Los archivos de cada semana y la foto se guardan en este navegador (IndexedDB); los títulos, enlaces y habilidades, en el almacenamiento local. No se sincronizan con otros dispositivos.'],
+ [/admin|administrar|contrasena|sesion|entrar|editar/,'Pulsa “Administrar” arriba a la derecha e inicia sesión. Desde ahí puedes editar todo el contenido y cerrar sesión.'],
+ [/semana|unidad|curso|navegar|buscar/,'Usa las pestañas de curso y los botones de unidad en la sección “Trabajos”. También puedes preguntarme directamente, por ejemplo: “¿qué hizo en la semana 2 de Algoritmo?”.']];
+function weekReply(q,n){
+ const um=q.match(/unidad\s*(\d)/);
+ const c=/taller|aplicaciones/.test(q)?0:/algoritmo|estructura/.test(q)?1:S.c;
+ let un=um?+um[1]-1:S.u,w=n-1;
+ /* Sin unidad, una semana mayor a 4 se entiende como el número de semana del curso (1–16) */
+ if(!um&&n>4){un=Math.floor((n-1)/4);w=(n-1)%4}
+ if(n<1||n>16||w>3||un<0||un>3)return 'Cada curso tiene 4 unidades con 4 semanas cada una (16 en total). Prueba con “semana 2 de la unidad 1”.';
+ const slot=`${c}-${un}-${w}`,files=slotImgs(slot),d=S.weekDetails[slot]||{},link=safeLink(d.link||'');
+ const where=`la semana ${w+1} de la unidad ${un+1} de ${COURSES[c]}`;
+ if(!files.length&&!d.title&&!link)return `Todavía no hay trabajos publicados en ${where}.`;
+ return [
+  d.title?`En ${where} el trabajo se titula “${d.title}”.`:`En ${where} hay trabajos publicados.`,
+  files.length?`Tiene ${files.length} ${files.length===1?'archivo':'archivos'}: ${listEs(files.slice(0,4).map(f=>f.name))}${files.length>4?' y más':''}.`:'',
+  link?`También incluye un enlace a ${new URL(link).hostname.replace(/^www\./,'')}.`:''].filter(Boolean).join(' ');
+}
 function chatReply(question){
- const q=question.toLocaleLowerCase('es').normalize('NFD').replace(/[̀-ͯ]/g,'');
- if(/\b(hola|buenas|buenos dias|buenas tardes)\b/.test(q))return '¡Hola! Puedo responder preguntas sobre cómo usar este portafolio académico.';
- if(/habilidad|skill|nivel|categoria/.test(q))return 'En administración, agrega una habilidad con su nombre, categoría y nivel. Para cambiar el nivel de una existente, toca uno de sus segmentos; para quitarla, usa el botón × junto a ella.';
- if(/titulo|nombre|enlace|link/.test(q))return 'En administración, cada semana tiene campos opcionales para título y enlace. Escribe lo que quieras y pulsa “Guardar”; el enlace debe empezar con http:// o https://.';
- if(/imagen|foto|subir|cargar|archivo|documento|pdf|word|excel|powerpoint|zip/.test(q))return 'En administración, abre el curso y la unidad; en la semana elegida puedes arrastrar o seleccionar cualquier archivo: imágenes, PDF, Word, Excel, PowerPoint, ZIP y más. La foto del perfil se cambia desde “Cambiar foto”.';
- if(/semana|unidad|curso|tarea|trabajo|progreso/.test(q))return 'El portafolio organiza los trabajos por curso, unidad y semana. Usa las pestañas de cursos y los botones de unidad para navegar. Las barras del inicio muestran cuántas de las 16 semanas de cada curso ya tienen trabajos.';
- if(/guardar|datos|privacidad|navegador|dispositivo/.test(q))return 'Los archivos de cada semana y la foto se guardan en IndexedDB de este navegador; los títulos, enlaces y habilidades se guardan en el almacenamiento local. No se sincronizan con otros dispositivos.';
- if(/admin|administrar|contrasena|sesion|entrar/.test(q))return 'Para administrar, pulsa “Administrar” en el portafolio público e inicia sesión. Desde esa vista puedes editar el contenido y cerrar sesión.';
- if(/portafolio|sistema|funciona|funcion/.test(q))return 'Este sistema muestra un portafolio académico con cursos, unidades, semanas, trabajos, habilidades y foto de perfil. Pregúntame por cualquiera de esas funciones.';
- return 'Solo puedo ayudar con el uso de este portafolio académico. Pregúntame sobre cursos, semanas, imágenes, títulos, enlaces, habilidades o administración.';
+ const q=norm(question),has=re=>re.test(q);
+ const name=lsGet('user',{name:OWNER}).name,skills=getSkills();
+ if(has(/^(hola|buenas|buenos dias|buenas tardes|buenas noches|hey|que tal|saludos)\b/))return `¡Hola! Soy el asistente del portafolio de ${name}. Pregúntame por sus habilidades, por los trabajos de una semana o por su avance en cada curso.`;
+ if(has(/\b(gracias|genial|excelente|chevere|bacan)\b/))return '¡Con gusto! Si quieres saber algo más del portafolio, aquí estoy.';
+ if(has(/\b(adios|chau|chao|bye|hasta luego)\b/))return '¡Hasta luego! Gracias por visitar el portafolio.';
+ if(has(/\b(que hora|hora es|que fecha|que dia)\b/)){const now=new Date();return `Hoy es ${now.toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} y son las ${now.toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'})}.`}
+ if(has(/\b(quien eres|que eres|eres un bot|eres una ia)\b/))return 'Soy un asistente integrado en este portafolio. Respondo con la información que hay aquí: perfil, cursos, trabajos por semana, avance y habilidades.';
+ /* Las preguntas de “cómo hacer algo” van primero para no confundirlas con preguntas sobre el contenido */
+ if(has(/\b(como|donde|puedo|se puede)\b/)){const h=HOWTO.find(([re])=>re.test(q));if(h)return h[1]}
+ const wm=q.match(/semana\s*(\d{1,2})/);
+ if(wm)return weekReply(q,+wm[1]);
+ if(has(/avance|progreso|cuant|entrega|complet|va en/))return `${COURSES.map((n,i)=>`${n}: ${doneWeeks(i)} de 16 semanas con trabajos`).join('. ')}.`;
+ const found=skills.filter(s=>s.name.split(/\s+y\s+|[(),]/).map(t=>norm(t).trim()).filter(t=>t.length>1).some(t=>new RegExp(`(^|[^a-z0-9+#])${reEsc(t)}($|[^a-z0-9+#])`).test(q)));
+ if(found.length)return `${found.map(s=>`${s.name}: nivel ${LEVELS[skillLevel(s)].toLocaleLowerCase()} (${skillLevel(s)} de 5)`).join('. ')}.`;
+ if(has(/habilidad|sabe|conoce|domina|tecnolog|lenguaje|herramienta|skill|stack|programa/)){
+  const cat=SKILL_CATS.find(c=>CAT_WORDS[c].test(q));
+  const groups=(cat?[cat]:SKILL_CATS).map(c=>[c,skills.filter(s=>s.cat===c)]).filter(([,l])=>l.length);
+  if(!groups.length)return 'Todavía no hay habilidades publicadas en esa categoría.';
+  const top=skills.filter(s=>skillLevel(s)>=4).map(s=>s.name);
+  return `${!cat&&top.length?`Sus puntos fuertes son ${listEs(top)}. `:''}${groups.map(([c,l])=>`${c}: ${l.map(s=>s.name).join(', ')}`).join('. ')}.`;
+ }
+ if(has(/contacto|correo|email|telefono|whatsapp|contratar|linkedin/))return 'Este portafolio todavía no tiene datos de contacto publicados.';
+ if(has(/quien|sobre (el|david|piero)|carrera|estudia|universidad|presenta|perfil|cursos|upla/))return `${name} es estudiante de ${CAREER} en la Universidad Peruana Los Andes. Aquí publica sus trabajos de ${listEs(COURSES)}, organizados por unidad y semana.`;
+ const h=HOWTO.find(([re])=>re.test(q));if(h)return h[1];
+ if(has(/portafolio|sistema|funciona|funcion|ayuda/))return 'Este portafolio reúne cursos, trabajos por semana, avance y habilidades. Puedes preguntarme, por ejemplo: “¿qué sabe hacer?”, “¿cómo va su avance?” o “¿qué hizo en la semana 3?”.';
+ return 'No encontré eso en el portafolio. Puedo contarte quién es, qué habilidades tiene, cómo va su avance o qué hizo en una semana concreta (por ejemplo, “semana 2 de Algoritmo”).';
 }
 const doneWeeks=c=>{let n=0;for(let u=0;u<4;u++)for(let w=0;w<4;w++){const slot=`${c}-${u}-${w}`;if(slotImgs(slot).length||S.weekDetails[slot]?.title||S.weekDetails[slot]?.link)n++}return n};
 const initials=n=>n.split(/[ ,]+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
@@ -275,13 +334,13 @@ async function delImage(id){
 }
 
 /* ---------- Vistas ---------- */
-const logo=`<svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 2l14 8v16l-14 8L4 26V10z" fill="var(--pri)"/><path d="M18 2l14 8v16l-14 8" fill="none" stroke="var(--gold)" stroke-width="1.5"/><text x="18" y="23" text-anchor="middle" fill="var(--pri-ink)" font-size="12" font-weight="700" font-family="Manrope,sans-serif">UP</text></svg>`;
+const logo=`<svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 2l14 8v16l-14 8L4 26V10z" fill="var(--pri)"/><path d="M18 2l14 8v16l-14 8" fill="none" stroke="var(--accent)" stroke-width="1.5"/><text x="18" y="23" text-anchor="middle" fill="var(--pri-ink)" font-size="12" font-weight="700" font-family="Unbounded,sans-serif">UP</text></svg>`;
 function authView(){
  const u=lsGet('user',null);
  $('#app').innerHTML=`<form class="auth" id="af">
   ${logo}
   <h1>${u?'Iniciar sesión':'Crear cuenta'}</h1>
-  ${u?`<p style="margin:0;color:var(--mut)">Hola, ${esc(u.name)}. Ingresa tu contraseña para editar el portafolio.</p>`:`<input type="text" id="nm" value="Flores Canto, David Piero" aria-label="Nombre completo" required>`}
+  ${u?`<p style="margin:0;color:var(--mut)">Hola, ${esc(u.name)}. Ingresa tu contraseña para editar el portafolio.</p>`:`<input type="text" id="nm" value="${OWNER}" aria-label="Nombre completo" required>`}
   <input type="password" id="pw" placeholder="Contraseña" aria-label="Contraseña" required minlength="4">
   <div class="err" id="er"></div>
   <button class="p" type="submit">${u?'Entrar':'Crear cuenta y entrar'}</button>
@@ -309,7 +368,7 @@ function skillsView(publicMode){
    <button class="p">Agregar habilidad</button></form>`}`;
 }
 function view(publicMode=false){
- const u=lsGet('user',{name:'Estudiante'});const c=S.c;
+ const u=lsGet('user',{name:OWNER});const c=S.c;
  const weekIndexes=[0,1,2,3].filter(w=>{
   const slot=`${c}-${S.u}-${w}`;const detail=S.weekDetails[slot];
   return !publicMode||slotImgs(slot).length||detail?.title||detail?.link;
@@ -339,6 +398,7 @@ function view(publicMode=false){
  </header>
  <main>
   <div class="hero">
+   <div class="floor" aria-hidden="true"></div>
    <div>
     <p class="kicker">${publicMode?`Estudiante de ${CAREER}`:'Modo edición'}</p>
     <h1>${esc(u.name)}</h1>
@@ -367,12 +427,21 @@ const chatPanel=$('#chat-panel'),chatToggle=$('#chat-toggle'),chatMessages=$('#c
 function setChatOpen(open){chatPanel.hidden=!open;chatToggle.setAttribute('aria-expanded',String(open));if(open)$('#chat-input').focus()}
 function addChatMessage(text,kind){
  const message=document.createElement('div');message.className=`chat-message ${kind}`.trim();message.textContent=text;chatMessages.append(message);chatMessages.scrollTop=chatMessages.scrollHeight;
+ return message;
 }
+/* Muestra “escribiendo…” un instante antes de responder, para que la respuesta se note como nueva */
+function askChat(question){
+ chatMessages.querySelector('.chat-suggest')?.remove();
+ addChatMessage(question,'user');
+ const typing=addChatMessage('','typing');typing.innerHTML='<span></span><span></span><span></span>';typing.setAttribute('aria-label','Escribiendo');
+ setTimeout(()=>{typing.className='chat-message';typing.removeAttribute('aria-label');typing.textContent=chatReply(question);chatMessages.scrollTop=chatMessages.scrollHeight},450);
+}
+chatMessages.addEventListener('click',e=>{const q=e.target.closest('[data-q]')?.dataset.q;if(q)askChat(q)});
 chatToggle.addEventListener('click',()=>setChatOpen(chatPanel.hidden));
 $('#chat-close').addEventListener('click',()=>setChatOpen(false));
 $('#chat-form').addEventListener('submit',e=>{
  e.preventDefault();const input=$('#chat-input');const question=input.value.trim();if(!question)return;
- addChatMessage(question,'user');addChatMessage(chatReply(question),'');input.value='';input.focus();
+ askChat(question);input.value='';input.focus();
 });
 app.addEventListener('click',e=>{const t=e.target.closest('button,img')||e.target;
  if(t.dataset.c){S.c=+t.dataset.c;S.u=0;view()}
