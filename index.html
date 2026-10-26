@@ -55,6 +55,12 @@ main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
 .wk.has{border-left:4px solid var(--ok)}
 .wk h3{font-size:19px;display:flex;justify-content:space-between;align-items:baseline}
 .wk h3 small{font:400 12px 'IBM Plex Mono',monospace;color:var(--mut)}
+.week-details{display:grid;gap:6px}
+.week-title{font-size:16px}
+.week-link{color:var(--pri);font-size:14px;overflow-wrap:anywhere}
+.week-meta{display:grid;gap:8px}
+.week-meta label{display:grid;gap:4px;color:var(--mut);font-size:13px}
+.week-meta button{justify-self:start}
 .drop{display:block;border:1.5px dashed var(--line);padding:18px 10px;text-align:center;color:var(--mut);font-size:14px;cursor:pointer}
 .drop.over{border-color:var(--pri);background:var(--soft);color:var(--ink)}
 .drop input{position:absolute;opacity:0;width:1px;height:1px}
@@ -71,7 +77,7 @@ main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
 .chip button{border:0;background:none;padding:0 3px;color:var(--mut);font-size:18px;line-height:1}
 .chip button:hover{color:var(--accent)}
 .add{display:flex;gap:8px;margin-top:14px}
-input[type=text],input[type=password]{font:inherit;padding:9px 12px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:2px;width:100%}
+input[type=text],input[type=password],input[type=url]{font:inherit;padding:9px 12px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:2px;width:100%}
 .note{color:var(--mut);font-size:13px;margin-top:40px;max-width:70ch}
 .auth{max-width:400px;margin:9vh auto;background:var(--card);border:1px solid var(--line);padding:32px;display:grid;gap:14px}
 .auth h1{font-size:28px}.err{color:#c0392b;font-size:14px;min-height:20px}
@@ -93,7 +99,7 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const COURSES=['Taller de Aplicaciones 1','Algoritmo y Estructura de Datos'];
 const DEFAULT_SKILLS=['Python','Java','JavaScript','HTML y CSS','Git y GitHub','SQL','Lógica de programación','Estructuras de datos','Algoritmos','Trabajo en equipo'];
-const S={c:0,u:0,imgs:[],photo:null,user:null};
+const S={c:0,u:0,imgs:[],photo:null,user:null,weekDetails:{}};
 const lsGet=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
 const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
 
@@ -104,6 +110,7 @@ const dbp=new Promise((res,rej)=>{const r=indexedDB.open('portafolio-upla',1);
 const tx=async(st,mode,fn)=>{const d=await dbp;return new Promise((res,rej)=>{const t=d.transaction(st,mode);const q=fn(t.objectStore(st));t.oncomplete=()=>res(q&&q.result);t.onerror=()=>rej(t.error)})};
 
 async function load(){
+ S.weekDetails=lsGet('weekDetails',{});
  const all=await tx('imgs','readonly',s=>s.getAll());
  all.sort((a,b)=>a.id-b.id);
  S.imgs=all.map(r=>({...r,url:URL.createObjectURL(r.blob)}));
@@ -122,7 +129,8 @@ async function shrink(f,max=1600){
  return new Promise(r=>c.toBlob(r,'image/jpeg',.82))}
 const toast=t=>{const m=$('#msg');m.textContent=t;m.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>m.style.display='none',2600)};
 const slotImgs=s=>S.imgs.filter(i=>i.slot===s);
-const doneWeeks=c=>{let n=0;for(let u=0;u<4;u++)for(let w=0;w<4;w++)if(slotImgs(`${c}-${u}-${w}`).length)n++;return n};
+const safeLink=value=>{try{const url=new URL(value);return ['http:','https:'].includes(url.protocol)?url.href:null}catch{return null}};
+const doneWeeks=c=>{let n=0;for(let u=0;u<4;u++)for(let w=0;w<4;w++){const slot=`${c}-${u}-${w}`;if(slotImgs(slot).length||S.weekDetails[slot]?.title||S.weekDetails[slot]?.link)n++}return n};
 const initials=n=>n.split(/[ ,]+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
 
 /* ---------- Subida múltiple ---------- */
@@ -164,10 +172,20 @@ function authView(){
 function view(publicMode=false){
  const u=lsGet('user',{name:'Estudiante'});const c=S.c;
  const done=doneWeeks(c);
- const weekIndexes=[0,1,2,3].filter(w=>!publicMode||slotImgs(`${c}-${S.u}-${w}`).length);
+ const weekIndexes=[0,1,2,3].filter(w=>{
+  const slot=`${c}-${S.u}-${w}`;const detail=S.weekDetails[slot];
+  return !publicMode||slotImgs(slot).length||detail?.title||detail?.link;
+ });
  const weeks=weekIndexes.map(w=>{const slot=`${c}-${S.u}-${w}`;const im=slotImgs(slot);
+  const detail=S.weekDetails[slot]||{title:'',link:''};const link=safeLink(detail.link||'');
   return `<section class="wk ${im.length?'has':''}" id="w${w}">
    <h3>Semana ${w+1}<small>${im.length} ${im.length===1?'imagen':'imágenes'}</small></h3>
+   ${detail.title||link?`<div class="week-details">${detail.title?`<h4 class="week-title">${esc(detail.title)}</h4>`:''}${link?`<a class="week-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">Ver enlace ↗</a>`:''}</div>`:''}
+   ${publicMode?'':`<form class="week-meta" data-slot="${slot}">
+    <label>Título (opcional)<input type="text" name="title" value="${esc(detail.title||'')}" placeholder="Título de la semana"></label>
+    <label>Enlace (opcional)<input type="url" name="link" value="${esc(detail.link||'')}" placeholder="https://..."></label>
+    <button class="p">Guardar</button>
+   </form>`}
    ${publicMode?'':`<label class="drop" data-slot="${slot}"><input type="file" accept="image/*" multiple data-slot="${slot}">Arrastra varias imágenes aquí o toca para elegirlas<br>(se suben todas juntas)</label>`}
    <div class="thumbs">${im.map((x,i)=>`<div class="th"><img src="${x.url}" alt="${esc(x.name)}" data-big="${x.url}"><i>${i+1}</i>${publicMode?'':`<button data-del="${x.id}" aria-label="Eliminar ${esc(x.name)}">×</button>`}</div>`).join('')}</div>
    ${!publicMode&&w<3?`<button class="nx" data-next="${w+1}">Siguiente semana →</button>`:''}
@@ -202,7 +220,7 @@ function view(publicMode=false){
    <div class="chips">${skills.map((s,i)=>`<span class="chip">${esc(s)}${publicMode?'':`<button data-rs="${i}" aria-label="Quitar ${esc(s)}">×</button>`}</span>`).join('')}</div>
    ${publicMode?'':'<form class="add" id="sf"><input type="text" id="sk" placeholder="Agregar habilidad" aria-label="Nueva habilidad"><button class="p">Agregar</button></form>'}
   </div>
-  ${publicMode?'<p class="public-footer">Portafolio académico · Universidad Peruana Los Andes</p>':'<p class="note">Tus imágenes se guardan en este navegador (IndexedDB), ordenadas por curso, unidad y semana. Si borras los datos del navegador o cambias de dispositivo, no las verás: conserva una copia de tus archivos originales.</p>'}
+  ${publicMode?'<p class="public-footer">Portafolio académico · Universidad Peruana Los Andes</p>':'<p class="note">Tus imágenes y los títulos y enlaces de cada semana se guardan en este navegador. Si borras los datos del navegador o cambias de dispositivo, no los verás: conserva una copia de tus archivos originales.</p>'}
  </main>`;
 }
 
@@ -219,7 +237,20 @@ app.addEventListener('click',e=>{const t=e.target;
 app.addEventListener('change',async e=>{const t=e.target;
  if(t.dataset.slot){await addImages(t.dataset.slot,t.files)}
  else if(t.id==='pf'&&t.files[0]){const b=await shrink(t.files[0],600);await tx('kv','readwrite',s=>s.put(b,'photo'));S.photo=URL.createObjectURL(b);view()}});
-app.addEventListener('submit',e=>{if(e.target.id==='sf'){e.preventDefault();const v=$('#sk').value.trim();if(v){const s=lsGet('skills',DEFAULT_SKILLS);if(s.some(x=>x.toLocaleLowerCase()===v.toLocaleLowerCase()))return toast('Esa habilidad ya está en la lista');s.push(v);lsSet('skills',s);view()}}});
+app.addEventListener('submit',e=>{
+ if(e.target.matches('.week-meta')){
+  e.preventDefault();const form=e.target;const title=form.elements.namedItem('title').value.trim();const link=form.elements.namedItem('link').value.trim();
+  if(link&&!safeLink(link))return toast('El enlace debe comenzar con http:// o https://');
+  const details={...S.weekDetails};
+  if(title||link)details[form.dataset.slot]={title,link};
+  else delete details[form.dataset.slot];
+  try{localStorage.setItem('weekDetails',JSON.stringify(details))}
+  catch(error){console.error('No se pudieron guardar los datos de la semana',error);return toast('No se pudieron guardar los datos de la semana')}
+  S.weekDetails=details;view();
+ }else if(e.target.id==='sf'){
+  e.preventDefault();const v=$('#sk').value.trim();if(v){const s=lsGet('skills',DEFAULT_SKILLS);if(s.some(x=>x.toLocaleLowerCase()===v.toLocaleLowerCase()))return toast('Esa habilidad ya está en la lista');s.push(v);lsSet('skills',s);view()}
+ }
+});
 ['dragover','dragleave','drop'].forEach(ev=>app.addEventListener(ev,e=>{const d=e.target.closest('.drop');if(!d)return;e.preventDefault();
  d.classList.toggle('over',ev==='dragover');if(ev==='drop')addImages(d.dataset.slot,e.dataTransfer.files)}));
 $('#lb').onclick=()=>$('#lb').classList.remove('on');
