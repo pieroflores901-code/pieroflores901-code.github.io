@@ -227,22 +227,19 @@ async function shrink(f,max=1600){
  return new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error('No se pudo procesar la imagen')),'image/jpeg',.82))}
 const toast=t=>{const m=$('#msg');m.textContent=t;m.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>m.style.display='none',2600)};
 const slotImgs=s=>S.imgs.filter(i=>i.slot===s);
-const fileKind=f=>{
- const name=f.name.toLocaleLowerCase();
- if(f.type.startsWith('image/')||(!f.type&&/\.(avif|bmp|gif|jpe?g|png|webp)$/.test(name)))return 'image';
- if(f.type==='application/pdf'||name.endsWith('.pdf'))return 'pdf';
- if(f.type==='application/msword'||f.type==='application/vnd.openxmlformats-officedocument.wordprocessingml.document'||/\.(doc|docx)$/.test(name))return 'word';
- return null;
-};
+/* Las imágenes se muestran como miniatura; cualquier otro archivo se guarda tal cual y se ofrece para descargar */
+const fileKind=f=>/^image\/(avif|bmp|gif|jpeg|png|webp)$/.test(f.type)||(!f.type&&/\.(avif|bmp|gif|jpe?g|png|webp)$/i.test(f.name))?'image':'file';
+const DOC_TYPES={pdf:'PDF',doc:'Word',docx:'Word',odt:'documento',xls:'Excel',xlsx:'Excel',csv:'CSV',ods:'hoja de cálculo',ppt:'PowerPoint',pptx:'PowerPoint',odp:'presentación',txt:'texto',zip:'ZIP',rar:'RAR','7z':'7Z',svg:'SVG'};
+const docLabel=name=>{const ext=(name.match(/\.([^.]+)$/)?.[1]||'').toLocaleLowerCase();return DOC_TYPES[ext]||(ext?ext.toUpperCase():'archivo')};
 const safeLink=value=>{try{const url=new URL(value);return ['http:','https:'].includes(url.protocol)?url.href:null}catch{return null}};
 function chatReply(question){
  const q=question.toLocaleLowerCase('es').normalize('NFD').replace(/[̀-ͯ]/g,'');
  if(/\b(hola|buenas|buenos dias|buenas tardes)\b/.test(q))return '¡Hola! Puedo responder preguntas sobre cómo usar este portafolio académico.';
  if(/habilidad|skill|nivel|categoria/.test(q))return 'En administración, agrega una habilidad con su nombre, categoría y nivel. Para cambiar el nivel de una existente, toca uno de sus segmentos; para quitarla, usa el botón × junto a ella.';
  if(/titulo|nombre|enlace|link/.test(q))return 'En administración, cada semana tiene campos opcionales para título y enlace. Escribe lo que quieras y pulsa “Guardar”; el enlace debe empezar con http:// o https://.';
- if(/imagen|foto|subir|cargar|archivo|pdf|word/.test(q))return 'En administración, abre el curso y la unidad; en la semana elegida puedes arrastrar o seleccionar imágenes, PDF y archivos Word (.doc o .docx). La foto del perfil se cambia desde “Cambiar foto”.';
+ if(/imagen|foto|subir|cargar|archivo|documento|pdf|word|excel|powerpoint|zip/.test(q))return 'En administración, abre el curso y la unidad; en la semana elegida puedes arrastrar o seleccionar cualquier archivo: imágenes, PDF, Word, Excel, PowerPoint, ZIP y más. La foto del perfil se cambia desde “Cambiar foto”.';
  if(/semana|unidad|curso|tarea|trabajo|progreso/.test(q))return 'El portafolio organiza los trabajos por curso, unidad y semana. Usa las pestañas de cursos y los botones de unidad para navegar. Las barras del inicio muestran cuántas de las 16 semanas de cada curso ya tienen trabajos.';
- if(/guardar|datos|privacidad|navegador|dispositivo/.test(q))return 'Las imágenes, los PDF, los archivos Word y la foto se guardan en IndexedDB de este navegador; los títulos, enlaces y habilidades se guardan en el almacenamiento local. No se sincronizan con otros dispositivos.';
+ if(/guardar|datos|privacidad|navegador|dispositivo/.test(q))return 'Los archivos de cada semana y la foto se guardan en IndexedDB de este navegador; los títulos, enlaces y habilidades se guardan en el almacenamiento local. No se sincronizan con otros dispositivos.';
  if(/admin|administrar|contrasena|sesion|entrar/.test(q))return 'Para administrar, pulsa “Administrar” en el portafolio público e inicia sesión. Desde esa vista puedes editar el contenido y cerrar sesión.';
  if(/portafolio|sistema|funciona|funcion/.test(q))return 'Este sistema muestra un portafolio académico con cursos, unidades, semanas, trabajos, habilidades y foto de perfil. Pregúntame por cualquiera de esas funciones.';
  return 'Solo puedo ayudar con el uso de este portafolio académico. Pregúntame sobre cursos, semanas, imágenes, títulos, enlaces, habilidades o administración.';
@@ -252,15 +249,14 @@ const initials=n=>n.split(/[ ,]+/).filter(Boolean).slice(0,2).map(x=>x[0]).join(
 
 /* ---------- Subida múltiple ---------- */
 async function addFiles(slot,files){
- const selected=[...files].map(file=>({file,kind:fileKind(file)}));
- const fs=selected.filter(x=>x.kind).sort((a,b)=>a.file.name.localeCompare(b.file.name,undefined,{numeric:true}));
- if(selected.some(x=>!x.kind))toast('Solo se admiten imágenes, PDF y archivos Word (.doc o .docx).');
+ const fs=[...files].map(file=>({file,kind:fileKind(file)})).sort((a,b)=>a.file.name.localeCompare(b.file.name,undefined,{numeric:true}));
  if(!fs.length)return;
  let n=0;
  for(const {file,kind} of fs){
   toast(`Guardando ${++n} de ${fs.length}…`);
   try{
-   const blob=kind==='image'?await shrink(file):file;
+   /* Los GIF se guardan sin recomprimir para no perder la animación */
+   const blob=kind==='image'&&file.type!=='image/gif'?await shrink(file):file;
    const rec={slot,name:file.name,kind,blob};
    rec.id=await tx('imgs','readwrite',s=>s.add(rec));
    S.imgs.push({...rec,url:URL.createObjectURL(blob)});
@@ -270,8 +266,7 @@ async function addFiles(slot,files){
    view();return;
   }
  }
- const skipped=selected.length-fs.length;
- toast(`${fs.length} archivo(s) guardados${skipped?`; ${skipped} no admitido(s)`:''}`);view();
+ toast(`${fs.length} archivo(s) guardados`);view();
 }
 async function delImage(id){
  await tx('imgs','readwrite',s=>s.delete(id));
@@ -329,8 +324,8 @@ function view(publicMode=false){
     <label>Enlace (opcional)<input type="url" name="link" value="${esc(detail.link||'')}" placeholder="https://..."><small>Si es de OneDrive o Google Drive, usa “Compartir” con acceso para cualquier persona con el vínculo.</small></label>
     <button class="p">Guardar</button>
    </form>`}
-   ${publicMode?'':`<label class="drop" data-slot="${slot}"><input type="file" accept="image/*,.pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple data-slot="${slot}">Arrastra imágenes, PDF o Word aquí, o toca para elegirlos<br>(puedes seleccionar varios archivos)</label>`}
-   <div class="thumbs">${im.map((x,i)=>`<div class="th ${x.kind==='image'?'':'document'}">${x.kind==='image'?`<img src="${x.url}" alt="${esc(x.name)}" data-big="${x.url}">`:`<a href="${x.url}" download="${esc(x.name)}">${esc(x.name)}<small>Descargar ${x.kind==='pdf'?'PDF':'Word'}</small></a>`}<i>${i+1}</i>${publicMode?'':`<button data-del="${x.id}" aria-label="Eliminar ${esc(x.name)}">×</button>`}</div>`).join('')}</div>
+   ${publicMode?'':`<label class="drop" data-slot="${slot}"><input type="file" multiple data-slot="${slot}">Arrastra tus archivos aquí o toca para elegirlos<br>(imágenes, PDF, Word, Excel, PowerPoint, ZIP y más)</label>`}
+   <div class="thumbs">${im.map((x,i)=>`<div class="th ${x.kind==='image'?'':'document'}">${x.kind==='image'?`<img src="${x.url}" alt="${esc(x.name)}" data-big="${x.url}">`:`<a href="${x.url}" download="${esc(x.name)}">${esc(x.name)}<small>Descargar ${docLabel(x.name)}</small></a>`}<i>${i+1}</i>${publicMode?'':`<button data-del="${x.id}" aria-label="Eliminar ${esc(x.name)}">×</button>`}</div>`).join('')}</div>
    ${!publicMode&&w<3?`<button class="nx" data-next="${w+1}">Siguiente semana</button>`:''}
   </section>`}).join('');
  const progress=COURSES.map((n,i)=>{const d=doneWeeks(i);return `<div><p><b>${n}</b><span>${d} de 16 semanas</span></p><div class="bar" role="progressbar" aria-label="Avance en ${n}" aria-valuemin="0" aria-valuemax="16" aria-valuenow="${d}"><i style="width:${d/16*100}%"></i></div></div>`}).join('');
