@@ -23,6 +23,15 @@ button.p,.btn.p{background:var(--btn);color:var(--btnt);border-color:var(--btn)}
 button:focus-visible,input:focus-visible,label:focus-within{outline:2px solid var(--pri);outline-offset:2px}
 main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
 .hero{background:linear-gradient(112deg,var(--card) 72%,var(--soft));border:1px solid var(--line);border-left:4px solid var(--pri);display:grid;grid-template-columns:auto 1fr auto;gap:32px;padding:36px;box-shadow:0 12px 34px rgba(24,50,42,.06)}
+.hero.public-hero{grid-template-columns:minmax(0,1fr) 180px;align-items:center;min-height:290px}
+.public-hero .ph{width:180px}
+.public-hero .ph .box{width:160px;height:200px;margin:0 auto}
+.public-hero .eyebrow{letter-spacing:.08em}
+.public-section{margin-top:42px}
+.public-section h2{font-size:30px;margin-bottom:8px}
+.public-lead{color:var(--mut);margin:0 0 20px}
+.public-empty{padding:22px;background:var(--card);border:1px dashed var(--line);color:var(--mut)}
+.public-footer{border-top:1px solid var(--line);margin-top:44px;padding-top:18px;color:var(--mut);font-size:13px}
 .hero h1{font-size:clamp(28px,5vw,46px);margin:6px 0 14px}
 .hero p{color:var(--mut);margin:0 0 22px;max-width:60ch}
 .hero p b{color:var(--ink)}
@@ -66,10 +75,11 @@ input[type=text],input[type=password]{font:inherit;padding:9px 12px;border:1px s
 .note{color:var(--mut);font-size:13px;margin-top:40px;max-width:70ch}
 .auth{max-width:400px;margin:9vh auto;background:var(--card);border:1px solid var(--line);padding:32px;display:grid;gap:14px}
 .auth h1{font-size:28px}.err{color:#c0392b;font-size:14px;min-height:20px}
+.auth a{color:var(--pri);font-size:14px}
 #lb{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;place-items:center;z-index:9;cursor:zoom-out}
 #lb.on{display:grid}#lb img{max-width:94vw;max-height:92vh}
 #msg{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--btn);color:var(--btnt);padding:10px 18px;display:none;z-index:10}
-@media(max-width:760px){main{padding:22px 14px 44px}.hero{grid-template-columns:1fr;gap:20px;padding:22px}.badge{display:none}.ph{order:-1}.ph .box{margin:0 auto 8px}.stats{gap:16px}.units{overflow-x:auto;flex-wrap:nowrap;padding:2px}.units button{flex:0 0 auto}.weeks{grid-template-columns:1fr}.add{align-items:stretch}.add input{min-width:0}}
+@media(max-width:760px){main{padding:22px 14px 44px}.hero,.hero.public-hero{grid-template-columns:1fr;gap:20px;padding:22px}.badge{display:none}.ph{order:-1}.ph .box{margin:0 auto 8px}.public-hero .ph{order:-1;width:100%}.stats{gap:16px}.units{overflow-x:auto;flex-wrap:nowrap;padding:2px}.units button{flex:0 0 auto}.weeks{grid-template-columns:1fr}.add{align-items:stretch}.add input{min-width:0}}
 @media(max-width:420px){header{gap:10px;padding:10px 12px}header svg{width:30px;height:30px}header .t b{font-size:16px}header .t span{font-size:12px}header button{padding:7px 9px;font-size:14px}.hero h1{overflow-wrap:anywhere}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.stats b{font-size:23px}.stats span{font-size:12px}.tabs button{padding:11px 12px;font-size:14px}.add{gap:6px}.add button{padding:8px 10px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>
@@ -144,49 +154,55 @@ function authView(){
   <input type="password" id="pw" placeholder="Contraseña" aria-label="Contraseña" required minlength="4">
   <div class="err" id="er"></div>
   <button class="p" type="submit">${u?'Entrar':'Crear cuenta y entrar'}</button>
+  <a href="./">Volver al portafolio público</a>
  </form>`;
  $('#af').onsubmit=async e=>{e.preventDefault();const pw=$('#pw').value;const h=await hash(pw);
   if(u){if(h!==u.h)return $('#er').textContent='Contraseña incorrecta. Inténtalo de nuevo.'}
   else lsSet('user',{name:$('#nm').value.trim(),h});
-  sessionStorage.setItem('ok','1');start()};
+  sessionStorage.setItem('ok','1');history.replaceState(null,'',`${location.pathname}?admin=1`);start(false)};
 }
-function view(){
+function view(publicMode=false){
  const u=lsGet('user',{name:'Estudiante'});const c=S.c;
  const done=doneWeeks(c);
- const weeks=[0,1,2,3].map(w=>{const slot=`${c}-${S.u}-${w}`;const im=slotImgs(slot);
+ const weekIndexes=[0,1,2,3].filter(w=>!publicMode||slotImgs(`${c}-${S.u}-${w}`).length);
+ const weeks=weekIndexes.map(w=>{const slot=`${c}-${S.u}-${w}`;const im=slotImgs(slot);
   return `<section class="wk ${im.length?'has':''}" id="w${w}">
-   <h3>Semana ${w+1}<small>${im.length} img</small></h3>
-   <label class="drop" data-slot="${slot}"><input type="file" accept="image/*" multiple data-slot="${slot}">Arrastra varias imágenes aquí o toca para elegirlas<br>(se suben todas juntas)</label>
-   <div class="thumbs">${im.map((x,i)=>`<div class="th"><img src="${x.url}" alt="${esc(x.name)}" data-big="${x.url}"><i>${i+1}</i><button data-del="${x.id}" aria-label="Eliminar ${esc(x.name)}">×</button></div>`).join('')}</div>
-   ${w<3?`<button class="nx" data-next="${w+1}">Siguiente semana →</button>`:''}
+   <h3>Semana ${w+1}<small>${im.length} ${im.length===1?'imagen':'imágenes'}</small></h3>
+   ${publicMode?'':`<label class="drop" data-slot="${slot}"><input type="file" accept="image/*" multiple data-slot="${slot}">Arrastra varias imágenes aquí o toca para elegirlas<br>(se suben todas juntas)</label>`}
+   <div class="thumbs">${im.map((x,i)=>`<div class="th"><img src="${x.url}" alt="${esc(x.name)}" data-big="${x.url}"><i>${i+1}</i>${publicMode?'':`<button data-del="${x.id}" aria-label="Eliminar ${esc(x.name)}">×</button>`}</div>`).join('')}</div>
+   ${!publicMode&&w<3?`<button class="nx" data-next="${w+1}">Siguiente semana →</button>`:''}
   </section>`}).join('');
  const skills=lsGet('skills',DEFAULT_SKILLS);
  $('#app').innerHTML=`
  <header>
   <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><path d="M18 2l14 8v16l-14 8L4 26V10z" fill="var(--pri)"/><text x="18" y="23" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="sans-serif">UP</text></svg>
   <div class="t"><b>${esc(u.name)}</b><span>Universidad Peruana Los Andes</span></div>
-  <button id="out">Cerrar sesión</button>
+  <a class="btn ${publicMode?'p':''}" href="${publicMode?'?admin=1':'./'}">${publicMode?'Administrar':'Ver portafolio'}</a>
+  ${publicMode?'':'<button id="out">Cerrar sesión</button>'}
  </header>
  <main>
-  <div class="hero">
-   <div class="badge mono"><span>Universidad</span><span>Peruana</span><span>Los Andes</span></div>
+  <div class="hero ${publicMode?'public-hero':''}">
+   ${publicMode?'':'<div class="badge mono"><span>Universidad</span><span>Peruana</span><span>Los Andes</span></div>'}
    <div>
-    <p class="eyebrow mono" style="margin:0">Expediente de curso</p>
-    <h1>${esc(u.name)}</h1>
-    <p>Registro de las tareas entregadas en <b>${COURSES[0]}</b> y <b>${COURSES[1]}</b>, organizadas por unidad y semana en el mismo orden en que se dictaron en clase.</p>
+    <p class="eyebrow mono" style="margin:0">${publicMode?'Portafolio académico':'Expediente de curso'}</p>
+    <h1>${publicMode?'Hola, soy ':''}${esc(u.name)}</h1>
+    <p>${publicMode?'Aquí comparto mis trabajos, habilidades y proyectos de la Universidad Peruana Los Andes.':`Registro de las tareas entregadas en <b>${COURSES[0]}</b> y <b>${COURSES[1]}</b>, organizadas por unidad y semana en el mismo orden en que se dictaron en clase.`}</p>
     <div class="stats"><div><b>02</b><span>Cursos</span></div><div><b>04</b><span>Unidades por curso</span></div><div><b>${done}/16</b><span>Semanas con tareas</span></div></div>
    </div>
-   <div class="ph"><div class="box">${S.photo?`<img src="${S.photo}" alt="Foto del estudiante">`:esc(initials(u.name))}</div><label>Cambiar foto<input type="file" accept="image/*" id="pf" hidden></label></div>
+   <div class="ph"><div class="box">${S.photo?`<img src="${S.photo}" alt="Foto de ${esc(u.name)}">`:esc(initials(u.name))}</div>${publicMode?'':'<label>Cambiar foto<input type="file" accept="image/*" id="pf" hidden></label>'}</div>
   </div>
+  <section class="public-section" id="trabajos">
+  ${publicMode?'<h2>Trabajos seleccionados</h2><p class="public-lead">Explora las entregas por curso y unidad.</p>':''}
   <div class="tabs" role="tablist">${COURSES.map((n,i)=>`<button role="tab" aria-selected="${i===c}" data-c="${i}">${n}</button>`).join('')}</div>
   <div class="units">${[0,1,2,3].map(i=>`<button aria-selected="${i===S.u}" data-u="${i}">Unidad ${i+1}</button>`).join('')}</div>
-  <div class="weeks">${weeks}</div>
+  <div class="weeks">${weeks|| (publicMode?'<p class="public-empty">Aún no hay trabajos en esta unidad.</p>':'')}</div>
+  </section>
   <div class="skills">
    <h2>Habilidades</h2>
-   <div class="chips">${skills.map((s,i)=>`<span class="chip">${esc(s)}<button data-rs="${i}" aria-label="Quitar ${esc(s)}">×</button></span>`).join('')}</div>
-   <form class="add" id="sf"><input type="text" id="sk" placeholder="Agregar habilidad" aria-label="Nueva habilidad"><button class="p">Agregar</button></form>
+   <div class="chips">${skills.map((s,i)=>`<span class="chip">${esc(s)}${publicMode?'':`<button data-rs="${i}" aria-label="Quitar ${esc(s)}">×</button>`}</span>`).join('')}</div>
+   ${publicMode?'':'<form class="add" id="sf"><input type="text" id="sk" placeholder="Agregar habilidad" aria-label="Nueva habilidad"><button class="p">Agregar</button></form>'}
   </div>
-  <p class="note">Tus imágenes se guardan en este navegador (IndexedDB), ordenadas por curso, unidad y semana. Si borras los datos del navegador o cambias de dispositivo, no las verás: conserva una copia de tus archivos originales.</p>
+  ${publicMode?'<p class="public-footer">Portafolio académico · Universidad Peruana Los Andes</p>':'<p class="note">Tus imágenes se guardan en este navegador (IndexedDB), ordenadas por curso, unidad y semana. Si borras los datos del navegador o cambias de dispositivo, no las verás: conserva una copia de tus archivos originales.</p>'}
  </main>`;
 }
 
@@ -199,7 +215,7 @@ app.addEventListener('click',e=>{const t=e.target;
  else if(t.dataset.big){$('#lb img').src=t.dataset.big;$('#lb').classList.add('on')}
  else if(t.dataset.next){$('#w'+t.dataset.next).scrollIntoView({behavior:'smooth'})}
  else if(t.dataset.rs!==undefined){const s=lsGet('skills',DEFAULT_SKILLS);s.splice(+t.dataset.rs,1);lsSet('skills',s);view()}
- else if(t.id==='out'){sessionStorage.clear();authView()}});
+ else if(t.id==='out'){sessionStorage.clear();history.replaceState(null,'',location.pathname);start(true)}});
 app.addEventListener('change',async e=>{const t=e.target;
  if(t.dataset.slot){await addImages(t.dataset.slot,t.files)}
  else if(t.id==='pf'&&t.files[0]){const b=await shrink(t.files[0],600);await tx('kv','readwrite',s=>s.put(b,'photo'));S.photo=URL.createObjectURL(b);view()}});
@@ -209,8 +225,9 @@ app.addEventListener('submit',e=>{if(e.target.id==='sf'){e.preventDefault();cons
 $('#lb').onclick=()=>$('#lb').classList.remove('on');
 document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#lb').classList.remove('on')});
 
-async function start(){await load();view()}
-sessionStorage.getItem('ok')?start():authView();
+async function start(publicMode=false){await load();view(publicMode)}
+const adminRequested=new URLSearchParams(location.search).has('admin');
+if(adminRequested){sessionStorage.getItem('ok')?start(false):authView()}else start(true);
 </script>
 </body>
 </html>
