@@ -143,6 +143,11 @@ input[type=text],input[type=password],input[type=url],select{font:inherit;font-s
 input::placeholder{color:#64708f}
 input:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px rgba(94,230,240,.18)}
 .note{color:var(--mut);font-size:14px;margin-top:48px;max-width:70ch;padding:14px 16px;border-left:3px solid var(--accent);background:var(--card);border-radius:0 12px 12px 0}
+.publish{margin-top:28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,280px) auto;gap:10px 14px;align-items:center;padding:20px;background:var(--card);border:1px solid rgba(94,230,240,.35);border-radius:18px;box-shadow:var(--shadow)}
+.publish h3{font-size:16px;margin-bottom:4px}
+.publish p{margin:0;color:var(--mut);font-size:14px}
+.publish small{grid-column:1/-1;color:var(--mut);font-size:13px}
+.publish small b{color:var(--ink)}
 .public-footer{border-top:1px solid var(--line);margin-top:72px;padding-top:20px;color:var(--mut);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
 /* ---------- Acceso ---------- */
@@ -179,7 +184,7 @@ input:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 
 .chat-form button{flex:0 0 auto}
 
 @media(max-width:860px){header nav{display:none}}
-@media(max-width:760px){main{padding:22px 14px 48px}.hero{grid-template-columns:1fr;gap:30px;padding:30px 22px 40px}.ph{order:-1}.ph .box{width:160px}.ph::before{width:220px;height:220px}.section{margin-top:52px}.units{overflow-x:auto;flex-wrap:nowrap;padding:2px}.units button{flex:0 0 auto}.weeks{grid-template-columns:1fr}.add{grid-template-columns:1fr 1fr}.add input{grid-column:1/-1}.add button{grid-column:1/-1;justify-content:center}}
+@media(max-width:760px){main{padding:22px 14px 48px}.hero{grid-template-columns:1fr;gap:30px;padding:30px 22px 40px}.ph{order:-1}.ph .box{width:160px}.ph::before{width:220px;height:220px}.section{margin-top:52px}.units{overflow-x:auto;flex-wrap:nowrap;padding:2px}.units button{flex:0 0 auto}.weeks{grid-template-columns:1fr}.publish{grid-template-columns:1fr}.add{grid-template-columns:1fr 1fr}.add input{grid-column:1/-1}.add button{grid-column:1/-1;justify-content:center}}
 @media(max-width:420px){header{gap:10px;padding:10px 12px}header .logo{width:27px;height:31px}header .t b{font-size:13px}header .t span{font-size:12px}header .btn,header button{padding:7px 10px;font-size:14px}.hero h1{overflow-wrap:anywhere}.tabs{display:flex}.tabs button{padding:9px 12px;font-size:14px}.chat-toggle{right:12px;bottom:12px}.chat-panel{right:12px;bottom:70px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.floor::before{animation:none}}
 </style>
@@ -214,12 +219,17 @@ const CAT_ICONS={
  'Datos y herramientas':'<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
  'Fundamentos':'<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M7.5 8l3.5 8M16.5 8L13 16"/>',
  'Habilidades blandas':'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5M16 4.8a3.5 3.5 0 010 6.4M18.5 14.8c1.7.8 2.7 2.5 3 5.2"/>'};
-const S={c:0,u:0,imgs:[],photo:null,user:null,weekDetails:{}};
+/* pm: vista pública o de edición; pub: contenido publicado en el repositorio (lo que ven los visitantes) */
+const S={c:0,u:0,imgs:[],photo:null,photoBlob:null,user:null,weekDetails:{},pm:true,pub:null};
 const lsGet=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}};
 const lsSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}};
 /* Las versiones anteriores guardaban las habilidades como texto; se convierten al formato con categoría y nivel */
 const normSkill=s=>{if(typeof s!=='string')return s;const d=DEFAULT_SKILLS.find(x=>x.name.toLocaleLowerCase()===s.toLocaleLowerCase());return d?{...d,name:s}:{name:s,cat:'Fundamentos',level:3}};
-const getSkills=()=>lsGet('skills',DEFAULT_SKILLS).map(normSkill);
+const getSkills=()=>(S.pub?S.pub.skills||DEFAULT_SKILLS:lsGet('skills',DEFAULT_SKILLS)).map(normSkill);
+const ownerName=()=>S.pub?.name||lsGet('user',{name:OWNER}).name;
+/* Repositorio de GitHub Pages donde se publica el contenido */
+const REPO=location.hostname.endsWith('.github.io')?`${location.hostname.split('.')[0]}/${location.hostname}`:'pieroflores901-code/pieroflores901-code.github.io';
+const BRANCH='main';
 
 /* ---------- Base de datos local (IndexedDB) ---------- */
 const dbp=new Promise((res,rej)=>{const r=indexedDB.open('portafolio-upla',1);
@@ -227,13 +237,64 @@ const dbp=new Promise((res,rej)=>{const r=indexedDB.open('portafolio-upla',1);
  r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
 const tx=async(st,mode,fn)=>{const d=await dbp;return new Promise((res,rej)=>{const t=d.transaction(st,mode);const q=fn(t.objectStore(st));t.oncomplete=()=>res(q&&q.result);t.onerror=()=>rej(t.error)})};
 
-async function load(){
+async function loadPublished(){
+ try{
+  const r=await fetch(`data/portfolio.json?v=${Date.now()}`,{cache:'no-store'});
+  if(!r.ok)return false;
+  const d=await r.json();
+  S.pub=d;S.weekDetails=d.weekDetails||{};S.photo=d.photo||null;
+  S.imgs=(d.files||[]).map(f=>({...f,url:f.path}));
+  return true;
+ }catch{return false}
+}
+async function load(publicMode){
+ S.pub=null;
+ /* Los visitantes ven lo publicado; si aún no hay nada publicado se usa lo guardado en este navegador */
+ if(publicMode&&await loadPublished())return;
  S.weekDetails=lsGet('weekDetails',{});
  const all=await tx('imgs','readonly',s=>s.getAll());
  all.sort((a,b)=>a.id-b.id);
  S.imgs=all.map(r=>({...r,kind:r.kind||fileKind({name:r.name,type:r.blob.type})||'image',url:URL.createObjectURL(r.blob)}));
  const p=await tx('kv','readonly',s=>s.get('photo'));
- S.photo=p?URL.createObjectURL(p):null;
+ S.photoBlob=p||null;S.photo=p?URL.createObjectURL(p):null;
+}
+
+/* ---------- Publicación en GitHub (un solo commit con todo el contenido en data/) ---------- */
+const toB64=bytes=>{let s='';for(let i=0;i<bytes.length;i+=0x8000)s+=String.fromCharCode(...bytes.subarray(i,i+0x8000));return btoa(s)};
+const gitSha=async bytes=>{const h=new TextEncoder().encode(`blob ${bytes.length}\0`);const all=new Uint8Array(h.length+bytes.length);all.set(h);all.set(bytes,h.length);
+ return [...new Uint8Array(await crypto.subtle.digest('SHA-1',all))].map(x=>x.toString(16).padStart(2,'0')).join('')};
+const safeName=n=>n.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^A-Za-z0-9._-]+/g,'-').replace(/^-+|-+$/g,'')||'archivo';
+async function publish(token){
+ const api=async(p,o={})=>{const r=await fetch(`https://api.github.com/repos/${REPO}${p}`,{...o,headers:{Authorization:`Bearer ${token}`,Accept:'application/vnd.github+json',...(o.body?{'Content-Type':'application/json'}:{})}});
+  if(!r.ok){const m=(await r.json().catch(()=>({}))).message||'';throw new Error(r.status===401?'El token no es válido o expiró.':r.status===403||r.status===404?'El token no tiene permiso de escritura (Contents: Read and write) en el repositorio.':`GitHub respondió ${r.status} ${m}`)}
+  return r.json()};
+ toast('Conectando con GitHub…');
+ const ref=await api(`/git/ref/heads/${BRANCH}`);
+ const head=await api(`/git/commits/${ref.object.sha}`);
+ const tree=await api(`/git/trees/${head.tree.sha}?recursive=1`);
+ const have=new Map(tree.tree.filter(e=>e.type==='blob').map(e=>[e.path,e.sha]));
+ const entries=[],keep=new Set();
+ const put=async(path,data)=>{keep.add(path);const bytes=data instanceof Blob?new Uint8Array(await data.arrayBuffer()):new TextEncoder().encode(data);
+  const sha=await gitSha(bytes);if(have.get(path)===sha)return;
+  const b=await api('/git/blobs',{method:'POST',body:JSON.stringify({content:toB64(bytes),encoding:'base64'})});
+  entries.push({path,mode:'100644',type:'blob',sha:b.sha})};
+ const files=[];let n=0;
+ for(const f of S.imgs){
+  toast(`Subiendo ${++n} de ${S.imgs.length}…`);
+  const path=`data/files/${f.slot}/${f.id}-${safeName(f.name)}`;
+  await put(path,f.blob);files.push({slot:f.slot,name:f.name,kind:f.kind,path});
+ }
+ let photo=null;
+ if(S.photoBlob){const bytes=new Uint8Array(await S.photoBlob.arrayBuffer());photo=`data/photo-${(await gitSha(bytes)).slice(0,10)}.jpg`;await put(photo,S.photoBlob)}
+ await put('data/portfolio.json',JSON.stringify({name:lsGet('user',{name:OWNER}).name,photo,skills:getSkills(),weekDetails:S.weekDetails,files},null,1));
+ await put('.nojekyll','');
+ for(const p of have.keys())if(p.startsWith('data/')&&!keep.has(p))entries.push({path:p,mode:'100644',type:'blob',sha:null});
+ if(!entries.length)return toast('Todo ya estaba publicado');
+ toast('Guardando en el repositorio…');
+ const nt=await api('/git/trees',{method:'POST',body:JSON.stringify({base_tree:head.tree.sha,tree:entries})});
+ const c=await api('/git/commits',{method:'POST',body:JSON.stringify({message:'Publicar contenido del portafolio',tree:nt.sha,parents:[ref.object.sha]})});
+ await api(`/git/refs/heads/${BRANCH}`,{method:'PATCH',body:JSON.stringify({sha:c.sha})});
+ toast('¡Publicado! En 1 o 2 minutos todos verán los cambios en el link.');
 }
 
 /* ---------- Utilidades ---------- */
@@ -245,7 +306,7 @@ async function shrink(f,max=1600){
  const c=document.createElement('canvas');c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);
  c.getContext('2d').drawImage(bm,0,0,c.width,c.height);
  return new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error('No se pudo procesar la imagen')),'image/jpeg',.82))}
-const toast=t=>{const m=$('#msg');m.textContent=t;m.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>m.style.display='none',2600)};
+const toast=(t,ms=2600)=>{const m=$('#msg');m.textContent=t;m.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>m.style.display='none',ms)};
 const slotImgs=s=>S.imgs.filter(i=>i.slot===s);
 /* Las imágenes se muestran como miniatura; cualquier otro archivo se guarda tal cual y se ofrece para descargar */
 const fileKind=f=>/^image\/(avif|bmp|gif|jpeg|png|webp)$/.test(f.type)||(!f.type&&/\.(avif|bmp|gif|jpe?g|png|webp)$/i.test(f.name))?'image':'file';
@@ -282,7 +343,7 @@ function weekReply(q,n){
 }
 function chatReply(question){
  const q=norm(question),has=re=>re.test(q);
- const name=lsGet('user',{name:OWNER}).name,skills=getSkills();
+ const name=ownerName(),skills=getSkills();
  if(has(/^(hola|buenas|buenos dias|buenas tardes|buenas noches|hey|que tal|saludos)\b/))return `¡Hola! Soy el asistente del portafolio de ${name}. Pregúntame por sus habilidades, por los trabajos de una semana o por su avance en cada curso.`;
  if(has(/\b(gracias|genial|excelente|chevere|bacan)\b/))return '¡Con gusto! Si quieres saber algo más del portafolio, aquí estoy.';
  if(has(/\b(adios|chau|chao|bye|hasta luego)\b/))return '¡Hasta luego! Gracias por visitar el portafolio.';
@@ -372,8 +433,10 @@ function skillsView(publicMode){
    <select id="skl" aria-label="Nivel">${[1,2,3,4,5].map(n=>`<option value="${n}" ${n===3?'selected':''}>${LEVELS[n]}</option>`).join('')}</select>
    <button class="p">Agregar habilidad</button></form>`}`;
 }
-function view(publicMode=false){
- const u=lsGet('user',{name:OWNER});const c=S.c;
+/* Sin argumento se conserva el modo actual: cambiar de curso o unidad no debe pasar a modo edición */
+function view(publicMode=S.pm){
+ S.pm=publicMode;
+ const u={name:ownerName()};const c=S.c;
  const weekIndexes=[0,1,2,3].filter(w=>{
   const slot=`${c}-${S.u}-${w}`;const detail=S.weekDetails[slot];
   return !publicMode||slotImgs(slot).length||detail?.title||detail?.link;
@@ -412,17 +475,23 @@ function view(publicMode=false){
    </div>
    <div class="ph"><div class="box"><div class="face">${S.photo?`<img src="${S.photo}" alt="Foto de ${esc(u.name)}">`:esc(initials(u.name))}</div></div>${publicMode?'':'<label>Cambiar foto<input type="file" accept="image/*" id="pf" hidden></label>'}</div>
   </div>
+  ${publicMode?'':`<form class="publish" id="pubf">
+   <div><h3>Publicar para todos</h3><p>Lo que editas aquí solo se guarda en este navegador. Pulsa “Publicar” para que cualquiera que abra tu link vea tus trabajos, foto y habilidades.</p></div>
+   <input type="password" id="ght" value="${esc(lsGet('ghToken',''))}" placeholder="Token de GitHub (github_pat_…)" aria-label="Token de GitHub" autocomplete="off" required>
+   <button class="p" type="submit">Publicar</button>
+   <small>Crea el token en GitHub → Settings → Developer settings → Fine-grained tokens, solo para el repositorio <b>${esc(REPO)}</b>, con permiso <b>Contents: Read and write</b>. Se guarda solo en este navegador.</small>
+  </form>`}
   <section class="section" id="trabajos">
    <div class="section-head"><div><h2>Trabajos</h2><p>${publicMode?'Elige un curso y una unidad para ver las entregas de cada semana.':'Sube archivos, títulos y enlaces para cada semana.'}</p></div>
    <div class="tabs" role="tablist">${COURSES.map((n,i)=>`<button role="tab" aria-selected="${i===c}" data-c="${i}">${n}</button>`).join('')}</div></div>
-   <div class="units">${[0,1,2,3].map(i=>`<button aria-selected="${i===S.u}" data-u="${i}">Unidad ${i+1}</button>`).join('')}</div>
+   <div class="units">${[0,1,2,3].map(i=>`<button type="button" aria-selected="${i===S.u}" data-u="${i}">Unidad ${i+1}</button>`).join('')}</div>
    <div class="weeks">${weeks||(publicMode?'<p class="public-empty">Esta unidad todavía no tiene entregas publicadas.</p>':'')}</div>
   </section>
   <section class="section" id="habilidades">
    <div class="section-head"><div><h2>Habilidades</h2><p>Lenguajes, herramientas y fundamentos que aplico en mis proyectos, con mi nivel actual en cada uno.</p></div></div>
    ${skillsView(publicMode)}
   </section>
-  ${publicMode?`<footer class="public-footer"><span class="foot-brand">${logo}${esc(u.name)}</span><span>${CAREER} · Universidad Peruana Los Andes</span></footer>`:'<p class="note">Tus imágenes, documentos, títulos, enlaces y habilidades se guardan en este navegador. Si borras los datos del navegador o cambias de dispositivo, no los verás: conserva una copia de tus archivos originales.</p>'}
+  ${publicMode?`<footer class="public-footer"><span class="foot-brand">${logo}${esc(u.name)}</span><span>${CAREER} · Universidad Peruana Los Andes</span></footer>`:'<p class="note">Tus imágenes, documentos, títulos, enlaces y habilidades se guardan en este navegador hasta que pulses “Publicar”. Si borras los datos del navegador o cambias de dispositivo, no los verás aquí: conserva una copia de tus archivos originales.</p>'}
  </main>`;
 }
 
@@ -474,6 +543,12 @@ app.addEventListener('submit',e=>{
   try{localStorage.setItem('weekDetails',JSON.stringify(details))}
   catch(error){console.error('No se pudieron guardar los datos de la semana',error);return toast('No se pudieron guardar los datos de la semana')}
   S.weekDetails=details;view();toast('Semana guardada');
+ }else if(e.target.id==='pubf'){
+  e.preventDefault();const btn=e.target.querySelector('button');const token=$('#ght').value.trim();if(!token)return;
+  if(!S.imgs.length&&!Object.keys(S.weekDetails).length&&!confirm('Este navegador no tiene trabajos guardados. Si publicas, el link quedará sin trabajos. ¿Continuar?'))return;
+  lsSet('ghToken',token);btn.disabled=true;btn.textContent='Publicando…';
+  publish(token).catch(error=>{console.error('No se pudo publicar',error);toast(`No se pudo publicar: ${error.message}`,8000)})
+   .finally(()=>{btn.disabled=false;btn.textContent='Publicar'});
  }else if(e.target.id==='sf'){
   e.preventDefault();const v=$('#sk').value.trim();if(!v)return;
   const s=getSkills();if(s.some(x=>x.name.toLocaleLowerCase()===v.toLocaleLowerCase()))return toast('Esa habilidad ya está en la lista');
@@ -505,7 +580,7 @@ app.addEventListener('pointerleave',()=>{resetTilt();const box=$('.ph .box');if(
 $('#lb').onclick=()=>$('#lb').classList.remove('on');
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#lb').classList.remove('on');if(!chatPanel.hidden)setChatOpen(false)}});
 
-async function start(publicMode=false){await load();view(publicMode)}
+async function start(publicMode=false){await load(publicMode);view(publicMode)}
 const adminRequested=new URLSearchParams(location.search).has('admin');
 if(adminRequested){sessionStorage.getItem('ok')?start(false):authView()}else start(true);
 </script>
