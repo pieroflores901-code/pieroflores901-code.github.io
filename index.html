@@ -161,17 +161,41 @@ input:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 
 #lb{position:fixed;inset:0;background:rgba(4,6,14,.92);display:none;place-items:center;z-index:9;cursor:zoom-out}
 #lb.on{display:grid}#lb img{max-width:94vw;max-height:92vh;border-radius:8px}
 #msg{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--solid);color:var(--ink);border:1px solid var(--line-strong);padding:11px 20px;border-radius:12px;box-shadow:var(--shadow);display:none;z-index:12;font-weight:600;font-size:14px;max-width:calc(100vw - 32px)}
-.chat-toggle{position:fixed;right:20px;bottom:20px;z-index:11;border:0;border-radius:99px;padding:12px 18px;background:var(--grad);color:var(--pri-ink);box-shadow:0 8px 24px rgba(0,0,0,.45),var(--glow)}
-.chat-panel{position:fixed;right:20px;bottom:82px;z-index:11;width:min(370px,calc(100vw - 28px));height:min(480px,calc(100dvh - 110px));background:rgba(10,15,32,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line-strong);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.6);display:flex;flex-direction:column;overflow:hidden;transform-origin:bottom right}
+.chat-toggle{position:fixed;right:20px;bottom:20px;z-index:11;border:0;border-radius:99px;padding:6px 18px 6px 8px;gap:8px;background:var(--grad);color:var(--pri-ink);box-shadow:0 8px 24px rgba(0,0,0,.45),var(--glow)}
+/* Rayas, el tigre del asistente: respira, parpadea, mueve las orejas, sigue el puntero con la mirada y habla al responder */
+.tiger{display:block;overflow:visible}
+.chat-toggle .tiger{width:40px;height:40px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.35))}
+.chat-head .tiger{width:46px;height:46px;flex:0 0 auto;padding:3px;border-radius:50%;background:rgba(7,11,24,.18)}
+.t-ear,.t-eyes,.t-mouth{transform-box:fill-box}
+.t-ear{transform-origin:50% 100%}
+.t-eyes,.t-mouth{transform-origin:center}
+.t-pupils{transition:transform .15s ease-out}
+@media(prefers-reduced-motion:no-preference){
+ .tiger{animation:bob 3.2s ease-in-out infinite}
+ .t-eyes{animation:blinkEye 4.6s infinite}
+ .t-ear-l{animation:twitch 5.5s infinite}
+ .t-ear-r{animation:twitch 7s 1.3s infinite}
+ .chat-toggle:hover .tiger{animation:hop .5s var(--ease-out)}
+ .talking .t-mouth{animation:talk .16s ease-in-out infinite alternate}
+}
+@keyframes bob{50%{transform:translateY(-3px) rotate(-3deg)}}
+@keyframes blinkEye{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes twitch{0%,85%,100%{transform:rotate(0)}89%{transform:rotate(-16deg)}93%{transform:rotate(6deg)}}
+@keyframes hop{40%{transform:translateY(-8px) rotate(8deg)}}
+@keyframes talk{to{transform:scaleY(3.2)}}
+.chat-skills{display:flex;gap:6px;overflow-x:auto;padding:8px 10px 0;border-top:1px solid var(--line);scrollbar-width:none}
+.chat-skills button{flex:0 0 auto;font-size:12px;padding:5px 10px;border-radius:99px}
+.chat-panel{position:fixed;right:20px;bottom:82px;z-index:11;width:min(380px,calc(100vw - 28px));height:min(560px,calc(100dvh - 110px));background:rgba(10,15,32,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line-strong);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.6);display:flex;flex-direction:column;overflow:hidden;transform-origin:bottom right}
 .chat-panel[hidden]{display:none}
 @media(prefers-reduced-motion:no-preference){.chat-panel:not([hidden]){animation:pop .18s var(--ease-out)}}
 @keyframes pop{from{opacity:0;transform:scale(.96) translateY(6px)}}
 .chat-head{display:flex;align-items:center;gap:10px;padding:14px 16px;background:var(--grad);color:var(--pri-ink)}
-.chat-head strong{flex:1}
+.chat-head>div{flex:1}
+.chat-head strong{font:500 16px 'Unbounded',sans-serif}
 .chat-head small{display:block;opacity:.75;font-size:12px;font-weight:600}
 .chat-close{padding:0 10px;font-size:22px;background:none;border:0;color:inherit}
 .chat-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:14px}
-.chat-message{max-width:88%;padding:10px 13px;background:var(--soft);border:1px solid var(--line);border-radius:14px 14px 14px 4px;overflow-wrap:anywhere;font-size:14px}
+.chat-message{max-width:88%;padding:10px 13px;background:var(--soft);border:1px solid var(--line);border-radius:14px 14px 14px 4px;overflow-wrap:anywhere;font-size:14px;white-space:pre-line}
 .chat-message.user{align-self:flex-end;background:var(--grad);color:var(--pri-ink);border:0;border-radius:14px 14px 4px 14px;font-weight:600}
 .chat-message.typing{display:flex;gap:4px;padding:14px 13px}
 .chat-message.typing span{width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.4}
@@ -179,7 +203,7 @@ input:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 
 @keyframes blink{50%{opacity:1}}
 .chat-suggest{display:flex;flex-wrap:wrap;gap:6px}
 .chat-suggest button{font-size:13px;padding:6px 11px;border-radius:99px}
-.chat-form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line)}
+.chat-form{display:flex;gap:8px;padding:10px}
 .chat-form input{min-width:0}
 .chat-form button{flex:0 0 auto}
 
@@ -193,12 +217,13 @@ input:focus,select:focus{border-color:var(--accent);outline:none;box-shadow:0 0 
 <div id="app"></div>
 <div id="lb"><img alt="Vista ampliada"></div>
 <div id="msg" role="status"></div>
-<section class="chat-panel" id="chat-panel" aria-label="Ayuda del portafolio" hidden>
- <div class="chat-head"><div><strong>Asistente del portafolio</strong><small>Responde con la información de esta página</small></div><button class="chat-close" id="chat-close" type="button" aria-label="Cerrar chat">×</button></div>
- <div class="chat-messages" id="chat-messages" aria-live="polite"><div class="chat-message">¡Hola! Soy el asistente de este portafolio. Pregúntame por el perfil, las habilidades, el avance o los trabajos de cualquier semana.</div><div class="chat-suggest"><button type="button" data-q="¿Quién es?">¿Quién es?</button><button type="button" data-q="¿Qué habilidades tiene?">¿Qué habilidades tiene?</button><button type="button" data-q="¿Cómo va su avance?">¿Cómo va su avance?</button><button type="button" data-q="¿Qué hizo en la semana 1?">¿Qué hizo en la semana 1?</button></div></div>
- <form class="chat-form" id="chat-form"><input type="text" id="chat-input" placeholder="Pregunta sobre el portafolio..." aria-label="Escribe tu pregunta" autocomplete="off" required><button class="p" type="submit">Enviar</button></form>
+<section class="chat-panel" id="chat-panel" aria-label="Rayas, asistente del portafolio" hidden>
+ <div class="chat-head"><span data-tiger></span><div><strong>Rayas</strong><small>Lee los trabajos · calcula · explica conceptos</small></div><button class="chat-close" id="chat-close" type="button" aria-label="Cerrar chat">×</button></div>
+ <div class="chat-messages" id="chat-messages" aria-live="polite"><div class="chat-message">¡Grrr, hola! 🐯 Soy Rayas, el tigre de este portafolio. Leo los trabajos publicados, resuelvo operaciones y ecuaciones, explico conceptos de programación y te cuento del perfil, las habilidades y el avance. ¿Qué quieres saber?</div><div class="chat-suggest"><button type="button" data-q="¿De qué tratan sus trabajos?">¿De qué tratan sus trabajos?</button><button type="button" data-q="¿Qué hizo en la semana 1?">¿Qué hizo en la semana 1?</button><button type="button" data-q="¿Quién es?">¿Quién es?</button><button type="button" data-q="Resuelve 2x + 3 = 11">Resuelve 2x + 3 = 11</button></div></div>
+ <div class="chat-skills" aria-label="Habilidades de Rayas"><button type="button" data-q="¿De qué tratan sus trabajos?">📚 Trabajos</button><button type="button" data-q="¿Cuánto es el 15% de 240?">🧮 Matemática</button><button type="button" data-q="¿Qué es una pila?">🧠 Conceptos</button><button type="button" data-q="¿Qué habilidades tiene?">⚡ Habilidades</button><button type="button" data-q="¿Cómo va su avance?">📈 Avance</button><button type="button" data-q="Cuéntame un chiste">😄 Chiste</button><button type="button" data-q="Dame un dato curioso">💡 Dato curioso</button></div>
+ <form class="chat-form" id="chat-form"><input type="text" id="chat-input" placeholder="Pregúntale algo a Rayas..." aria-label="Escribe tu pregunta" autocomplete="off" required><button class="p" type="submit">Enviar</button></form>
 </section>
-<button class="chat-toggle" id="chat-toggle" type="button" aria-expanded="false" aria-controls="chat-panel">💬 Pregúntame</button>
+<button class="chat-toggle" id="chat-toggle" type="button" aria-expanded="false" aria-controls="chat-panel"><span data-tiger></span>Pregúntale a Rayas</button>
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -278,11 +303,12 @@ async function publish(token){
   const sha=await gitSha(bytes);if(have.get(path)===sha)return;
   const b=await api('/git/blobs',{method:'POST',body:JSON.stringify({content:toB64(bytes),encoding:'base64'})});
   entries.push({path,mode:'100644',type:'blob',sha:b.sha})};
+ toast('Leyendo el texto de los trabajos…');await backfillText();
  const files=[];let n=0;
  for(const f of S.imgs){
   toast(`Subiendo ${++n} de ${S.imgs.length}…`);
   const path=`data/files/${f.slot}/${f.id}-${safeName(f.name)}`;
-  await put(path,f.blob);files.push({slot:f.slot,name:f.name,kind:f.kind,path});
+  await put(path,f.blob);files.push({slot:f.slot,name:f.name,kind:f.kind,path,...(f.text?{text:f.text}:{})});
  }
  let photo=null;
  if(S.photoBlob){const bytes=new Uint8Array(await S.photoBlob.arrayBuffer());photo=`data/photo-${(await gitSha(bytes)).slice(0,10)}.jpg`;await put(photo,S.photoBlob)}
@@ -313,6 +339,44 @@ const fileKind=f=>/^image\/(avif|bmp|gif|jpeg|png|webp)$/.test(f.type)||(!f.type
 const DOC_TYPES={pdf:'PDF',doc:'Word',docx:'Word',odt:'documento',xls:'Excel',xlsx:'Excel',csv:'CSV',ods:'hoja de cálculo',ppt:'PowerPoint',pptx:'PowerPoint',odp:'presentación',txt:'texto',zip:'ZIP',rar:'RAR','7z':'7Z',svg:'SVG'};
 const docLabel=name=>{const ext=(name.match(/\.([^.]+)$/)?.[1]||'').toLocaleLowerCase();return DOC_TYPES[ext]||(ext?ext.toUpperCase():'archivo')};
 const safeLink=value=>{try{const url=new URL(value);return ['http:','https:'].includes(url.protocol)?url.href:null}catch{return null}};
+
+/* ---------- Lectura de trabajos: se extrae el texto de cada archivo para que Rayas pueda responder sobre él ---------- */
+const PDFJS='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+const JSZIP='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+const TEXT_LIMIT=20000;
+const libs={};
+const lib=src=>libs[src]??=new Promise((res,rej)=>{const s=document.createElement('script');s.src=src;s.onload=res;s.onerror=()=>{delete libs[src];rej(new Error(`No se pudo cargar ${src}`))};document.head.append(s)});
+const decodeXml=s=>{const t=document.createElement('textarea');t.innerHTML=s;return t.value};
+const clip=s=>s.replace(/[ \t\r\f\v]+/g,' ').replace(/\n\s*\n+/g,'\n').trim().slice(0,TEXT_LIMIT);
+const PLAIN_EXT=['txt','md','csv','json','html','htm','css','js','ts','py','java','c','cpp','cs','h','sql','xml','php'];
+async function extractText(blob,name){
+ const ext=(name.match(/\.([^.]+)$/)?.[1]||'').toLocaleLowerCase();
+ try{
+  if(PLAIN_EXT.includes(ext))return clip(await blob.text());
+  if(ext==='pdf'){
+   await lib(PDFJS);pdfjsLib.GlobalWorkerOptions.workerSrc=PDFJS.replace('pdf.min.js','pdf.worker.min.js');
+   const doc=await pdfjsLib.getDocument({data:new Uint8Array(await blob.arrayBuffer())}).promise;let out='';
+   for(let i=1;i<=Math.min(doc.numPages,40)&&out.length<TEXT_LIMIT;i++){const c=await(await doc.getPage(i)).getTextContent();out+=c.items.map(x=>x.str+(x.hasEOL?'\n':' ')).join('')+'\n'}
+   return clip(out);
+  }
+  if(['docx','pptx','xlsx'].includes(ext)){
+   await lib(JSZIP);const zip=await JSZip.loadAsync(blob);
+   const parts=Object.keys(zip.files).filter(n=>ext==='docx'?n==='word/document.xml':ext==='pptx'?/^ppt\/slides\/slide\d+\.xml$/.test(n):n==='xl/sharedStrings.xml').sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
+   let out='';
+   for(const n of parts)out+=(await zip.file(n).async('string')).replace(/<(w:tab|w:br|a:br)\b[^>]*\/>/g,' ').replace(/<\/(w:p|a:p|si)>/g,'\n').replace(/<[^>]+>/g,'')+'\n';
+   return clip(decodeXml(out));
+  }
+ }catch(error){console.warn(`No se pudo leer el texto de ${name}`,error)}
+ return '';
+}
+/* Los archivos subidos antes de esta función todavía no tienen texto: se completa en segundo plano */
+async function backfillText(){
+ for(const f of S.imgs){
+  if(f.text!==undefined||!f.blob)continue;
+  f.text=await extractText(f.blob,f.name);
+  const {url,...rec}=f;await tx('imgs','readwrite',s=>s.put(rec)).catch(()=>{});
+ }
+}
 /* ---------- Asistente: responde con los datos reales del portafolio ---------- */
 const norm=s=>String(s).toLocaleLowerCase('es').normalize('NFD').replace(/[̀-ͯ]/g,'');
 const reEsc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
@@ -339,20 +403,182 @@ function weekReply(q,n){
  return [
   d.title?`En ${where} el trabajo se titula “${d.title}”.`:`En ${where} hay trabajos publicados.`,
   files.length?`Tiene ${files.length} ${files.length===1?'archivo':'archivos'}: ${listEs(files.slice(0,4).map(f=>f.name))}${files.length>4?' y más':''}.`:'',
-  link?`También incluye un enlace a ${new URL(link).hostname.replace(/^www\./,'')}.`:''].filter(Boolean).join(' ');
+  link?`También incluye un enlace a ${new URL(link).hostname.replace(/^www\./,'')}.`:'',
+  files.some(f=>f.text)?`\n📚 De lo que leí: “${short(files.find(f=>f.text).text,260)}”`:''].filter(Boolean).join(' ');
 }
+const short=(t,n)=>{t=t.replace(/\s+/g,' ').trim();return t.length>n?t.slice(0,n).replace(/\s+\S*$/,'')+'…':t};
+const slotLabel=slot=>{const [c,u,w]=slot.split('-').map(Number);return `semana ${w+1} de la unidad ${u+1} de ${COURSES[c]}`};
+function worksOverview(){
+ const out=[];
+ for(let c=0;c<COURSES.length;c++)for(let u=0;u<4;u++)for(let w=0;w<4;w++){
+  const slot=`${c}-${u}-${w}`,files=slotImgs(slot),d=S.weekDetails[slot]||{};
+  if(!files.length&&!d.title&&!d.link)continue;
+  const t=files.find(f=>f.text)?.text;
+  out.push(`• ${COURSES[c]}, unidad ${u+1}, semana ${w+1}: ${d.title||files[0]?.name||'enlace publicado'}${t?` — ${short(t,90)}`:''}`);
+ }
+ return out.length?`Estos son sus trabajos publicados 🐯\n${out.slice(0,8).join('\n')}${out.length>8?`\n…y ${out.length-8} más. Pregúntame por una semana concreta.`:''}`:'Todavía no hay trabajos publicados. ¡Pronto habrá!';
+}
+
+/* Búsqueda dentro del texto de los trabajos: se elige el fragmento que comparte más palabras con la pregunta */
+const STOP=new Set('que cual cuales como donde cuando quien para por con sin los las del una uno unos unas este esta esto ese esa eso hay tiene tienen sobre entre pero mas muy sus son fue ser esta estan hizo hace hacer dime cuentame sabes explica explicame habla trata tratan trabajo trabajos semana unidad curso archivo documento segun dice algo todo'.split(' '));
+const stem=w=>w.length>5?w.slice(0,5):w;
+const wordsOf=s=>(norm(s).match(/[a-z0-9+#]+/g)||[]).map(stem);
+const chunkCache=new WeakMap();
+function searchDocs(question){
+ const ws=[...new Set((norm(question).match(/[a-z0-9+#]+/g)||[]).filter(w=>w.length>2&&!STOP.has(w)).map(stem))];
+ if(!ws.length)return null;
+ let best=null;
+ for(const f of S.imgs){
+  if(!f.text)continue;
+  if(!chunkCache.has(f)){const parts=f.text.split(/(?<=[.!?])\s+|\n+/).map(t=>t.trim()).filter(t=>t.length>15);chunkCache.set(f,parts.map((p,i)=>{const t=parts.slice(i,i+2).join(' ');return {t,w:new Set(wordsOf(t))}}))}
+  /* Las palabras que ya están en el nombre del archivo cuentan una vez para el archivo, no para elegir el fragmento */
+  const fname=norm(f.name),inName=ws.filter(w=>fname.includes(w)),rest=ws.filter(w=>!fname.includes(w)),topic=rest.length?rest:ws;
+  for(const ch of chunkCache.get(f)){const score=topic.filter(w=>ch.w.has(w)).length+inName.length*.75;if(score>(best?.score||0))best={score,t:ch.t,f}}
+ }
+ if(!best||best.score<Math.max(1,Math.ceil(ws.length*.4)))return null;
+ return `📚 En “${best.f.name}” (${slotLabel(best.f.slot)}) encontré esto:\n“${short(best.t,380)}”`;
+}
+
+/* ---------- Matemática: operaciones, porcentajes, funciones y ecuaciones con x (sin eval) ---------- */
+const FUNCS={sqrt:Math.sqrt,sin:x=>Math.sin(x*Math.PI/180),cos:x=>Math.cos(x*Math.PI/180),tan:x=>Math.tan(x*Math.PI/180),log:Math.log10,ln:Math.log,abs:Math.abs,exp:Math.exp};
+const CONSTS={pi:Math.PI,e:Math.E};
+const fact=n=>{if(n<0||n>170||!Number.isInteger(n))return NaN;let r=1;for(let i=2;i<=n;i++)r*=i;return r};
+const fmt=v=>(+v.toPrecision(12)).toLocaleString('es-PE',{maximumFractionDigits:8});
+function mathPrep(q){
+ let s=norm(q).replace(/[¿?¡]/g,' ').replace(/\b(por favor|porfa|porfis)\b/g,' ')
+  .replace(/(\d),(\d)/g,'$1.$2').replace(/[×·]/g,'*').replace(/÷/g,'/').replace(/²/g,'^2').replace(/³/g,'^3').replace(/√/g,' sqrt ')
+  .replace(/(\d+(?:\.\d+)?)\s*(%|por ciento)\s*(de)?/g,'($1/100)*')
+  .replace(/\braiz cuadrada( de)?\b|\braiz( de)?\b/g,' sqrt ')
+  .replace(/\bseno( de)?\b|\bsen\b/g,' sin ').replace(/\bcoseno( de)?\b/g,' cos ').replace(/\btangente( de)?\b/g,' tan ')
+  .replace(/\blogaritmo natural( de)?\b/g,' ln ').replace(/\blogaritmo( de)?\b/g,' log ').replace(/\bvalor absoluto( de)?\b/g,' abs ')
+  .replace(/\bfactorial de\s*(\d+)/g,' $1! ').replace(/\b(sqrt|sin|cos|tan|log|ln|abs)\s+de\b/g,'$1 ')
+  .replace(/\b(es )?igual a\b/g,' = ').replace(/\bal cuadrado\b/g,'^2').replace(/\bal cubo\b/g,'^3').replace(/\belevado al?\b/g,'^')
+  .replace(/\b(multiplicado por|por|veces)\b/g,' * ').replace(/\b(dividido entre|dividido por|dividido|entre)\b/g,' / ')
+  .replace(/\bmas\b/g,' + ').replace(/\bmenos\b/g,' - ')
+  .replace(/\b(cuanto|cuantos|cuanta|es|son|el|la|los|las|de|del|calcula|calcular|calculame|resuelve|resolver|resuelveme|resultado|cual|seria|sale|da|me|dime|halla|hallar|encuentra|ecuacion|operacion|rayas)\b/g,' ');
+ if(!s.includes('='))s=s.replace(/(\d)\s*x\s*(?=[\d(])/g,'$1*');
+ return s.replace(/\s+/g,' ').trim();
+}
+function parseMath(src){
+ const toks=[],re=/\s*(\d+(?:\.\d+)?|[a-z]+|[-+*/^()!=])/y;
+ while(re.lastIndex<src.length){const m=re.exec(src);if(!m){if(/^\s*$/.test(src.slice(re.lastIndex)))break;throw 0}toks.push(m[1])}
+ let i=0,usesX=false;
+ const pk=()=>toks[i],nx=()=>toks[i++];
+ const starts=t=>t!==undefined&&/^[\d(a-z]/.test(t);
+ const expr=()=>{let a=term();while(pk()==='+'||pk()==='-'){const o=nx(),b=term(),l=a;a=o==='+'?x=>l(x)+b(x):x=>l(x)-b(x)}return a};
+ const term=()=>{let a=unary();for(;;){const t=pk();
+  if(t==='*'||t==='/'){nx();const b=unary(),l=a;a=t==='*'?x=>l(x)*b(x):x=>l(x)/b(x)}
+  else if(starts(t)){const b=power(),l=a;a=x=>l(x)*b(x)}
+  else return a}};
+ const unary=()=>{if(pk()==='-'){nx();const a=unary();return x=>-a(x)}if(pk()==='+'){nx();return unary()}return power()};
+ const power=()=>{const b=postfix();if(pk()==='^'){nx();const e=unary();return x=>Math.pow(b(x),e(x))}return b};
+ const postfix=()=>{let a=primary();while(pk()==='!'){nx();const l=a;a=x=>fact(l(x))}return a};
+ const primary=()=>{const t=nx();
+  if(t===undefined)throw 0;
+  if(/^\d/.test(t)){const v=+t;return()=>v}
+  if(t==='('){const a=expr();if(nx()!==')')throw 0;return a}
+  if(t==='x'){usesX=true;return x=>x}
+  if(t in CONSTS){const v=CONSTS[t];return()=>v}
+  if(t in FUNCS){const f=FUNCS[t],a=power();return x=>f(a(x))}
+  throw 0};
+ const lhs=expr();let rhs=null;
+ if(pk()==='='){nx();rhs=expr()}
+ if(i<toks.length)throw 0;
+ return {lhs,rhs,usesX,ops:toks.some(t=>/^[-+*/^!]$/.test(t)||t in FUNCS)};
+}
+function mathReply(question){
+ const q=norm(question).replace(/(\d),(\d)/g,'$1.$2'),nums=(q.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
+ if(/\b(promedio|media)\b/.test(q)&&nums.length>1)return `🧮 El promedio de ${listEs(nums.map(fmt))} es ${fmt(nums.reduce((a,b)=>a+b,0)/nums.length)}.`;
+ if(/\bsuma(r)?\b/.test(q)&&nums.length>1&&!/[*/^x]/.test(q))return `🧮 ${nums.map(fmt).join(' + ')} = ${fmt(nums.reduce((a,b)=>a+b,0))}`;
+ const src=mathPrep(question);
+ if(!/\d/.test(src))return null;
+ let p;try{p=parseMath(src)}catch{return null}
+ const pretty=src.replace(/sqrt ?/g,'√').replace(/\*/g,'×').replace(/\//g,'÷');
+ if(p.rhs){
+  if(!p.usesX){const a=p.lhs(0),b=p.rhs(0);return Math.abs(a-b)<1e-9?`✅ Correcto: ${pretty}`:`❌ No es correcto: el lado izquierdo da ${fmt(a)} y el derecho ${fmt(b)}.`}
+  const f=x=>p.lhs(x)-p.rhs(x),f0=f(0),f1=f(1),f2=f(2),a=(f2-2*f1+f0)/2,b=f1-f0-a,c=f0;
+  if(![f0,f1,f2].every(Number.isFinite)||Math.abs(f(3)-(9*a+3*b+c))>1e-6*Math.max(1,Math.abs(f(3))))return 'Resuelvo ecuaciones lineales y cuadráticas con x, por ejemplo “2x + 3 = 11” o “x^2 - 5x + 6 = 0”.';
+  if(Math.abs(a)<1e-12){if(Math.abs(b)<1e-12)return Math.abs(c)<1e-12?'Esa ecuación se cumple para cualquier valor de x.':'Esa ecuación no tiene solución.';return `🧮 ${pretty}\nx = ${fmt(-c/b)}`}
+  const d=b*b-4*a*c;
+  if(d<-1e-12)return `🧮 ${pretty}\nNo tiene soluciones reales: el discriminante es ${fmt(d)}.`;
+  const r1=(-b+Math.sqrt(Math.max(0,d)))/(2*a),r2=(-b-Math.sqrt(Math.max(0,d)))/(2*a);
+  return Math.abs(r1-r2)<1e-9?`🧮 ${pretty}\nx = ${fmt(r1)}`:`🧮 ${pretty}\nx₁ = ${fmt(r1)} y x₂ = ${fmt(r2)}`;
+ }
+ if(p.usesX||!p.ops)return null;
+ const v=p.lhs(0);
+ if(!Number.isFinite(v))return 'Esa operación no tiene un resultado definido (¿una división entre cero? 🐯).';
+ return `🧮 ${pretty} = ${fmt(v)}${/sin|cos|tan/.test(src)?'\n(Los ángulos se toman en grados.)':''}`;
+}
+
+/* ---------- Conceptos de los cursos ---------- */
+const CONCEPTS=[
+ [/algoritmo/,'Un algoritmo es una secuencia finita y ordenada de pasos para resolver un problema. Debe ser preciso, tener un inicio y un fin, y producir un resultado.'],
+ [/recursi/,'La recursividad es cuando una función se llama a sí misma para resolver una versión más pequeña del problema. Siempre necesita un caso base para detenerse; por ejemplo, factorial(n) = n × factorial(n − 1) y factorial(0) = 1.'],
+ [/\bpila|stack/,'Una pila (stack) es una estructura LIFO: el último elemento en entrar es el primero en salir. Sus operaciones son push (apilar), pop (desapilar) y peek (ver la cima). Se usa en el “deshacer” y en las llamadas a funciones.'],
+ [/\bcola|queue/,'Una cola (queue) es una estructura FIFO: el primero en entrar es el primero en salir. Sus operaciones son encolar (enqueue) y desencolar (dequeue). Se usa en colas de impresión y en la búsqueda en anchura (BFS).'],
+ [/lista enlazada|linked list/,'Una lista enlazada es una secuencia de nodos en la que cada nodo guarda un dato y una referencia al siguiente. Insertar y eliminar es rápido (O(1) si tienes el nodo), pero acceder por posición cuesta O(n).'],
+ [/arreglo|array|vector/,'Un arreglo (array) guarda elementos del mismo tipo en posiciones contiguas, a las que se accede por índice en O(1). Su tamaño suele ser fijo; insertar en medio cuesta O(n).'],
+ [/arbol binario de busqueda|\babb\b|\bbst\b/,'Un árbol binario de búsqueda (ABB) guarda los menores a la izquierda y los mayores a la derecha de cada nodo. Buscar, insertar y eliminar cuestan O(log n) si está balanceado.'],
+ [/\barbol|tree/,'Un árbol es una estructura jerárquica de nodos con una raíz y nodos hijos, sin ciclos. El árbol binario tiene como máximo dos hijos por nodo. Se recorre en preorden, inorden o postorden.'],
+ [/grafo|graph/,'Un grafo es un conjunto de vértices unidos por aristas, que pueden ser dirigidas o no y tener peso. Se representa con una matriz o una lista de adyacencia y se recorre con BFS o DFS.'],
+ [/hash/,'Una tabla hash guarda pares clave-valor y usa una función hash para calcular dónde va cada clave. En promedio, buscar e insertar cuestan O(1). Las colisiones se resuelven con encadenamiento o con direccionamiento abierto.'],
+ [/burbuja|bubble/,'El ordenamiento burbuja compara pares vecinos y los intercambia si están en desorden, repitiendo hasta que no haya cambios. Es fácil de entender, pero cuesta O(n²).'],
+ [/quicksort|quick sort/,'Quicksort elige un pivote, deja los menores a un lado y los mayores al otro, y ordena cada parte recursivamente. Cuesta O(n log n) en promedio y O(n²) en el peor caso.'],
+ [/merge ?sort|mezcla/,'Merge sort divide la lista por la mitad, ordena cada mitad recursivamente y luego las mezcla. Siempre cuesta O(n log n) y es estable, pero usa memoria extra.'],
+ [/busqueda binaria|binary search/,'La búsqueda binaria trabaja sobre una lista ordenada: compara con el elemento del medio y descarta la mitad que no sirve. Cuesta O(log n).'],
+ [/ordenamiento|ordenar|sort/,'Los algoritmos de ordenamiento acomodan datos en un orden. Los clásicos son burbuja, selección e inserción (O(n²)), y merge sort y quicksort (O(n log n)). Pregúntame por cualquiera.'],
+ [/complejidad|big ?o|notacion o/,'La notación Big O describe cómo crece el tiempo o la memoria de un algoritmo según el tamaño de la entrada. De menor a mayor costo: O(1), O(log n), O(n), O(n log n), O(n²) y O(2ⁿ).'],
+ [/herencia/,'La herencia permite que una clase hija reciba los atributos y métodos de una clase padre, y que los amplíe o los redefina. Así se reutiliza código, por ejemplo: Perro hereda de Animal.'],
+ [/polimorfismo/,'El polimorfismo es que un mismo mensaje o método se comporte distinto según el objeto que lo recibe; por ejemplo, hablar() en Perro ladra y en Gato maúlla.'],
+ [/encapsulamiento|encapsulacion/,'El encapsulamiento oculta los datos internos de un objeto y solo permite usarlos mediante sus métodos (getters y setters), lo que protege su estado.'],
+ [/\bpoo\b|orientada a objetos|\bclase|\bobjeto/,'La programación orientada a objetos (POO) organiza el código en clases, que son los moldes, y objetos, que son las instancias. Sus pilares son la abstracción, el encapsulamiento, la herencia y el polimorfismo.'],
+ [/variable/,'Una variable es un espacio con nombre que guarda un valor que puede cambiar, como edad = 20. Tiene un tipo: entero, decimal, texto, booleano…'],
+ [/funcion|metodo/,'Una función es un bloque de código con nombre que recibe parámetros, hace una tarea y puede devolver un resultado. Sirve para no repetir código. Cuando pertenece a una clase, se llama método.'],
+ [/\bbucle|ciclo|\bfor\b|while/,'Un bucle repite instrucciones: for se usa cuando sabes cuántas vueltas dará y while mientras se cumpla una condición. Cuidado con los bucles infinitos.'],
+ [/\bhtml/,'HTML es el lenguaje de marcado que define la estructura de una página web con etiquetas como <h1>, <p>, <a> o <img>.'],
+ [/\bcss/,'CSS es el lenguaje que da estilo a las páginas web: colores, tipografías, tamaños, posiciones y animaciones. Con Flexbox y Grid se arman los diseños.'],
+ [/javascript|\bjs\b/,'JavaScript es el lenguaje que da interactividad a las páginas web; también corre en servidores con Node.js. Este portafolio y yo, Rayas, estamos hechos con JavaScript 🐯.'],
+ [/python/,'Python es un lenguaje de alto nivel, fácil de leer, muy usado en ciencia de datos, inteligencia artificial, automatización y desarrollo web.'],
+ [/\bjava\b/,'Java es un lenguaje orientado a objetos y fuertemente tipado que corre en la máquina virtual de Java (JVM). Se usa en aplicaciones empresariales y Android.'],
+ [/\bsql|base de datos|database/,'Una base de datos guarda información organizada. En las relacionales se usan tablas y SQL para consultarlas: SELECT, INSERT, UPDATE y DELETE.'],
+ [/\bapi\b/,'Una API es un conjunto de reglas que permite que dos programas se comuniquen; por ejemplo, una página que pide datos a un servidor en formato JSON.'],
+ [/\bgit\b|github/,'Git es un sistema de control de versiones que guarda el historial de cambios del código (commit, branch, merge). GitHub aloja repositorios Git en la nube; este portafolio está publicado ahí.'],
+ [/compilador|interprete/,'Un compilador traduce todo el programa a código máquina antes de ejecutarlo, como en C++. Un intérprete lo traduce y ejecuta línea por línea, como en Python.']];
+const conceptReply=q=>{const c=CONCEPTS.find(([re])=>re.test(q));return c?`🧠 ${c[1]}`:null};
+
+/* ---------- Personalidad ---------- */
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const JOKES=['¿Por qué el programador confunde Halloween con Navidad? Porque OCT 31 = DEC 25 🎃🎄','—¿Cuántos programadores hacen falta para cambiar un foco? —Ninguno, es un problema de hardware 💡','Un SQL entra a un bar, se acerca a dos mesas y pregunta: “¿Me puedo unir (JOIN)?” 🍻','Hay 10 tipos de personas: las que entienden binario y las que no 🤓','Mi código funciona y no sé por qué; ayer no funcionaba y tampoco sabía por qué 🐯','¿Por qué los tigres no juegan a las cartas en la selva? ¡Porque hay demasiados guepardos tramposos! 🐆'];
+const FACTS=['El primer “bug” de la historia fue una polilla real atrapada en una computadora Harvard Mark II, en 1947 🦋','Los tigres tienen rayas también en la piel, no solo en el pelaje, y no hay dos tigres con las mismas rayas 🐯','El nombre de Python viene del grupo de comedia Monty Python, no de la serpiente 🐍','La búsqueda binaria encuentra un dato entre un millón en unos 20 pasos como máximo 🔎','JavaScript se creó en solo 10 días, en 1995 ⚡'];
+const CHEERS=['¡Tú puedes! Cada línea de código que escribes hoy es experiencia para mañana 💪🐯','Los errores no son fracasos: son pistas para que tu programa funcione 🔍','Paso a paso: divide el problema en partes pequeñas, igual que un buen algoritmo 🧩','Rugido de ánimo: ¡GRRR! Ahora sí, a seguir estudiando 🐯'];
 function chatReply(question){
  const q=norm(question),has=re=>re.test(q);
  const name=ownerName(),skills=getSkills();
- if(has(/^(hola|buenas|buenos dias|buenas tardes|buenas noches|hey|que tal|saludos)\b/))return `¡Hola! Soy el asistente del portafolio de ${name}. Pregúntame por sus habilidades, por los trabajos de una semana o por su avance en cada curso.`;
- if(has(/\b(gracias|genial|excelente|chevere|bacan)\b/))return '¡Con gusto! Si quieres saber algo más del portafolio, aquí estoy.';
- if(has(/\b(adios|chau|chao|bye|hasta luego)\b/))return '¡Hasta luego! Gracias por visitar el portafolio.';
- if(has(/\b(que hora|hora es|que fecha|que dia)\b/)){const now=new Date();return `Hoy es ${now.toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} y son las ${now.toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'})}.`}
- if(has(/\b(quien eres|que eres|eres un bot|eres una ia)\b/))return 'Soy un asistente integrado en este portafolio. Respondo con la información que hay aquí: perfil, cursos, trabajos por semana, avance y habilidades.';
- /* Las preguntas de “cómo hacer algo” van primero para no confundirlas con preguntas sobre el contenido */
+ /* La matemática va primero para que “¿cuánto es 5 por 3?” no se confunda con una pregunta de avance */
+ const math=mathReply(question);if(math)return math;
+ if(has(/^(hola|holi|buenas|buenos dias|buenas tardes|buenas noches|hey|que tal|saludos|que onda)\b/))return `¡Grrr, hola! 🐯 Soy Rayas, el tigre del portafolio de ${name}. Puedo contarte de qué tratan sus trabajos, resolver operaciones, explicarte conceptos de programación o contarte un chiste. ¿Qué quieres?`;
+ if(has(/\b(gracias|genial|excelente|chevere|bacan|buena|grande|crack)\b/))return '¡De nada! 🐯 Si quieres saber algo más, aquí estoy con las garras listas.';
+ if(has(/\b(adios|chau|chao|bye|hasta luego|nos vemos)\b/))return '¡Hasta luego! 🐾 Gracias por visitar el portafolio.';
+ if(has(/\b(que hora|hora es|que fecha|que dia)\b/)){const now=new Date();return `🕒 Hoy es ${now.toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} y son las ${now.toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'})}.`}
+ if(has(/\b(quien eres|que eres|como te llamas|tu nombre|eres un bot|eres una ia|que puedes hacer|que sabes hacer|tus habilidades)\b/))return `Soy Rayas 🐯, el tigre asistente de este portafolio. Mis habilidades:\n📚 Leer los trabajos publicados y decirte de qué tratan\n🧮 Resolver operaciones, porcentajes, raíces y ecuaciones (como “2x + 3 = 11”)\n🧠 Explicar conceptos de programación y estructuras de datos\n📈 Contarte el avance y las habilidades de ${name}\n😄 Contar chistes y datos curiosos`;
+ if(has(/chiste|broma|hazme reir/))return pick(JOKES);
+ if(has(/dato curioso|curiosidad|sabias que/))return `💡 ${pick(FACTS)}`;
+ if(has(/motiva|animo|frase|consejo/))return pick(CHEERS);
+ if(has(/\b(dado|lanza un dado)\b/))return `🎲 Salió ${1+Math.floor(Math.random()*6)}.`;
+ if(has(/\b(moneda|cara o sello|cara o cruz)\b/))return `🪙 ¡${Math.random()<.5?'Cara':'Sello'}!`;
+ if(has(/\b(ruge|rugido|grr)\b/))return '¡GRRRRRR! 🐯 ¿Te asusté? Tranquilo, solo muerdo bugs.';
+ /* Las preguntas de “cómo hacer algo” en el portafolio van antes para no confundirlas con preguntas sobre el contenido */
  if(has(/\b(como|donde|puedo|se puede)\b/)){const h=HOWTO.find(([re])=>re.test(q));if(h)return h[1]}
+ const asksDefinition=/(que es|que son|que significa|define|definicion|explica|para que sirve|como funciona|en que consiste|concepto)/;
+ if(has(asksDefinition)){
+  const subject=q.replace(/.*?(que es|que son|que significa|define|definicion de|definicion|explicame|explica|para que sirve|como funciona|en que consiste|concepto de)\s*/,'');
+  const c=conceptReply(subject);
+  if(c){const doc=searchDocs(subject);return doc?`${c}\n\n${doc}`:c}
+ }
  const wm=q.match(/semana\s*(\d{1,2})/);
  if(wm)return weekReply(q,+wm[1]);
+ if(has(/(de que tratan|que trabajos|sus trabajos|que ha hecho|que hizo|tareas|entregas publicadas|lista de trabajos)/))return worksOverview();
+ if(has(/trabajo|tarea|documento|archivo|informe|pdf|segun|dice|menciona|leiste|lee/)){const d=searchDocs(question);if(d)return d}
  if(has(/avance|progreso|cuant|entrega|complet|va en/))return `${COURSES.map((n,i)=>`${n}: ${doneWeeks(i)} de 16 semanas con trabajos`).join('. ')}.`;
  const found=skills.filter(s=>s.name.split(/\s+y\s+|[(),]/).map(t=>norm(t).trim()).filter(t=>t.length>1).some(t=>new RegExp(`(^|[^a-z0-9+#])${reEsc(t)}($|[^a-z0-9+#])`).test(q)));
  if(found.length)return `${found.map(s=>`${s.name}: nivel ${LEVELS[skillLevel(s)].toLocaleLowerCase()} (${skillLevel(s)} de 5)`).join('. ')}.`;
@@ -365,9 +591,11 @@ function chatReply(question){
  }
  if(has(/contacto|correo|email|telefono|whatsapp|contratar|linkedin/))return 'Este portafolio todavía no tiene datos de contacto publicados.';
  if(has(/quien|sobre (el|david|piero)|carrera|estudia|universidad|presenta|perfil|cursos|upla/))return `${name} es estudiante de ${CAREER} en la Universidad Peruana Los Andes. Aquí publica sus trabajos de ${listEs(COURSES)}, organizados por unidad y semana.`;
+ const doc=searchDocs(question);if(doc)return doc;
+ const concept=conceptReply(q);if(concept)return concept;
  const h=HOWTO.find(([re])=>re.test(q));if(h)return h[1];
- if(has(/portafolio|sistema|funciona|funcion|ayuda/))return 'Este portafolio reúne cursos, trabajos por semana, avance y habilidades. Puedes preguntarme, por ejemplo: “¿qué sabe hacer?”, “¿cómo va su avance?” o “¿qué hizo en la semana 3?”.';
- return 'No encontré eso en el portafolio. Puedo contarte quién es, qué habilidades tiene, cómo va su avance o qué hizo en una semana concreta (por ejemplo, “semana 2 de Algoritmo”).';
+ if(has(/portafolio|sistema|funciona|funcion|ayuda/))return 'Este portafolio reúne cursos, trabajos por semana, avance y habilidades. Puedes preguntarme, por ejemplo: “¿de qué tratan sus trabajos?”, “¿qué es una cola?”, “¿cuánto es 25% de 80?” o “¿qué hizo en la semana 3?”.';
+ return 'Mmm, eso no lo encontré ni en los trabajos ni en lo que sé 🐯. Puedo contarte de qué tratan sus trabajos, resolver operaciones y ecuaciones, explicarte conceptos de programación (pilas, colas, árboles, POO…) o contarte un chiste.';
 }
 const doneWeeks=c=>{let n=0;for(let u=0;u<4;u++)for(let w=0;w<4;w++){const slot=`${c}-${u}-${w}`;if(slotImgs(slot).length||S.weekDetails[slot]?.title||S.weekDetails[slot]?.link)n++}return n};
 const initials=n=>n.split(/[ ,]+/).filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
@@ -382,7 +610,7 @@ async function addFiles(slot,files){
   try{
    /* Los GIF se guardan sin recomprimir para no perder la animación */
    const blob=kind==='image'&&file.type!=='image/gif'?await shrink(file):file;
-   const rec={slot,name:file.name,kind,blob};
+   const rec={slot,name:file.name,kind,blob,text:kind==='image'?'':await extractText(file,file.name)};
    rec.id=await tx('imgs','readwrite',s=>s.add(rec));
    S.imgs.push({...rec,url:URL.createObjectURL(blob)});
   }catch(error){
@@ -508,9 +736,35 @@ function askChat(question){
  chatMessages.querySelector('.chat-suggest')?.remove();
  addChatMessage(question,'user');
  const typing=addChatMessage('','typing');typing.innerHTML='<span></span><span></span><span></span>';typing.setAttribute('aria-label','Escribiendo');
- setTimeout(()=>{typing.className='chat-message';typing.removeAttribute('aria-label');typing.textContent=chatReply(question);chatMessages.scrollTop=chatMessages.scrollHeight},450);
+ chatPanel.classList.add('talking');clearTimeout(askChat.t);
+ setTimeout(()=>{
+  let answer;try{answer=chatReply(question)}catch(error){console.error(error);answer='Uy, se me enredaron las rayas 🐯. Intenta preguntarlo de otra forma.'}
+  typing.className='chat-message';typing.removeAttribute('aria-label');typing.textContent=answer;chatMessages.scrollTop=chatMessages.scrollHeight;
+  askChat.t=setTimeout(()=>chatPanel.classList.remove('talking'),Math.min(2400,400+answer.length*8));
+ },500);
 }
-chatMessages.addEventListener('click',e=>{const q=e.target.closest('[data-q]')?.dataset.q;if(q)askChat(q)});
+/* El tigre se dibuja en el botón y en la cabecera del chat; sus pupilas siguen al puntero */
+const TIGER=`<svg class="tiger" viewBox="0 0 64 64" aria-hidden="true">
+ <g class="t-ear t-ear-l"><path d="M9 25 7 6l18 8z" fill="#f28c28"/><path d="M12 20l-1-9 8 4z" fill="#ffe0bd"/></g>
+ <g class="t-ear t-ear-r"><path d="M55 25l2-19-18 8z" fill="#f28c28"/><path d="M52 20l1-9-8 4z" fill="#ffe0bd"/></g>
+ <ellipse cx="32" cy="36" rx="25" ry="22" fill="#f7a23b"/>
+ <path d="M32 14v8M25.5 15l2.2 6.5M38.5 15l-2.2 6.5M7.5 33h7M8.5 40l6.5-2.5M56.5 33h-7M55.5 40l-6.5-2.5" stroke="#2b1607" stroke-width="2.6" stroke-linecap="round"/>
+ <ellipse cx="25" cy="45" rx="9.5" ry="7.5" fill="#fff5e8"/><ellipse cx="39" cy="45" rx="9.5" ry="7.5" fill="#fff5e8"/>
+ <g class="t-eyes"><ellipse cx="23" cy="31" rx="4.8" ry="5.2" fill="#fff"/><ellipse cx="41" cy="31" rx="4.8" ry="5.2" fill="#fff"/>
+  <g class="t-pupils"><circle cx="23" cy="31.5" r="2.7" fill="#1d2b1c"/><circle cx="41" cy="31.5" r="2.7" fill="#1d2b1c"/><circle cx="24" cy="30.3" r=".9" fill="#fff"/><circle cx="42" cy="30.3" r=".9" fill="#fff"/></g></g>
+ <path d="M28.5 39.5h7L32 43.5z" fill="#e04b5f"/>
+ <path d="M32 43.5v2M32 45.5q-3 3-6.5 1.2M32 45.5q3 3 6.5 1.2" stroke="#2b1607" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+ <ellipse class="t-mouth" cx="32" cy="48.6" rx="3" ry=".9" fill="#7a1b2a"/>
+</svg>`;
+document.querySelectorAll('[data-tiger]').forEach(el=>el.outerHTML=TIGER);
+document.addEventListener('pointermove',e=>{
+ for(const t of document.querySelectorAll('.tiger')){
+  const r=t.getBoundingClientRect();if(!r.width)continue;
+  const dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),d=Math.hypot(dx,dy)||1,k=Math.min(1,d/160)*1.7;
+  t.querySelector('.t-pupils').style.transform=`translate(${dx/d*k}px,${dy/d*k}px)`;
+ }
+},{passive:true});
+chatPanel.addEventListener('click',e=>{const q=e.target.closest('[data-q]')?.dataset.q;if(q){askChat(q);$('#chat-input').focus()}});
 chatToggle.addEventListener('click',()=>setChatOpen(chatPanel.hidden));
 $('#chat-close').addEventListener('click',()=>setChatOpen(false));
 $('#chat-form').addEventListener('submit',e=>{
@@ -580,7 +834,7 @@ app.addEventListener('pointerleave',()=>{resetTilt();const box=$('.ph .box');if(
 $('#lb').onclick=()=>$('#lb').classList.remove('on');
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){$('#lb').classList.remove('on');if(!chatPanel.hidden)setChatOpen(false)}});
 
-async function start(publicMode=false){await load(publicMode);view(publicMode)}
+async function start(publicMode=false){await load(publicMode);view(publicMode);if(!S.pub)backfillText()}
 const adminRequested=new URLSearchParams(location.search).has('admin');
 if(adminRequested){sessionStorage.getItem('ok')?start(false):authView()}else start(true);
 </script>
