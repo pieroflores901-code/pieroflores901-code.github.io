@@ -41,13 +41,15 @@
    "slot": "0-1-0",
    "name": "Manual SQL.pdf",
    "kind": "pdf",
-   "path": "data/files/0-1-0/2-Manual-SQL.pdf"
+   "path": "data/files/0-1-0/2-Manual-SQL.pdf",
+   "text": "ACTIVIDAD – SEMANA 05 \nInstalación de SQL Server \nE ste manual explica cómo instalar el motor de base de datos SQL Server (edición Express, \ngratuita) y la herramienta SQL Server Management Studio (SSMS) para administrarlo. \n1.1 Requisitos previos \n• Windows 10/11 (64 bits) o Windows Server compatible. \n• Mínimo 6 GB de espacio libre en disco y 4 GB de RAM recomendados. \n• Permisos de administrador en el equipo. \n• Conexión a internet para descargar los instaladores. \n1.2 Descargar SQL Server Express \n1. Entra a la página oficial de descargas: microsoft.com/es - es/sql - server/sql - server - \ndownloads \n2. Busca la edición Express y haz clic en Descargar ahora . \n3. Guarda el archivo (SQL2022 - SSEI - Expr.exe o similar) y ejecútalo como administrador. \n1.3 Instalar el motor de base de datos \n1. En el instalador elige el tipo de instalación: Básica (recomendada para clases; usa la \nconfiguración por defecto). \n2. Acepta los Términos de licencia . \n3. Deja la ubicación de instalación por defecto y haz clic en Instalar. \n4. Espera a que termine la descarga e instalación (puede tardar varios minutos). \n5. Al finalizar verás un resumen con el nombre de instancia (SQLEXPRESS) y la cadena \nde conexión . Anótalos o toma captura. \nNota: Si usaste la instalación Básica, la autenticación por defecto es la de Windows y el \nservidor se llama localhost \\ SQLEXPRESS. \n1.4 Instalar SQL Server Management Studio (SSMS) \n1. En la pantalla final del instalador, haz clic en Instalar SSMS . También puedes buscar \n“Download SSMS” en la web de Microsoft. \n2. Descarga y ejecuta el instalador de SSMS, luego presiona Instalar. \n3. Cuando termine, reinicia el equipo si el instalador lo solicita. \n1.5 Conectarse al servidor desde SSMS \n1. Abre SQL Server Management Studio desde el menú Inicio. \n2. En la ventana Conectar, completa los datos: \n• Nombre del servidor: localhost \\ SQLEXPRESS \n• Authentication: Autenticación de Windows \n• Cifrar: Obligatorio \n• Certificado de servidor de confianza: marcado (necesario en instalaciones locales, de \nlo contrario aparece un error de certificado). \n3. Haz clic en Conectar . \n4. Si todo está bien, el Explorador de objetos mostrará tu servidor con sus carpetas (Bases \nde datos, Seguridad, etc.). \n1.6 Verificar la instalación \n1. Haz clic derecho sobre el servidor y elige Nueva consulta . \n2. Ejecuta la siguiente instrucción con el botón Ejecutar (o F5): \nSELECT @@VERSION; \n3. Debe mostrar la versión de SQL Server instalada. Luego crea una base de datos de \nprueba: \nCREATE DATABASE PruebaSemana05; \nGO \nUSE PruebaSemana05; \n1.7 Problemas frecuentes \n• Error de certificado / “cadena de certificados emitida por entidad no de \nconfianza”: marca la casilla “Certificado de servidor de confianza”. \n• No se encuentra el servidor: abre “Administrador de configuración de SQL Server” y \nverifica que el servicio SQL Server (SQLEXPRESS) esté en ejecución. \n• Falta espacio o permisos: libera disco y ejecuta el instalador como administrador."
   },
   {
    "slot": "0-1-0",
    "name": "Manual Azure.pdf",
    "kind": "pdf",
-   "path": "data/files/0-1-0/3-Manual-Azure.pdf"
+   "path": "data/files/0-1-0/3-Manual-Azure.pdf",
+   "text": "ACTIVIDAD – SEMANA 05 \nMicrosoft Azur e \nM ANUAL : Instalación y configuración inicial de Microsoft Azure \nMicrosoft Azure es una plataforma en la nube, por lo que no se instala en la computadora como \nun programa: se crea una cuenta y se accede desde el navegador a su portal. Este manual \nexplica cómo crear la cuenta, ingresar al portal de Azure y dejar listo un grupo de recursos para \ntrabajar. \n2.1 Requisitos previos \n• Un navegador web actualizado (Edge, Chrome o Firefox). \n• Una cuenta de correo (Microsoft, Outlook o Gmail) y un número de teléfono para la \nverificación. \n• Una tarjeta de crédito o débito si usas la cuenta gratuita estándar, o tu correo \ninstitucional si usas Azure for Students (normalmente no pide tarjeta). \n• Conexión a internet. \n2.2 Crear la cuenta de Azure \n1. Ingresa a azure.microsoft.com/free (o a azure.microsoft.com/free/students si eres \nestudiante). \n2. Haz clic en Empezar gratis e inicia sesión con tu cuenta Microsoft (o crea una nueva). \n3. Completa tus datos: país o región, nombre, apellidos, correo y teléfono. Verifica el \nteléfono con el código que llega por mensaje de texto. \n4. Acepta el contrato de suscripción y finaliza el registro. \nFigura 1. Registro de la cuenta de Azure. \nNota: Las condiciones del crédito gratuito pueden cambiar; revísalas en la página oficial al \nregistrarte. \n2.3 Ingresar al Portal de Azure \n1. Entra a portal.azure.com con la cuenta que creaste. \n2. En la página de inicio verás los servicios de Azure, el buscador y los recursos recientes. \nFigura 2. Página de inicio del Portal de Azure. \n2.4 Verificar la suscripción \n1. En el buscador del portal escribe Suscripciones y ábrelo. \n2. Comprueba que tu suscripción aparezca con el estado Activa y revisa el crédito \ndisponible. \nFigura 3. Suscripción activa. \n2.5 Crear un grupo de recursos \nUn grupo de recursos es un contenedor donde se organizan los servicios de Azure. \n1. En el buscador escribe Grupos de recursos y entra. \n2. Haz clic en Crear , elige tu suscripción, escribe un nombre (por ejemplo, rg - semana05) y \nselecciona una región. \n3. Pulsa Revisar y crear y luego Crear . \nFigura 4. Creación del grupo de recursos. \n4. Verifica que el grupo aparezca en la lista de grupos de recursos. \nFigura 5. Grupo de recursos creado. \n2.6 Recomendaciones \n• Si ya no usarás los recursos, elimina el grupo de recursos para evitar cargos."
   },
   {
    "slot": "0-1-0",
@@ -92,36 +94,6 @@
    "path": "data/files/1-1-1/13-Modificar-Pila-3.png"
   },
   {
-   "slot": "1-1-0",
-   "name": "zip 1.zip",
-   "kind": "file",
-   "path": "data/files/1-1-0/14-zip-1.zip"
-  },
-  {
-   "slot": "1-1-0",
-   "name": "Infografía Java_ Eliminar elemento paso a paso.png",
-   "kind": "image",
-   "path": "data/files/1-1-0/15-Infografia-Java_-Eliminar-elemento-paso-a-paso.png"
-  },
-  {
-   "slot": "1-1-2",
-   "name": "Infografía Java_ Eliminar elemento paso a paso.png",
-   "kind": "image",
-   "path": "data/files/1-1-2/16-Infografia-Java_-Eliminar-elemento-paso-a-paso.png"
-  },
-  {
-   "slot": "1-1-2",
-   "name": "insertar elemento 3.png",
-   "kind": "image",
-   "path": "data/files/1-1-2/17-insertar-elemento-3.png"
-  },
-  {
-   "slot": "1-1-2",
-   "name": "modificar elemento 2.png",
-   "kind": "image",
-   "path": "data/files/1-1-2/18-modificar-elemento-2.png"
-  },
-  {
    "slot": "1-1-1",
    "name": "Metodo 6.png",
    "kind": "image",
@@ -156,6 +128,558 @@
    "name": "Captura de pantalla 2026-10-29 093031.png",
    "kind": "image",
    "path": "data/files/0-1-1/24-Captura-de-pantalla-2026-10-29-093031.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad_1_Alumno.zip",
+   "kind": "file",
+   "path": "data/files/1-1-0/25-Actividad_1_Alumno.zip"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad1_Metodo01_Pila_Stack.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/26-Actividad1_Metodo01_Pila_Stack.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad1_Metodo02_Crear_Pila.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/27-Actividad1_Metodo02_Crear_Pila.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad1_Metodo03_Ingresar_elementos_push.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/28-Actividad1_Metodo03_Ingresar_elementos_push.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad1_Metodo04_Eliminar_elemento_pop.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/29-Actividad1_Metodo04_Eliminar_elemento_pop.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad1_Metodo05_Vaciar_la_pila.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/30-Actividad1_Metodo05_Vaciar_la_pila.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad1_Metodo06_Modificar_elemento.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/31-Actividad1_Metodo06_Modificar_elemento.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad1_Metodo07_Insertar_elemento.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/32-Actividad1_Metodo07_Insertar_elemento.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad1_Metodo08_Suma_de_elementos.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/33-Actividad1_Metodo08_Suma_de_elementos.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad1_Metodo09_Mayor_menor_y_promedio.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/34-Actividad1_Metodo09_Mayor_menor_y_promedio.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad1_Metodo10_Mostrar_elementos.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/35-Actividad1_Metodo10_Mostrar_elementos.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad_2_Sistema_Academico.zip",
+   "kind": "file",
+   "path": "data/files/1-1-0/36-Actividad_2_Sistema_Academico.zip"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad2_Metodo01_Registrar_estudiante.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/37-Actividad2_Metodo01_Registrar_estudiante.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad2_Metodo02_Listar_estudiantes.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/38-Actividad2_Metodo02_Listar_estudiantes.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad2_Metodo03_Buscar_estudiante.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/39-Actividad2_Metodo03_Buscar_estudiante.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad2_Metodo05_Eliminar_estudiante.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/40-Actividad2_Metodo05_Eliminar_estudiante.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad2_Metodo06_Registrar_curso.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/41-Actividad2_Metodo06_Registrar_curso.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad2_Metodo07_Listar_cursos.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/42-Actividad2_Metodo07_Listar_cursos.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad2_Metodo08_Matricular_estudiante.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/43-Actividad2_Metodo08_Matricular_estudiante.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad2_Metodo09_Listar_matriculas.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/44-Actividad2_Metodo09_Listar_matriculas.png"
+  },
+  {
+   "slot": "1-1-0",
+   "name": "Actividad2_Metodo10_Reporte_estudiantes_por_curso.png",
+   "kind": "image",
+   "path": "data/files/1-1-0/45-Actividad2_Metodo10_Reporte_estudiantes_por_curso.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "SistemaInventarioComputadoras.zip",
+   "kind": "file",
+   "path": "data/files/1-1-1/46-SistemaInventarioComputadoras.zip"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad2_Metodo01_Registrar_computadora.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/47-Actividad2_Metodo01_Registrar_computadora.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad2_Metodo02_Listar_computadoras.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/48-Actividad2_Metodo02_Listar_computadoras.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad2_Metodo03_Buscar_computadora.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/49-Actividad2_Metodo03_Buscar_computadora.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad2_Metodo05_Eliminar_computadora.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/50-Actividad2_Metodo05_Eliminar_computadora.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad2_Metodo06_Registrar_accesorio.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/51-Actividad2_Metodo06_Registrar_accesorio.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad2_Metodo07_Listar_accesorios.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/52-Actividad2_Metodo07_Listar_accesorios.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad2_Metodo08_Buscar_accesorio.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/53-Actividad2_Metodo08_Buscar_accesorio.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad2_Metodo09_Modificar_accesorio.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/54-Actividad2_Metodo09_Modificar_accesorio.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad2_Metodo10_Reporte_de_inventario.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/55-Actividad2_Metodo10_Reporte_de_inventario.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad3_Metodos_Historial_Java.zip",
+   "kind": "file",
+   "path": "data/files/1-1-1/56-Actividad3_Metodos_Historial_Java.zip"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad3_Metodo01_ejecutarNuevaAccion.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/59-Actividad3_Metodo01_ejecutarNuevaAccion.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad3_Metodo02_deshacerAccion.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/60-Actividad3_Metodo02_deshacerAccion.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad3_Metodo03_rehacerAccion.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/61-Actividad3_Metodo03_rehacerAccion.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad3_Metodo04_mostrarEstadoHistorial.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/62-Actividad3_Metodo04_mostrarEstadoHistorial.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad3_Metodo05_buscarAccionEnHistorial.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/63-Actividad3_Metodo05_buscarAccionEnHistorial.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad3_Metodo06_invertirPilaAcciones.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/64-Actividad3_Metodo06_invertirPilaAcciones.png"
+  },
+  {
+   "slot": "1-1-1",
+   "name": "Actividad3_Metodo07_exportarHistorialResumen.png",
+   "kind": "image",
+   "path": "data/files/1-1-1/65-Actividad3_Metodo07_exportarHistorialResumen.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "Actividad01_Cola_Alumnos_Completa (1).zip",
+   "kind": "file",
+   "path": "data/files/1-1-2/66-Actividad01_Cola_Alumnos_Completa-1-.zip"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "ColaAlumnos_Metodo01_Insertar_alumno.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/67-ColaAlumnos_Metodo01_Insertar_alumno.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "ColaAlumnos_Metodo02_Mostrar_alumnos.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/68-ColaAlumnos_Metodo02_Mostrar_alumnos.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "ColaAlumnos_Metodo03_Eliminar_alumno.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/69-ColaAlumnos_Metodo03_Eliminar_alumno.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "ColaAlumnos_Metodo04_Consultar_el_primero.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/70-ColaAlumnos_Metodo04_Consultar_el_primero.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "ColaAlumnos_Metodo05_Verificar_si_esta_vacia_y_llena.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/71-ColaAlumnos_Metodo05_Verificar_si_esta_vacia_y_llena.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "ColaAlumnos_Metodo06_Buscar_alumno.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/72-ColaAlumnos_Metodo06_Buscar_alumno.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "ColaAlumnos_Metodo07_Calcular_promedio_de_notas.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/73-ColaAlumnos_Metodo07_Calcular_promedio_de_notas.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "ColaAlumnos_Metodo08_Contar_alumnos.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/74-ColaAlumnos_Metodo08_Contar_alumnos.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "ColaAlumnos_Metodo09_Invertir_cola.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/75-ColaAlumnos_Metodo09_Invertir_cola.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "ColaAlumnos_Metodo10_Vaciar_cola.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/76-ColaAlumnos_Metodo10_Vaciar_cola.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "Actividad02_Turnos_Bancarios.zip",
+   "kind": "file",
+   "path": "data/files/1-1-2/77-Actividad02_Turnos_Bancarios.zip"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "TurnosBancarios_Metodo01_Registrar_cliente.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/78-TurnosBancarios_Metodo01_Registrar_cliente.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "TurnosBancarios_Metodo02_Atender_cliente.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/79-TurnosBancarios_Metodo02_Atender_cliente.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "TurnosBancarios_Metodo03_Consultar_siguiente_turno.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/80-TurnosBancarios_Metodo03_Consultar_siguiente_turno.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "TurnosBancarios_Metodo04_Mostrar_cola_de_turnos.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/81-TurnosBancarios_Metodo04_Mostrar_cola_de_turnos.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "TurnosBancarios_Metodo05_Buscar_cliente_por_ticket_o_DNI.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/82-TurnosBancarios_Metodo05_Buscar_cliente_por_ticket_o_DNI.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "TurnosBancarios_Metodo06_Cancelar_turno.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/83-TurnosBancarios_Metodo06_Cancelar_turno.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "Actividad03_ColaDinamica_DAO.zip",
+   "kind": "file",
+   "path": "data/files/1-1-2/84-Actividad03_ColaDinamica_DAO.zip"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "PedidosCocina_Metodo01_Registrar_pedido.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/85-PedidosCocina_Metodo01_Registrar_pedido.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "PedidosCocina_Metodo02_Atender_pedido.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/86-PedidosCocina_Metodo02_Atender_pedido.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "PedidosCocina_Metodo03_Consultar_siguiente_pedido.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/87-PedidosCocina_Metodo03_Consultar_siguiente_pedido.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "PedidosCocina_Metodo04_Listar_pedidos_pendientes.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/88-PedidosCocina_Metodo04_Listar_pedidos_pendientes.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "PedidosCocina_Metodo05_Verificar_si_esta_vacia.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/89-PedidosCocina_Metodo05_Verificar_si_esta_vacia.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "PedidosCocina_Metodo06_Buscar_pedido_por_codigo.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/90-PedidosCocina_Metodo06_Buscar_pedido_por_codigo.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "PedidosCocina_Metodo07_Calcular_total_acumulado.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/91-PedidosCocina_Metodo07_Calcular_total_acumulado.png"
+  },
+  {
+   "slot": "1-1-2",
+   "name": "PedidosCocina_Metodo08_Cancelar_pedido_por_codigo.png",
+   "kind": "image",
+   "path": "data/files/1-1-2/92-PedidosCocina_Metodo08_Cancelar_pedido_por_codigo.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "Actividad1_SistemaArchivosEmpresa.zip",
+   "kind": "file",
+   "path": "data/files/1-1-3/93-Actividad1_SistemaArchivosEmpresa.zip"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ArchivosEmpresa_Metodo01_Crear_estructura_de_empresa.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/94-ArchivosEmpresa_Metodo01_Crear_estructura_de_empresa.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ArchivosEmpresa_Metodo02_Registrar_empleado.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/95-ArchivosEmpresa_Metodo02_Registrar_empleado.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ArchivosEmpresa_Metodo03_Listar_empleados.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/96-ArchivosEmpresa_Metodo03_Listar_empleados.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ArchivosEmpresa_Metodo04_Buscar_empleado_por_DNI.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/97-ArchivosEmpresa_Metodo04_Buscar_empleado_por_DNI.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ArchivosEmpresa_Metodo05_Actualizar_empleado.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/98-ArchivosEmpresa_Metodo05_Actualizar_empleado.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ArchivosEmpresa_Metodo06_Eliminar_empleado.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/99-ArchivosEmpresa_Metodo06_Eliminar_empleado.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ArchivosEmpresa_Metodo07_Generar_reporte_de_empleados.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/100-ArchivosEmpresa_Metodo07_Generar_reporte_de_empleados.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ArchivosEmpresa_Metodo08_Listar_contenido_de_carpetas.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/101-ArchivosEmpresa_Metodo08_Listar_contenido_de_carpetas.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "Proyecto2_Busqueda_Productos_Inventario.zip",
+   "kind": "file",
+   "path": "data/files/1-1-3/102-Proyecto2_Busqueda_Productos_Inventario.zip"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ProductosInventario_Metodo01_Registrar_producto.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/103-ProductosInventario_Metodo01_Registrar_producto.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ProductosInventario_Metodo02_Listar_productos.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/104-ProductosInventario_Metodo02_Listar_productos.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ProductosInventario_Metodo03_Buscar_producto_por_codigo.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/105-ProductosInventario_Metodo03_Buscar_producto_por_codigo.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ProductosInventario_Metodo04_Calcular_valor_total_del_inventario.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/106-ProductosInventario_Metodo04_Calcular_valor_total_del_inventario.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ProductosInventario_Metodo05_Contar_unidades_en_inventario.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/107-ProductosInventario_Metodo05_Contar_unidades_en_inventario.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ProductosInventario_Metodo06_Listar_productos_agotados.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/108-ProductosInventario_Metodo06_Listar_productos_agotados.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ProductosInventario_Metodo07_Generar_reporte_de_bajo_stock.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/109-ProductosInventario_Metodo07_Generar_reporte_de_bajo_stock.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "Proyecto3_Gestion_Expedientes.zip",
+   "kind": "file",
+   "path": "data/files/1-1-3/110-Proyecto3_Gestion_Expedientes.zip"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ExpedientesAcademicos_Extra_Estructura_del_Arbol_ejemplo_visual.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/111-ExpedientesAcademicos_Extra_Estructura_del_Arbol_ejemplo_visual.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ExpedientesAcademicos_Metodo01_Registrar_expediente.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/112-ExpedientesAcademicos_Metodo01_Registrar_expediente.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ExpedientesAcademicos_Metodo02_Buscar_expediente.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/113-ExpedientesAcademicos_Metodo02_Buscar_expediente.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ExpedientesAcademicos_Metodo03_Listar_expedientes.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/114-ExpedientesAcademicos_Metodo03_Listar_expedientes.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ExpedientesAcademicos_Metodo04_Contar_expedientes.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/115-ExpedientesAcademicos_Metodo04_Contar_expedientes.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ExpedientesAcademicos_Metodo05_Calcular_altura_del_arbol.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/116-ExpedientesAcademicos_Metodo05_Calcular_altura_del_arbol.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ExpedientesAcademicos_Metodo06_Contar_por_nombre_o_estado.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/117-ExpedientesAcademicos_Metodo06_Contar_por_nombre_o_estado.png"
+  },
+  {
+   "slot": "1-1-3",
+   "name": "ExpedientesAcademicos_Metodo07_Validar_registro_de_expediente.png",
+   "kind": "image",
+   "path": "data/files/1-1-3/118-ExpedientesAcademicos_Metodo07_Validar_registro_de_expediente.png"
   }
  ]
 }
