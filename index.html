@@ -304,23 +304,27 @@ async function publish(token){
   const b=await api('/git/blobs',{method:'POST',body:JSON.stringify({content:toB64(bytes),encoding:'base64'})});
   entries.push({path,mode:'100644',type:'blob',sha:b.sha})};
  toast('Leyendo el texto de los trabajos…');await backfillText();
- const files=[];let n=0;
+ const files=[],failed=[];let n=0;
  for(const f of S.imgs){
   toast(`Subiendo ${++n} de ${S.imgs.length}…`);
   const path=`data/files/${f.slot}/${f.id}-${safeName(f.name)}`;
-  await put(path,f.blob);files.push({slot:f.slot,name:f.name,kind:f.kind,path,...(f.text?{text:f.text}:{})});
+  /* Un archivo que el navegador ya no puede leer se salta para no frenar el resto de la publicación */
+  try{await put(path,f.blob)}
+  catch(error){if(['NotFoundError','NotReadableError'].includes(error?.name)){console.warn(`No se pudo leer ${f.name}`,error);keep.delete(path);failed.push(f.name);continue}throw error}
+  files.push({slot:f.slot,name:f.name,kind:f.kind,path,...(f.text?{text:f.text}:{})});
  }
  let photo=null;
  if(S.photoBlob){const bytes=new Uint8Array(await S.photoBlob.arrayBuffer());photo=`data/photo-${(await gitSha(bytes)).slice(0,10)}.jpg`;await put(photo,S.photoBlob)}
  await put('data/portfolio.json',JSON.stringify({name:lsGet('user',{name:OWNER}).name,photo,skills:getSkills(),weekDetails:S.weekDetails,files},null,1));
  await put('.nojekyll','');
  for(const p of have.keys())if(p.startsWith('data/')&&!keep.has(p))entries.push({path:p,mode:'100644',type:'blob',sha:null});
- if(!entries.length)return toast('Todo ya estaba publicado');
+ const failNote=failed.length?` No se pudieron leer ${failed.length} archivo(s): ${failed.slice(0,3).join(', ')}${failed.length>3?'…':''}. Bórralos con × y vuelve a subirlos.`:'';
+ if(!entries.length)return toast(`Todo ya estaba publicado.${failNote}`,failed.length?12000:2600);
  toast('Guardando en el repositorio…');
  const nt=await api('/git/trees',{method:'POST',body:JSON.stringify({base_tree:head.tree.sha,tree:entries})});
  const c=await api('/git/commits',{method:'POST',body:JSON.stringify({message:'Publicar contenido del portafolio',tree:nt.sha,parents:[ref.object.sha]})});
  await api(`/git/refs/heads/${BRANCH}`,{method:'PATCH',body:JSON.stringify({sha:c.sha})});
- toast('¡Publicado! En 1 o 2 minutos todos verán los cambios en el link.');
+ toast(`¡Publicado! En 1 o 2 minutos todos verán los cambios en el link.${failNote}`,failed.length?15000:5000);
 }
 
 /* ---------- Utilidades ---------- */
@@ -609,13 +613,14 @@ async function addFiles(slot,files){
   toast(`Guardando ${++n} de ${fs.length}…`);
   try{
    /* Los GIF se guardan sin recomprimir para no perder la animación */
-   const blob=kind==='image'&&file.type!=='image/gif'?await shrink(file):file;
+   /* Se guarda una copia completa: así no depende del archivo original, que puede moverse o quedar solo en la nube (OneDrive) */
+   const blob=kind==='image'&&file.type!=='image/gif'?await shrink(file):new Blob([await file.arrayBuffer()],{type:file.type});
    const rec={slot,name:file.name,kind,blob,text:kind==='image'?'':await extractText(file,file.name)};
    rec.id=await tx('imgs','readwrite',s=>s.add(rec));
    S.imgs.push({...rec,url:URL.createObjectURL(blob)});
   }catch(error){
    console.error(`No se pudo guardar ${file.name}`,error);
-   toast(`No se pudo guardar ${file.name}. Revisa el espacio disponible en el navegador.`);
+   toast(error?.name==='NotFoundError'||error?.name==='NotReadableError'?`No se pudo leer ${file.name}. Si está en OneDrive, ábrelo o elige “Mantener siempre en este dispositivo” y vuelve a subirlo.`:`No se pudo guardar ${file.name}. Revisa el espacio disponible en el navegador.`,8000);
    view();return;
   }
  }
